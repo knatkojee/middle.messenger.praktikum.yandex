@@ -1,11 +1,12 @@
 import { defineConfig } from "vite";
+// @ts-ignore
 import handlebars from "vite-plugin-handlebars";
 
 export default defineConfig({
   publicDir: "static",
   build: {
     assetsDir: "source",
-    outDir: "build",
+    outDir: "dist",
     cssMinify: false,
     minify: false,
   },
