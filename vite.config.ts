@@ -13,5 +13,6 @@ export default defineConfig({
   css: {
     postcss: "./postcss.config.js",
   },
+  //@ts-ignore
   plugins: [handlebars()],
 });
