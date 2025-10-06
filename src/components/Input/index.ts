@@ -1,1 +1,2 @@
-export {Input} from './Input'
+import "./input.css";
+export { default as Input } from "./input.hbs?raw";
