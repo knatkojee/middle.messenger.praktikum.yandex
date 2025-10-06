@@ -1,1 +1,1 @@
-export { default as ListCat } from "./listCat.hbs?raw";
+export { default as ListCat } from "./ListCat.hbs?raw";

@@ -1,2 +1,2 @@
-import "./button.css";
-export { default as Button } from "./button.hbs?raw";
+import "./Button.css";
+export { default as Button } from "./Button.hbs?raw";
