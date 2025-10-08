@@ -1,0 +1,13 @@
+<div class="form-field">
+  <label for={{label}} class="field-label">{{label}}</label>
+  <input
+    type="{{inputType}}"
+    class="field-input  {{#if invalid}}error-state{{/if}}"
+    value="{{inputValue}}"
+    id="{{label}}"
+  />
+  <div class="field-underline"></div>
+  {{#if showError}}
+    <div class="error-message">{{errorMessage}}</div>
+  {{/if}}
+</div>

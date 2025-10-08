@@ -2,23 +2,111 @@ import Handlebars from "handlebars";
 import * as Pages from "./pages";
 import * as Components from "./components";
 
-import cat1 from "./assets/img_1.jpeg";
-import cat2 from "./assets/img_1.jpeg";
-import cat3 from "./assets/img_1.jpeg";
-
 const pages = {
-  login: [Pages.LoginPage],
-  list: [
-    Pages.ListPage,
+  login: [
+    Pages.LoginPage,
     {
-      cats: [
-        { name: "cat-1", avatar: cat1 },
-        { name: "cat-2", avatar: cat2, active: true },
-        { name: "cat-3", avatar: cat3 },
+      fields: [
+        {
+          label: "Логин",
+          inputType: "text",
+          errorClass: "",
+          inputValue: "ivanivanov",
+        },
+        {
+          label: "Пароль",
+          inputType: "email",
+          inputValue: "password",
+        },
       ],
-      showDialog: true,
     },
   ],
+  registration: [
+    Pages.RegistrationPage,
+    {
+      fields: [
+        {
+          label: "Почта",
+          inputType: "email",
+          errorClass: "",
+          inputValue: "pochta@yandex.ru",
+        },
+        {
+          label: "Логин",
+          inputType: "text",
+          errorClass: "",
+          inputValue: "ivanivanov",
+        },
+        {
+          label: "Имя",
+          inputType: "text",
+          errorClass: "",
+          inputValue: "Иван",
+        },
+        {
+          label: "Фамилия",
+          inputType: "text",
+          errorClass: "",
+          inputValue: "Иванов",
+        },
+        {
+          label: "Телефон",
+          inputType: "tel",
+          errorClass: "",
+          inputValue: "+7 (909) 967 30 30",
+        },
+        {
+          label: "Пароль",
+          inputType: "email",
+          inputValue: "password",
+          invalid: true,
+        },
+        {
+          label: "Пароль (ещё раз)",
+          inputType: "email",
+          inputValue: "password1",
+          invalid: true,
+          showError: true,
+          errorMessage: "Пароли не совпадают",
+        },
+      ],
+    },
+  ],
+  main: [Pages.MainPage],
+  profile: [
+    Pages.ProfilePage,
+    {
+      infoRows: [
+        {
+          label: "Почта",
+          value: "pochta@yandex.ru",
+        },
+        {
+          label: "Логин",
+          value: "ivanivanov",
+        },
+        {
+          label: "Имя",
+          value: "Иван",
+        },
+        {
+          label: "Фамилия",
+          value: "Иванов",
+        },
+        {
+          label: "Имя в чате",
+          value: "Иван",
+        },
+        {
+          label: "Телефон",
+          value: "+7 (909) 967 30 30",
+        },
+      ],
+      profileName: "Иван",
+    },
+  ],
+  "404": [Pages.Page404],
+  "500": [Pages.Page500],
   nav: [Pages.NavigatePage],
 };
 
@@ -34,11 +122,10 @@ function navigate(page: string) {
   const container = document.getElementById("app")!;
 
   const templatingFunction = Handlebars.compile(source);
-  console.log("html", templatingFunction(context));
   container.innerHTML = templatingFunction(context);
 }
 
-document.addEventListener("DOMContentLoaded", () => navigate("nav"));
+document.addEventListener("DOMContentLoaded", () => navigate("profile"));
 
 document.addEventListener("click", (e) => {
   // @ts-ignore

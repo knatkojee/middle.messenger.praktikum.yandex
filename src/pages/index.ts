@@ -1,3 +1,7 @@
 export { LoginPage } from "./Login";
-export { ListPage } from "./List";
+export { RegistrationPage } from "./Registration";
+export { MainPage } from "./MainPage";
+export { ProfilePage } from "./Profile";
 export { NavigatePage } from "./Navigate";
+export { Page500 } from "./Page500";
+export { Page404 } from "./Page404";
