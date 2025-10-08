@@ -3,6 +3,9 @@ import { defineConfig } from "vite";
 import handlebars from "vite-plugin-handlebars";
 
 export default defineConfig({
+  preview: {
+    port: 3000,
+  },
   publicDir: "static",
   build: {
     assetsDir: "source",
