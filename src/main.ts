@@ -10,13 +10,14 @@ const pages = {
         {
           label: "Логин",
           inputType: "text",
-          errorClass: "",
           inputValue: "ivanivanov",
+          name: "login",
         },
         {
           label: "Пароль",
-          inputType: "email",
+          inputType: "password",
           inputValue: "password",
+          name: "password",
         },
       ],
     },
@@ -28,46 +29,48 @@ const pages = {
         {
           label: "Почта",
           inputType: "email",
-          errorClass: "",
           inputValue: "pochta@yandex.ru",
+          name: "email",
         },
         {
           label: "Логин",
           inputType: "text",
-          errorClass: "",
           inputValue: "ivanivanov",
+          name: "login",
         },
         {
           label: "Имя",
           inputType: "text",
-          errorClass: "",
           inputValue: "Иван",
+          name: "first_name",
         },
         {
           label: "Фамилия",
           inputType: "text",
-          errorClass: "",
           inputValue: "Иванов",
+          name: "second_name",
         },
         {
           label: "Телефон",
           inputType: "tel",
-          errorClass: "",
           inputValue: "+7 (909) 967 30 30",
+          name: "phone",
         },
         {
           label: "Пароль",
-          inputType: "email",
+          inputType: "password",
           inputValue: "password",
           invalid: true,
+          name: "password",
         },
         {
           label: "Пароль (ещё раз)",
-          inputType: "email",
+          inputType: "password",
           inputValue: "password1",
           invalid: true,
           showError: true,
           errorMessage: "Пароли не совпадают",
+          name: "password_repeat",
         },
       ],
     },
@@ -115,8 +118,6 @@ Object.entries(Components).forEach(([name, template]) => {
 });
 
 function navigate(page: string) {
-  console.log(page);
-
   // @ts-ignore
   const [source, context] = pages[page];
   const container = document.getElementById("app")!;
