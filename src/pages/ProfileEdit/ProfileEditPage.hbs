@@ -31,18 +31,20 @@
   <section class="profile-section">
     {{> Avatar}}
 
-    <h1 class="profile-name">{{ profileName }}</h1>
+    <form action="#">
+      <div class="profile-info">
+      {{#each editFields}}
+        {{> FormFieldProfile}}
+        {{/each}}
 
-    <div class="profile-info">
-     {{#each infoRows}}
-       {{> InfoRow}}
-      {{/each}}
+        <div class="buttons-container">
+          {{> Button type="submit" text=primaryButtonText }}
 
-      <div class="action-buttons">
-        {{> ActionButton text="Изменить данные" withDivider=true}}
-        {{> ActionButton text="Изменить пароль" withDivider=true}}
-        {{> ActionButton text="Выйти" red=true}}
+          {{#if showSecondaryButton}}
+            {{> Button type="submit" text=secondaryButtonText isSecondary=true}}
+          {{/if}}
+        </div>
       </div>
-    </div>
+    </form>
   </section>
 </main>

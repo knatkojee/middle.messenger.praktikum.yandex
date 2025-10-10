@@ -108,6 +108,70 @@ const pages = {
       profileName: "Иван",
     },
   ],
+  profileEdit: [Pages.ProfileEditPage, {
+    editFields: [
+      {
+          label: "Почта",
+          inputType: "email",
+          inputValue: "pochta@yandex.ru",
+          name: "email",
+        },
+        {
+          label: "Логин",
+          inputType: "text",
+          inputValue: "ivanivanov",
+          name: "login",
+        },
+        {
+          label: "Имя",
+          inputType: "text",
+          inputValue: "Иван",
+          name: "first_name",
+        },
+        {
+          label: "Фамилия",
+          inputType: "text",
+          inputValue: "Иванов",
+          name: "second_name",
+        },
+        {
+          label: "Имя в чате",
+          inputType: "text",
+          inputValue: "Иван",
+          name: "display_name",
+        },
+        {
+          label: "Телефон",
+          inputType: "tel",
+          inputValue: "+7 (909) 967 30 30",
+          name: "phone",
+        },
+    ],
+    primaryButtonText: 'Сохранить',
+  }],
+   profileEditPassword: [Pages.ProfileEditPage, {
+    editFields: [
+      {
+        label: "Старый пароль",
+        inputType: "password",
+        inputValue: "oldPassword",
+        name: "password_old",
+      },
+      {
+        label: "Пароль",
+        inputType: "password",
+        inputValue: "password-new-222",
+        name: "newPassword",
+      },
+      {
+        label: "Пароль (ещё раз)",
+        inputType: "password",
+        inputValue: "password-new-222",
+        name: "newPasswordRepeat",
+      },
+    ],
+    primaryButtonText: 'Сохранить',
+  }],
   "404": [Pages.Page404],
   "500": [Pages.Page500],
   nav: [Pages.NavigatePage],
