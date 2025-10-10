@@ -7,3 +7,4 @@ export { ProfileEditPasswordPage } from "./ProfileEditPassword";
 export { NavigatePage } from "./Navigate";
 export { Page500 } from "./Page500";
 export { Page404 } from "./Page404";
+export { PageWithModal } from "./PageWithModal";

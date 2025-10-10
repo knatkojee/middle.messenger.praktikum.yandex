@@ -26,9 +26,22 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 img {
   max-width: 100%;
   height: auto;
+}
+
+#modal {
+  display: none;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #00000033;
+}
+
+#modal.active {
+  display: block;
 }

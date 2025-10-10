@@ -174,6 +174,9 @@ const pages = {
   }],
   "404": [Pages.Page404],
   "500": [Pages.Page500],
+  modalPage: [Pages.PageWithModal, {
+    showModal: true,
+  }],
   nav: [Pages.NavigatePage],
 };
 
@@ -190,7 +193,9 @@ function navigate(page: string) {
   container.innerHTML = templatingFunction(context);
 }
 
-document.addEventListener("DOMContentLoaded", () => navigate("nav"));
+document.addEventListener("DOMContentLoaded", () => {
+  navigate("nav");
+});
 
 document.addEventListener("click", (e) => {
   // @ts-ignore
