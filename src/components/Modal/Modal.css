@@ -1,0 +1,33 @@
+.modal-container {
+    background-color: rgba(0, 0, 0, .7);
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.modal {
+    background-color: white;
+    border-radius: 12px ;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 340px;
+    padding: 40px;
+}
+
+.modal__title {
+    text-align: center;
+    margin: 0;
+}
+
+.modal__body {
+    padding: 45px 0;
+}
+
+.modal__footer {
+    display: flex;
+    flex-direction: column;
+}

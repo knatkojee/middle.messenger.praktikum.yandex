@@ -1,0 +1,16 @@
+<div class="form-container">
+  <form class="form">
+    <h1 class="form-title">{{ title }}</h1>
+
+      {{#each fields}}
+        {{> FormField}}
+      {{/each}}
+
+    <div class="buttons-container">
+      {{> Button type="submit" text=primaryButtonText }}
+      {{#if showSecondaryButton}}
+        {{> Button type="submit" text=secondaryButtonText isSecondary=true}}
+      {{/if}}
+    </div>
+  </form>
+</div>

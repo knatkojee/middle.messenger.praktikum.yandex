@@ -1,0 +1,16 @@
+.chat-container {
+  overflow: hidden;
+  padding-right: 10px;
+  background-color: var(--white);
+}
+
+.chat-layout {
+  display: flex;
+  gap: 20px;
+}
+
+.chat-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,26 @@
+.action-button {
+  display: block;
+  width: 100%;
+
+  padding: 0;
+  background: none;
+  cursor: pointer;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--main-color);
+  text-align: left;
+}
+
+.action-button:hover {
+  opacity: 0.8;
+}
+
+.action-button:focus {
+  outline: 2px solid var(--main-color);
+  outline-offset: 2px;
+}
+
+.action-button.red {
+  color: #f00;
+}

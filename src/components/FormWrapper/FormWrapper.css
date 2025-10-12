@@ -1,0 +1,27 @@
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  width: 340px;
+
+  padding: 50px 30px 30px;
+
+  background-color: var(--white);
+  box-shadow: var(--container-box-shadow);
+  border-radius: 12px;
+}
+
+.form-title {
+  margin-bottom: 40px;
+
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-align: center;
+}
