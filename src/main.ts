@@ -1,6 +1,7 @@
 import Handlebars from "handlebars";
-import * as Pages from "./pages";
+
 import * as Components from "./components";
+import * as Pages from "./pages";
 
 const pages = {
   login: [
