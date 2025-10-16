@@ -13,24 +13,24 @@ export default [
       'public/**',
       '**/*.hbs',
       'src/main.ts',
-      'vite.config.ts'
-    ]
+      'vite.config.ts',
+    ],
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     languageOptions: {
       parser: tsParser,
       ecmaVersion: 'latest',
-      sourceType: 'module'
+      sourceType: 'module',
     },
     plugins: {
-      '@typescript-eslint': tseslint
+      '@typescript-eslint': tseslint,
     },
     rules: {
       ...js.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': 'error',
-      '@typescript-eslint/no-explicit-any': 'warn'
-    }
-  }
+      '@typescript-eslint/no-explicit-any': 'warn',
+    },
+  },
 ];

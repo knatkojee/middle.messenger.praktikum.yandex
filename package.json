@@ -18,13 +18,18 @@
     "@nabla/vite-plugin-eslint": "^2.0.6",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
+    "@vue/compiler-sfc": "^3.5.22",
     "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-prettier": "^5.5.4",
     "jiti": "^2.6.1",
     "postcss": "^8.5.6",
     "postcss-preset-env": "^10.4.0",
+    "prettier": "^3.6.2",
     "typescript": "~5.8.3",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vite-plugin-prettier": "^0.0.6"
   },
   "dependencies": {
     "@types/handlebars": "^4.0.40",
