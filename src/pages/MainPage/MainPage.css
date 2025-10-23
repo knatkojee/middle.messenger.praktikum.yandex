@@ -322,12 +322,14 @@
 .messages-wrapper {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column-reverse;
   overflow-y: scroll;
 }
 
 .messages-container {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   flex-wrap: wrap;
 
   gap: 20px;
@@ -338,125 +340,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-}
-
-.messages-left {
-  width: 100%;
-  padding-left: 10px;
-}
-
-.received-message {
-  border-radius: 0px 0px 0px 0px;
-  background-color: #f8f8f8;
-  display: flex;
-  align-items: stretch;
-  gap: 20px;
-  justify-content: space-between;
-  padding: 11px;
-}
-
-.message-text {
-  color: #1e1e1e;
-  font-size: 12px;
-  line-height: 1;
-}
-
-.message-timestamp {
-  color: #999999;
-  font-size: 9px;
-  line-height: 1;
-  text-align: right;
-}
-
-.image-message {
-  display: flex;
-  flex-direction: column;
-  border-radius: 12px;
-  position: relative;
-  aspect-ratio: 1.498;
-  margin-top: 10px;
-  width: 316px;
-  max-width: 100%;
-  align-items: end;
-  font-size: 9px;
-  color: #ffffff;
-  white-space: nowrap;
-  text-align: right;
-  line-height: 1;
-  padding: 187px 63px 11px;
-}
-
-.message-image {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.image-timestamp {
-  position: relative;
-  border-radius: 30px;
-  background-color: #52525280;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  padding: 2px 7px;
-}
-
-.sent-message {
-  align-items: stretch;
-  gap: 28px;
-  white-space: nowrap;
-  text-align: right;
-  padding: 11px;
-}
-
-.message-container {
-  width: 100%;
-  display: flex;
-
-  &:has(.outgoing-message) {
-    flex-direction: row-reverse;
-  }
-}
-
-.message {
-  display: flex;
-  align-items: end;
-  gap: 8px;
-  padding: 12px;
-  max-width: 400px;
-  width: fit-content;
-}
-
-.incoming-message {
-  background-color: #f8f8f8;
-  border-radius: 0px 12px 12px 12px;
-}
-
-.outgoing-message {
-  background-color: #e4edfd;
-  border-radius: 12px 12px 0px 12px;
-}
-
-.sent-message-text {
-  color: #1e1e1e;
-  font-size: 12px;
-  line-height: 1;
-}
-
-.sent-message-time {
-  color: #3369f3;
-  font-size: 9px;
-  line-height: 1;
-}
-
-.message-container-wrapper {
-  width: 100%;
-  z-index: 1000;
 }
 
 .bottom-divider {
@@ -496,11 +379,6 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-
-.attach-button {
-  &:hover {
-  }
 }
 
 .media-menu {

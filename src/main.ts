@@ -76,7 +76,40 @@ const pages = {
       ],
     },
   ],
-  main: [Pages.MainPage],
+  main: [
+    Pages.MainPage,
+    {
+      messages: [
+        {
+          text: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Obcaecati molestias, non laborum facere ducimus soluta saepe in minima praesentium. Accusamus fugiat dolorem',
+          incoming: true,
+          time: '11:26',
+        },
+        {
+          text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, in a? Quos pariatur accusamus eius reiciendis autem quod, esse animi nisi eligendi quo temporibus laudantium soluta ducimus necessitatibus labore veritatis?',
+          time: '11:27',
+        },
+        {
+          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat vitae placeat libero voluptatem tempore officiis, excepturi aspernatur voluptates reiciendis sapiente explicabo velit, assumenda quis molestiae numquam voluptas. Vel, odio aperiam?',
+          incoming: true,
+          time: '11:28',
+        },
+        {
+          text: 'Lorem ipsum dolor sit amet consectetur, explicabo velit, assumenda quis molestiae numquam voluptas. Vel, odio aperiam?',
+          time: '11:29',
+        },
+        {
+          text: 'velit, assumenda quis molestiae numquam voluptas. Vel, odio aperiam?',
+          incoming: true,
+          time: '11:30',
+        },
+        {
+          text: 'icabo velit, assumenda quis molestiae numquam voluptas. Vel, odio aperiam?',
+          time: '11:30',
+        },
+      ],
+    },
+  ],
   profile: [
     Pages.ProfilePage,
     {
