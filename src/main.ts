@@ -234,10 +234,22 @@ function navigate(page: string) {
 
   const templatingFunction = Handlebars.compile(source);
   container.innerHTML = templatingFunction(context);
+
+  const form = document.querySelector('form');
+  if (form) {
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData);
+
+      console.log(data);
+    });
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  navigate('main');
+  navigate('nav');
 });
 
 document.addEventListener('click', e => {
