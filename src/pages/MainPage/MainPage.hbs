@@ -1,7 +1,401 @@
-<main class="chat-container">
-  <div class="chat-layout">
-    <section class="chat-active">
-      Скоро тут появятся сообщения
+<main class='chat-container'>
+  <div class='chat-layout'>
+    <aside class='sidebar-column'>
+      <div class='sidebar-wrapper'>
+        <nav class='sidebar-content'>
+          <header class='profile-header'>
+            <span>Профиль</span>
+            <svg
+              width='6'
+              height='9'
+              viewBox='0 0 6 9'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'
+            >
+              <path d='M0.353554 8.35355L4.35355 4.35355L0.353554 0.353546' stroke='#999999' />
+            </svg>
+
+          </header>
+
+          <div class='search-bar'>
+            <span>Поиск</span>
+          </div>
+
+          <div class='divider'></div>
+
+          <div class='chat-item'>
+            <div class='chat-user-info'>
+              <div class='user-avatar'></div>
+              <div class='user-details'>
+                <h3 class='user-name'>Андрей</h3>
+                <p class='last-message'>Изображение</p>
+              </div>
+            </div>
+            <div class='chat-meta'>
+              <time class='message-time'>10:49</time>
+              <div class='unread-badge'>
+                <span>2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class='divider'></div>
+
+          <div class='chat-item'>
+            <div class='chat-user-info'>
+              <div class='user-avatar'></div>
+              <div class='user-details'>
+                <h3 class='user-name'>Киноклуб</h3>
+                <p class='last-message'>
+                  <span class='you-prefix'>Вы:</span>
+                  стикер
+                </p>
+              </div>
+            </div>
+            <time class='message-time'>12:00</time>
+          </div>
+
+          <div class='divider'></div>
+        </nav>
+        <div class='sidebar-divider'></div>
+      </div>
+    </aside>
+
+    <section class='main-column'>
+      <div class='main-content'>
+        <header class='chat-header'>
+          <div class='active-user-info'>
+            <div class='active-user-avatar'></div>
+            <h2 class='active-user-name'>Вадим</h2>
+          </div>
+          <div class='header-button-wrapper'>
+            <button class='message-page-button chat-options' aria-label='Chat options'>
+              <svg
+                width='3'
+                height='15'
+                viewBox='0 0 3 15'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <circle cx='1.5' cy='1.5' r='1.5' fill='#3369F3' />
+                <circle cx='1.5' cy='7.5' r='1.5' fill='#3369F3' />
+                <circle cx='1.5' cy='13.5' r='1.5' fill='#3369F3' />
+              </svg>
+            </button>
+            <div class='system-message'>
+              <div class='system-action'>
+                <div class='action-icon'>
+                  <svg
+                    width='11'
+                    height='11'
+                    viewBox='0 0 11 11'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <line
+                      x1='5.5'
+                      y1='3.27834e-08'
+                      x2='5.5'
+                      y2='11'
+                      stroke='#3369F3'
+                      stroke-width='1.5'
+                    />
+                    <line y1='5.5' x2='11' y2='5.5' stroke='#3369F3' stroke-width='1.5' />
+                  </svg>
+
+                </div>
+                <span class='action-text'>Добавить пользователя</span>
+              </div>
+              <div class='system-action'>
+                <div class='action-icon'>
+                  <svg
+                    width='16'
+                    height='16'
+                    viewBox='0 0 16 16'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <line
+                      x1='3.88909'
+                      y1='3.8892'
+                      x2='11.6673'
+                      y2='11.6674'
+                      stroke='#3369F3'
+                      stroke-width='1.5'
+                    />
+                    <line
+                      x1='3.8891'
+                      y1='11.6673'
+                      x2='11.6673'
+                      y2='3.8891'
+                      stroke='#3369F3'
+                      stroke-width='1.5'
+                    />
+                  </svg>
+
+                </div>
+                <span class='action-text-alt'>Удалить пользователя</span>
+              </div>
+            </div>
+          </div>
+          <div class='date-label'>19 июня</div>
+        </header>
+
+        <div class='messages-wrapper'>
+          <div class='messages-container'>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>sample text</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message outgoing-message'>
+                <p class='message-text'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Voluptas incidunt, facilis totam perferendis magni architecto nemo praesentium ab
+                  ullam itaque blanditiis? Modi minus inventore quia ipsum sit similique ex
+                  nesciunt.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Deleniti commodi, perferendis sed excepturi asperiores consequatur debitis eveniet
+                  earum est sapiente officiis aut quas distinctio voluptates, ea, et molestias
+                  adipisci aliquid.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>sample text</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message outgoing-message'>
+                <p class='message-text'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Voluptas incidunt, facilis totam perferendis magni architecto nemo praesentium ab
+                  ullam itaque blanditiis? Modi minus inventore quia ipsum sit similique ex
+                  nesciunt.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Deleniti commodi, perferendis sed excepturi asperiores consequatur debitis eveniet
+                  earum est sapiente officiis aut quas distinctio voluptates, ea, et molestias
+                  adipisci aliquid.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>sample text</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message outgoing-message'>
+                <p class='message-text'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Voluptas incidunt, facilis totam perferendis magni architecto nemo praesentium ab
+                  ullam itaque blanditiis? Modi minus inventore quia ipsum sit similique ex
+                  nesciunt.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Deleniti commodi, perferendis sed excepturi asperiores consequatur debitis eveniet
+                  earum est sapiente officiis aut quas distinctio voluptates, ea, et molestias
+                  adipisci aliquid.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>sample text</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message outgoing-message'>
+                <p class='message-text'>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Voluptas incidunt, facilis totam perferendis magni architecto nemo praesentium ab
+                  ullam itaque blanditiis? Modi minus inventore quia ipsum sit similique ex
+                  nesciunt.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+
+            <div class='message-container'>
+              <div class='message incoming-message'>
+                <p class='message-text'>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Deleniti commodi, perferendis sed excepturi asperiores consequatur debitis eveniet
+                  earum est sapiente officiis aut quas distinctio voluptates, ea, et molestias
+                  adipisci aliquid.</p>
+                <div class='message-timestamp'>11:56</div>
+              </div>
+            </div>
+            {{! <img src='/src/assets/sample_pic.jpg' class='message-image' alt='Shared image' /> }}
+
+          </div>
+        </div>
+
+        <div class='message-container-wrapper'>
+          <div class='bottom-divider'></div>
+          <div class='message-inner-container'>
+            <button class='message-page-button attach-button'>
+              <svg
+                width='32'
+                height='32'
+                viewBox='0 0 32 32'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M7.18662 13.5L14.7628 5.92389L15.7056 6.8667L8.12943 14.4428L7.18662 13.5Z'
+                  fill='#3369F3'
+                />
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M9.70067 16.014L17.2768 8.43781L18.2196 9.38062L10.6435 16.9568L9.70067 16.014Z'
+                  fill='#3369F3'
+                />
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M15.0433 21.3567L22.6195 13.7806L23.5623 14.7234L15.9861 22.2995L15.0433 21.3567Z'
+                  fill='#3369F3'
+                />
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M17.5574 23.8706L25.1335 16.2945L26.0763 17.2373L18.5002 24.8134L17.5574 23.8706Z'
+                  fill='#3369F3'
+                />
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M17.5574 23.8709C14.9423 26.486 10.7118 26.4954 8.10831 23.8919C5.50482 21.2884 5.51424 17.0579 8.12936 14.4428L7.18655 13.5C4.0484 16.6381 4.0371 21.7148 7.16129 24.839C10.2855 27.9632 15.3621 27.9518 18.5003 24.8137L17.5574 23.8709Z'
+                  fill='#3369F3'
+                />
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M22.6195 13.7806L23.5623 14.7234C26.003 12.2826 26.0118 8.3341 23.5819 5.90417C21.152 3.47424 17.2035 3.48304 14.7627 5.92381L15.7055 6.86662C17.6233 4.94887 20.7257 4.94196 22.6349 6.85119C24.5441 8.76042 24.5372 11.8628 22.6195 13.7806Z'
+                  fill='#3369F3'
+                />
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M9.70092 16.0144C7.95751 17.7578 7.95123 20.5782 9.68689 22.3138C11.4226 24.0495 14.2429 24.0432 15.9863 22.2998L15.0435 21.357C13.8231 22.5774 11.8489 22.5818 10.6339 21.3668C9.41894 20.1518 9.42334 18.1776 10.6437 16.9572L9.70092 16.0144Z'
+                  fill='#3369F3'
+                />
+              </svg>
+
+            </button>
+            <div class='message-input-wrapper'>
+              <input
+                type='text'
+                class='message-input'
+                name='message'
+                id='message'
+                placeholder='Сообщение'
+              />
+            </div>
+            <button class='message-page-button' type='submit'>
+              <svg
+                width='28'
+                height='28'
+                viewBox='0 0 28 28'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <circle cx='14' cy='14' r='14' fill='#3369F3' />
+                <rect x='8' y='13.2' width='11' height='1.6' fill='white' />
+                <path d='M15 9L19 14L15 19' stroke='white' stroke-width='1.6' />
+              </svg>
+
+            </button>
+          </div>
+          <div class='media-menu'>
+            <div class='media-option'>
+              <svg
+                width='22'
+                height='22'
+                viewBox='0 0 22 22'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M4 1.5H18C19.3807 1.5 20.5 2.61929 20.5 4V14L14.5194 12.4052C13.5108 12.1362 12.4714 12 11.4275 12H10.5725C9.52864 12 8.48921 12.1362 7.48057 12.4052L1.5 14V4C1.5 2.61929 2.61929 1.5 4 1.5ZM0 4C0 1.79086 1.79086 0 4 0H18C20.2091 0 22 1.79086 22 4V18C22 20.2091 20.2091 22 18 22H4C1.79086 22 0 20.2091 0 18V4ZM8 6C8 7.10457 7.10457 8 6 8C4.89543 8 4 7.10457 4 6C4 4.89543 4.89543 4 6 4C7.10457 4 8 4.89543 8 6Z'
+                  fill='#3369F3'
+                />
+              </svg>
+
+              <span class='media-label'>Фото или Видео</span>
+            </div>
+
+            <div class='media-option-file'>
+              <svg
+                width='22'
+                height='22'
+                viewBox='0 0 22 22'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M4 1.5H18C19.3807 1.5 20.5 2.61929 20.5 4V12H16C13.7909 12 12 13.7909 12 16V20.5H4C2.61929 20.5 1.5 19.3807 1.5 18V4C1.5 2.61929 2.61929 1.5 4 1.5ZM12 22H4C1.79086 22 0 20.2091 0 18V4C0 1.79086 1.79086 0 4 0H18C20.2091 0 22 1.79086 22 4V12V18C22 20.2091 20.2091 22 18 22H12Z'
+                  fill='#3369F3'
+                />
+              </svg>
+
+              <span class='media-label'>Файл</span>
+            </div>
+
+            <div class='media-option-location'>
+              <svg
+                width='22'
+                height='22'
+                viewBox='0 0 22 22'
+                fill='none'
+                xmlns='http://www.w3.org/2000/svg'
+              >
+                <path
+                  fill-rule='evenodd'
+                  clip-rule='evenodd'
+                  d='M20.5 11C20.5 16.2467 16.2467 20.5 11 20.5C5.75329 20.5 1.5 16.2467 1.5 11C1.5 5.75329 5.75329 1.5 11 1.5C16.2467 1.5 20.5 5.75329 20.5 11ZM22 11C22 17.0751 17.0751 22 11 22C4.92487 22 0 17.0751 0 11C0 4.92487 4.92487 0 11 0C17.0751 0 22 4.92487 22 11ZM11 14C12.6569 14 14 12.6569 14 11C14 9.34315 12.6569 8 11 8C9.34315 8 8 9.34315 8 11C8 12.6569 9.34315 14 11 14Z'
+                  fill='#3369F3'
+                />
+              </svg>
+
+              <span class='media-label'>Локация</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </main>
