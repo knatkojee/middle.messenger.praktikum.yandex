@@ -2,80 +2,12 @@ import Handlebars from 'handlebars';
 
 import * as Components from './components';
 import * as Pages from './pages';
+import renderDOM from './core/renderDom';
 
 const pages = {
-  login: [
-    Pages.LoginPage,
-    {
-      fields: [
-        {
-          label: 'Логин',
-          inputType: 'text',
-          inputValue: 'ivanivanov',
-          name: 'login',
-        },
-        {
-          label: 'Пароль',
-          inputType: 'password',
-          inputValue: 'password',
-          name: 'password',
-        },
-      ],
-    },
-  ],
-  registration: [
-    Pages.RegistrationPage,
-    {
-      fields: [
-        {
-          label: 'Почта',
-          inputType: 'email',
-          inputValue: 'pochta@yandex.ru',
-          name: 'email',
-        },
-        {
-          label: 'Логин',
-          inputType: 'text',
-          inputValue: 'ivanivanov',
-          name: 'login',
-        },
-        {
-          label: 'Имя',
-          inputType: 'text',
-          inputValue: 'Иван',
-          name: 'first_name',
-        },
-        {
-          label: 'Фамилия',
-          inputType: 'text',
-          inputValue: 'Иванов',
-          name: 'second_name',
-        },
-        {
-          label: 'Телефон',
-          inputType: 'tel',
-          inputValue: '+7 (909) 967 30 30',
-          name: 'phone',
-        },
-        {
-          label: 'Пароль',
-          inputType: 'password',
-          inputValue: 'password',
-          invalid: true,
-          name: 'password',
-        },
-        {
-          label: 'Пароль (ещё раз)',
-          inputType: 'password',
-          inputValue: 'password1',
-          invalid: true,
-          showError: true,
-          errorMessage: 'Пароли не совпадают',
-          name: 'password_repeat',
-        },
-      ],
-    },
-  ],
+  // login: [Pages.LoginPage],
+  login: [Pages.LoginPage],
+  registration: [Pages.RegistrationPage],
   main: [
     Pages.MainPage,
     {
@@ -222,38 +154,31 @@ const pages = {
   ],
   nav: [Pages.NavigatePage],
 };
-
 Object.entries(Components).forEach(([name, template]) => {
+  if (typeof template === 'function') {
+    return;
+  }
   Handlebars.registerPartial(name, template);
 });
 
 function navigate(page: string) {
   // @ts-ignore
   const [source, context] = pages[page];
+  if (typeof source === 'function') {
+    renderDOM(new source({}));
+    return;
+  }
+
   const container = document.getElementById('app')!;
 
-  const templatingFunction = Handlebars.compile(source);
-  container.innerHTML = templatingFunction(context);
-
-  const form = document.querySelector('form');
-  if (form) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-
-      const formData = new FormData(e.target as HTMLFormElement);
-      const data = Object.fromEntries(formData);
-
-      console.log(data);
-    });
-  }
+  const temlpatingFunction = Handlebars.compile(source);
+  container.innerHTML = temlpatingFunction(context);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  navigate('nav');
-});
+document.addEventListener('DOMContentLoaded', () => navigate('nav'));
 
 document.addEventListener('click', e => {
-  // @ts-ignore
+  //@ts-ignore
   const page = e.target.getAttribute('page');
   if (page) {
     navigate(page);
