@@ -33,7 +33,7 @@ type FormFieldType = {
   invalid?: boolean;
   errorMessage?: string;
   name?: string;
-  onBlur?: (val: BlurProps) => void;
+  onBlur?: (e: FocusEvent) => void;
 };
 
 type FormWrapperProps = {

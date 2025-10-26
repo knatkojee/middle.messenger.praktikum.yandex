@@ -1,38 +1,32 @@
 import Block from '../../core/block';
+import { Input } from '../Input';
 
 export default class FormField extends Block {
   constructor(props: any) {
-    console.log(props.onBlur);
-    
     super('div', {
       ...props,
-      className: 'form-field',
-      name: props.name,
       label: props.label,
-      inputType: props.inputType,
-      inputValue: props.inputValue,
-      invalid: props.invalid,
+      isInvalid: props.invalid,
       errorMessage: props.errorMessage,
-      onBlur: props.onBlur,
+      Input: new Input({
+        name: props.name,
+        inputType: props.inputType,
+        inputValue: props.inputValue,
+        onBlur: props.onBlur,
+      }),
     });
   }
 
   public render(): string {
     return `
+        <div class="form-field {{#if isInvalid}}error-state{{/if}}">
             <label for={{name}} class="field-label">{{label}}</label>
-            <input
-                type="{{inputType}}"
-                class="field-input  {{#if invalid}}error-state{{/if}}"
-                value="{{inputValue}}"
-                id="{{name}}"
-                name="{{name}}"
-                autocomplete="false"
-                onblur="{{onBlur}}"
-            />
+            {{{ Input }}}
             <div class="field-underline"></div>
             {{#if invalid}}
                 <div class="error-message">{{errorMessage}}</div>
             {{/if}}
+        </div>
         `;
   }
 }

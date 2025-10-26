@@ -18,9 +18,14 @@ export default class RegistrationPage extends Block {
             inputType: 'email',
             inputValue: 'pochta@yandex.ru',
             name: 'email',
-            onBlur: val => {
-              console.log(val);
-              // this.setProps({});
+            onBlur: e => {
+              const val = (e.target as HTMLInputElement)?.value;
+
+              console.log(this);
+
+              if (val.includes('@')) {
+                console.log(val);
+              }
             },
           },
           {
