@@ -18,6 +18,10 @@ export default class RegistrationPage extends Block {
             inputType: 'email',
             inputValue: 'pochta@yandex.ru',
             name: 'email',
+            onBlur: val => {
+              console.log(val);
+              // this.setProps({});
+            },
           },
           {
             label: 'Логин',

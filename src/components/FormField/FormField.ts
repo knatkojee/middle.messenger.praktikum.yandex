@@ -2,6 +2,8 @@ import Block from '../../core/block';
 
 export default class FormField extends Block {
   constructor(props: any) {
+    console.log(props.onBlur);
+    
     super('div', {
       ...props,
       className: 'form-field',
@@ -11,6 +13,7 @@ export default class FormField extends Block {
       inputValue: props.inputValue,
       invalid: props.invalid,
       errorMessage: props.errorMessage,
+      onBlur: props.onBlur,
     });
   }
 
@@ -24,6 +27,7 @@ export default class FormField extends Block {
                 id="{{name}}"
                 name="{{name}}"
                 autocomplete="false"
+                onblur="{{onBlur}}"
             />
             <div class="field-underline"></div>
             {{#if invalid}}
