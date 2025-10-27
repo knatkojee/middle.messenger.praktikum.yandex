@@ -1,5 +1,29 @@
 import { Button, FormFieldProfile } from '../../components';
+import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
+
+const validatePassword = (e: FocusEvent, context: Block, idx: number) => {
+  const val = (e.target as HTMLInputElement)?.value;
+  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
+
+  let error = '';
+  let isInvalid = false;
+
+  if (!passwordRegex.test(val)) {
+    error = 'Пароль должен содержать верхний и нижний регистр, цифру';
+    isInvalid = true;
+  }
+
+  if (val.length < 8) {
+    error = 'Пароль должен содержать более восьми символов';
+    isInvalid = true;
+  }
+
+  context.children.editFields[idx].setProps({
+    isInvalid,
+    errorMessage: error,
+  });
+};
 
 export default class ProfileEditPasswordPage extends Block {
   constructor(props: any) {
@@ -12,26 +36,31 @@ export default class ProfileEditPasswordPage extends Block {
         isSecondary: false,
         type: 'submit',
       }),
-      editFields: [
-        {
-          label: 'Старый пароль',
-          inputType: 'password',
-          inputValue: 'oldPassword',
-          name: 'password_old',
-        },
-        {
-          label: 'Пароль',
-          inputType: 'password',
-          inputValue: 'password-new-222',
-          name: 'newPassword',
-        },
-        {
-          label: 'Пароль (ещё раз)',
-          inputType: 'password',
-          inputValue: 'password-new-222',
-          name: 'newPasswordRepeat',
-        },
-      ].map((props: any) => {
+      editFields: (
+        [
+          {
+            label: 'Старый пароль',
+            inputType: 'password',
+            inputValue: 'oldPassword',
+            name: 'password_old',
+            onBlur: e => validatePassword(e, this, 0),
+          },
+          {
+            label: 'Пароль',
+            inputType: 'password',
+            inputValue: 'password-new-222',
+            name: 'newPassword',
+            onBlur: e => validatePassword(e, this, 1),
+          },
+          {
+            label: 'Пароль (ещё раз)',
+            inputType: 'password',
+            inputValue: 'password-new-222',
+            name: 'newPasswordRepeat',
+            onBlur: e => validatePassword(e, this, 2),
+          },
+        ] as FormFieldType[]
+      ).map((props: any) => {
         return new FormFieldProfile({
           ...props,
         });

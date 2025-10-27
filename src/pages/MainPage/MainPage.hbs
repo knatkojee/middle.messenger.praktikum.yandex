@@ -145,7 +145,7 @@
           <div class='messages-container'>
 
             {{#each messages}}
-              {{> Message}}
+              {{{this}}}
             {{/each}}
 
           </div>
@@ -207,15 +207,7 @@
               </svg>
 
             </button>
-            <div class='message-input-wrapper'>
-              <input
-                type='text'
-                class='message-input'
-                name='message'
-                id='message'
-                placeholder='Сообщение'
-              />
-            </div>
+            {{{Input}}}
             <button class='message-page-button' type='submit'>
               <svg
                 width='28'

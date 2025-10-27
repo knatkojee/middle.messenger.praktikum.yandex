@@ -24,7 +24,7 @@
   outline: none;
 }
 
-.field-input.error-state {
+.error-state .field-input {
   color: var(--error-color);
 }
 
@@ -51,4 +51,8 @@
 .field-input:focus + .field-underline {
   border-width: 2px;
   border-color: var(--main-color);
+}
+
+.text-right {
+  text-align: right;
 }

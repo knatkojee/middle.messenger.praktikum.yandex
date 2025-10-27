@@ -1,5 +1,6 @@
 import { FormWrapper } from '../../components';
 import Block from '../../core/block';
+import { validateLoginField, validatePassword } from '../../utils/validation';
 
 export default class LoginPage extends Block {
   constructor(props: any) {
@@ -18,12 +19,14 @@ export default class LoginPage extends Block {
             inputType: 'text',
             inputValue: 'ivanivanov',
             name: 'login',
+            onBlur: e => validateLoginField(e, this, 0),
           },
           {
             label: 'Пароль',
             inputType: 'password',
             inputValue: 'password',
             name: 'password',
+            onBlur: e => validatePassword(e, this, 1),
           },
         ],
       }),

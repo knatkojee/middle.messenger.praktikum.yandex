@@ -8,3 +8,4 @@ export { Avatar } from './Avatar';
 export { Modal } from './Modal';
 export { Message } from './Message';
 export { Input } from './Input';
+export { MessageField } from './MessageField';

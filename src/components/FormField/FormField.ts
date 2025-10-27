@@ -1,12 +1,13 @@
 import Block from '../../core/block';
+import type { FormFieldType } from '../FormWrapper/FormWrapper';
 import { Input } from '../Input';
 
 export default class FormField extends Block {
-  constructor(props: any) {
+  constructor(props: FormFieldType) {
     super('div', {
       ...props,
       label: props.label,
-      isInvalid: props.invalid,
+      isInvalid: props.isInvalid,
       errorMessage: props.errorMessage,
       Input: new Input({
         name: props.name,
@@ -23,7 +24,7 @@ export default class FormField extends Block {
             <label for={{name}} class="field-label">{{label}}</label>
             {{{ Input }}}
             <div class="field-underline"></div>
-            {{#if invalid}}
+            {{#if isInvalid}}
                 <div class="error-message">{{errorMessage}}</div>
             {{/if}}
         </div>

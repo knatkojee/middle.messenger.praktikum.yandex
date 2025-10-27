@@ -14,6 +14,7 @@ export default class Block {
   _element = null;
   _meta = null;
   _id = nanoid(6);
+  children: any;
 
   /** JSDoc
    * @param {string} tagName

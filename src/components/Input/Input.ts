@@ -6,19 +6,21 @@ type InputProps = {
   inputValue: string;
   onBlur?: (e: FocusEvent) => void;
   onClick?: () => void;
+  className?: string;
 };
 
 export default class Input extends Block {
   constructor(props: InputProps) {
     super('input', {
       ...props,
-      className: `field-input`,
+      className: `${props.className ? props.className : 'field-input'}`,
       attrs: {
         id: props.name,
         name: props.name,
         type: props.inputType,
         value: props.inputValue,
         autocomplete: false,
+        required: true,
       },
       events: {
         blur: props.onBlur,

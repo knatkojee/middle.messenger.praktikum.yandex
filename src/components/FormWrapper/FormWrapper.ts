@@ -2,37 +2,13 @@ import Block from '../../core/block';
 import { Button } from '../Button';
 import { FormField } from '../FormField';
 
-type BlurProps = {
-  name: string;
-  hash?: Object;
-  data: {
-    root: {
-      label: string;
-      inputType: string;
-      inputValue: string;
-      name: string;
-      className: string;
-    };
-  };
-  loc?: {
-    start: {
-      line: number;
-      column: number;
-    };
-    end: {
-      line: number;
-      column: number;
-    };
-  };
-};
-
-type FormFieldType = {
+export type FormFieldType = {
   label: string;
   inputType: string;
   inputValue: string;
-  invalid?: boolean;
+  isInvalid?: boolean;
   errorMessage?: string;
-  name?: string;
+  name: string;
   onBlur?: (e: FocusEvent) => void;
 };
 
@@ -64,7 +40,7 @@ export default class FormWrapper extends Block {
         type: 'button',
       }),
       formFields: props.fields.map(
-        (props: any) =>
+        props =>
           new FormField({
             ...props,
           })

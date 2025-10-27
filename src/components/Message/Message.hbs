@@ -1,5 +1,5 @@
 <div class='message-container'>
-  <div class='message {{#if incoming}}incoming-message{{else}}outgoing-message{{/if}}'>
+  <div class='message {{#if isIncoming}}incoming-message{{else}}outgoing-message{{/if}}'>
     <p class='message-text'>{{ text }}</p>
     <div class='message-timestamp'>{{ time }}</div>
   </div>
