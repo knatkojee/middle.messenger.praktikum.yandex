@@ -12,7 +12,7 @@ export default class FormField extends Block {
       Input: new Input({
         name: props.name,
         inputType: props.inputType,
-        inputValue: props.inputValue,
+        inputValue: props.inputValue ?? '',
         onBlur: props.onBlur,
       }),
     });
