@@ -1,6 +1,5 @@
-import type Block from '../core/block';
-
-export const validateFioField = (e: FocusEvent, context: Block, index: number) => {
+// Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
+export const validateFioField = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
 
@@ -18,7 +17,7 @@ export const validateFioField = (e: FocusEvent, context: Block, index: number) =
   });
 };
 
-export const validateLoginField = (e: FocusEvent, context: Block, index: number) => {
+export const validateLoginField = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const loginRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/;
 
@@ -36,7 +35,7 @@ export const validateLoginField = (e: FocusEvent, context: Block, index: number)
   });
 };
 
-export const validateEmail = (e: FocusEvent, context: Block, index: number) => {
+export const validateEmail = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
 
@@ -54,7 +53,7 @@ export const validateEmail = (e: FocusEvent, context: Block, index: number) => {
   });
 };
 
-export const validatePhone = (e: FocusEvent, context: Block, index: number) => {
+export const validatePhone = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const phoneRegex = /^\+?\d{10,15}$/;
 
@@ -72,7 +71,7 @@ export const validatePhone = (e: FocusEvent, context: Block, index: number) => {
   });
 };
 
-export const validatePassword = (e: FocusEvent, context: Block, index: number) => {
+export const validatePassword = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
 
@@ -95,7 +94,7 @@ export const validatePassword = (e: FocusEvent, context: Block, index: number) =
   });
 };
 
-export const validateMessage = (e: FocusEvent, context: Block, index: number) => {
+export const validateMessage = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const messageRegex = /.+/;
 

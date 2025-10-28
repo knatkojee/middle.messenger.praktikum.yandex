@@ -2,7 +2,8 @@ import { Button, FormFieldProfile } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
 
-const validatePassword = (e: FocusEvent, context: Block, idx: number) => {
+// Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
+const validatePassword = (e: FocusEvent, context: any, idx: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
 

@@ -31,7 +31,8 @@ export default class ProfileEditPage extends Block {
                 isInvalid = true;
               }
 
-              this.children.editFields[0].setProps({
+              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+              (this as any).children.editFields[0].setProps({
                 isInvalid,
                 errorMessage: error,
               });
@@ -55,7 +56,8 @@ export default class ProfileEditPage extends Block {
                 isInvalid = true;
               }
 
-              this.children.editFields[1].setProps({
+              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+              (this as any).children.editFields[1].setProps({
                 isInvalid,
                 errorMessage: error,
               });
@@ -79,7 +81,8 @@ export default class ProfileEditPage extends Block {
                 isInvalid = true;
               }
 
-              this.children.editFields[2].setProps({
+              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+              (this as any).children.editFields[2].setProps({
                 isInvalid,
                 errorMessage: error,
               });
@@ -103,7 +106,8 @@ export default class ProfileEditPage extends Block {
                 isInvalid = true;
               }
 
-              this.children.editFields[3].setProps({
+              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+              (this as any).children.editFields[3].setProps({
                 isInvalid,
                 errorMessage: error,
               });
@@ -127,7 +131,8 @@ export default class ProfileEditPage extends Block {
                 isInvalid = true;
               }
 
-              this.children.editFields[4].setProps({
+              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+              (this as any).children.editFields[4].setProps({
                 isInvalid,
                 errorMessage: error,
               });
@@ -150,7 +155,8 @@ export default class ProfileEditPage extends Block {
                 isInvalid = true;
               }
 
-              this.children.editFields[5].setProps({
+              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+              (this as any).children.editFields[5].setProps({
                 isInvalid,
                 errorMessage: error,
               });
