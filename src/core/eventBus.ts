@@ -15,6 +15,7 @@ export default class EventBus<E extends string> {
     }
     this.listeners[event] = this.listeners[event].filter(listener => listener !== callback);
   }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   emit<T extends any[] = []>(event: E, ...args: T) {
     if (!this.listeners[event]) {
       return;

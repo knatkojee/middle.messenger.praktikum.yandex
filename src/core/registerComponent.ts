@@ -29,6 +29,7 @@ export default function registerComponent<Props extends PropsBlock>(
        * Костыль для того, чтобы передавать переменные
        * внутрь блоков вручную подменяя значение
        */
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (Object.keys(hash) as any).forEach((key: keyof Props) => {
         if (this[key] && typeof this[key] === 'string') {
           hash[key] = hash[key].replace(new RegExp(`{{${key.toString()}}}`, 'i'), this[key]);

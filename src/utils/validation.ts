@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
 export const validateFioField = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;

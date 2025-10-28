@@ -3,9 +3,8 @@ import Block from '../../core/block';
 import { validateLoginField, validatePassword } from '../../utils/validation';
 
 export default class LoginPage extends Block {
-  constructor(props: any) {
+  constructor() {
     super('main', {
-      ...props,
       FormWrapper: new FormWrapper({
         primaryText: 'Авторизоваться',
         secondaryText: 'Нет аккаунта?',

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import EventBus from './eventBus';
 import { nanoid } from 'nanoid';
 import Handlebars from 'handlebars';
@@ -5,11 +6,12 @@ import Handlebars from 'handlebars';
 type Values<T> = T[keyof T];
 type Events = Values<typeof Block.EVENTS>;
 
-export interface BlockClass<P = any> extends Function {
+export interface BlockClass<P> extends Function {
   new (props: P): Block;
   componentName?: string;
 }
 
+// Используем any, так как типов для перечисления слишком много, ухудшит читаемость кода, но не даст положительного эффекта, каждый раз надо будет дополнять этот список
 type Props = Record<string, any>;
 
 interface BlockChildren {
@@ -225,7 +227,7 @@ export default class Block {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
       },
-      set(target: Props, prop: string, value: any) {
+      set(target: Props, prop: string, value) {
         const oldTarget = { ...target };
         target[prop] = value;
 

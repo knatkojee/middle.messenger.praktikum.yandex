@@ -5,7 +5,6 @@ import * as Pages from './pages';
 import renderDOM from './core/renderDom';
 
 const pages = {
-  // login: [Pages.LoginPage],
   login: [Pages.LoginPage],
   registration: [Pages.RegistrationPage],
   main: [Pages.MainPage],

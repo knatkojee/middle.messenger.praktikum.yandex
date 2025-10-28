@@ -9,10 +9,8 @@ import {
 } from '../../utils/validation';
 
 export default class RegistrationPage extends Block {
-  constructor(props: any) {
+  constructor() {
     super('main', {
-      ...props,
-      children: props.children,
       FormWrapper: new FormWrapper({
         primaryText: 'Регистрация',
         secondaryText: 'Зарегистрироваться',

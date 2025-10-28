@@ -1,8 +1,18 @@
 import Block from '../../core/block';
 import { Input } from '../Input';
 
+type FormFieldProfileProps = {
+  label: string;
+  name: string;
+  inputType: string;
+  inputValue: string;
+  errorMessage?: string;
+  isInvalid?: boolean;
+  onBlur?: (e: FocusEvent) => void;
+};
+
 export default class FormFieldProfile extends Block {
-  constructor(props: any) {
+  constructor(props: FormFieldProfileProps) {
     super('div', {
       ...props,
       className: 'form-field',

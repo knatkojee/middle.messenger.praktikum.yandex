@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, FormFieldProfile } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
@@ -163,7 +164,7 @@ export default class ProfileEditPage extends Block {
             },
           },
         ] as FormFieldType[]
-      ).map((props: any) => {
+      ).map(props => {
         return new FormFieldProfile({
           ...props,
         });

@@ -1,7 +1,14 @@
 import Block from '../../core/block';
 
+type ButtonProps = {
+  type: string;
+  label: string;
+  isSecondary?: boolean;
+  onClick: () => void;
+};
+
 export default class Button extends Block {
-  constructor(props: any) {
+  constructor(props: ButtonProps) {
     super('button', {
       ...props,
       className: `button ${props.isSecondary ? 'button-secondary' : 'primary'}`,

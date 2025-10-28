@@ -3,6 +3,7 @@ import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
 
 // Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const validatePassword = (e: FocusEvent, context: any, idx: number) => {
   const val = (e.target as HTMLInputElement)?.value;
   const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
@@ -27,9 +28,8 @@ const validatePassword = (e: FocusEvent, context: any, idx: number) => {
 };
 
 export default class ProfileEditPasswordPage extends Block {
-  constructor(props: any) {
+  constructor() {
     super('main', {
-      ...props,
       className: 'profile-container',
       PrimaryButton: new Button({
         label: 'Сохранить',
@@ -61,7 +61,7 @@ export default class ProfileEditPasswordPage extends Block {
             onBlur: e => validatePassword(e, this, 2),
           },
         ] as FormFieldType[]
-      ).map((props: any) => {
+      ).map(props => {
         return new FormFieldProfile({
           ...props,
         });
