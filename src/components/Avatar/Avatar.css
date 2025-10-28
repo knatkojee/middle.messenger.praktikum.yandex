@@ -1,26 +1,23 @@
 
 .profile-avatar {
-  width: 130px;
-  height: 130px;
-
-  display: flex;
   align-items: center;
-  justify-content: center;
-
-  border-radius: 50%;
   background-color: #efefef;
+  border-radius: 50%;
+  display: flex;
+  height: 130px;
+  justify-content: center;
+  width: 130px;
 }
 
 .edit-avatar-button {
-  top: calc(50% - 20px);
-  left: calc(50% - 20px);
-
-  width: 40px;
-  height: 40px;
-  padding: 0;
   background: none;
-  cursor: pointer;
   border: none;
+  cursor: pointer;
+  height: 40px;
+  left: calc(50% - 20px);
+  padding: 0;
+  top: calc(50% - 20px);
+  width: 40px;
 }
 
 .edit-avatar-button:hover {

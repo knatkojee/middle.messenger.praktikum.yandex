@@ -1,30 +1,28 @@
 .profile-container {
+  height: 100vh;
   position: relative;
   width: 100vw;
-  height: 100vh;
 }
 
 .sidebar {
+  background-color: var(--bg-grey);
+  height: 100%;
+  left: 0;
   position: absolute;
   top: 0;
-  left: 0;
   width: 64px;
-  height: 100%;
-  background-color: var(--bg-grey);
 }
 
 .back-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  height: 28px;
+  margin-left: 18px;
+  padding: 0;
   position: absolute;
   top: 50%;
-
   width: 28px;
-  height: 28px;
-  padding: 0;
-  margin-left: 18px;
-
-  background: none;
-  cursor: pointer;
-  border: none;
 }
 
 .back-button:hover {
@@ -37,77 +35,39 @@
 }
 
 .profile-section {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  width: 100%;
   height: 100%;
-}
-
-.profile-avatar {
-  width: 130px;
-  height: 130px;
-
-  display: flex;
-  align-items: center;
   justify-content: center;
-
-  border-radius: 50%;
-  background-color: #efefef;
-}
-
-.edit-avatar-button {
-  top: calc(50% - 20px);
-  left: calc(50% - 20px);
-
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  background: none;
-  cursor: pointer;
-  border: none;
-}
-
-.edit-avatar-button:hover {
-  opacity: 0.8;
-}
-
-.edit-avatar-button:focus {
-  outline: 2px solid var(--main-color);
-  outline-offset: 2px;
+  width: 100%;
 }
 
 .profile-name {
-  margin-top: 21px;
-
+  color: var(--text-color);
   font-size: 16px;
   font-weight: 600;
-  color: var(--text-color);
+  margin-top: 21px;
   text-align: center;
 }
 
 .profile-info {
   display: flex;
   flex-direction: column;
-
   margin-top: 60px;
   width: 510px;
 }
 
 .action-buttons {
-  margin-top: 60px;
-
   display: flex;
   flex-direction: column;
+  margin-top: 60px;
 }
 
 .action-divider {
-  width: 100%;
-  height: 1px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-
   background-color: #eaeaea;
+  height: 1px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 100%;
 }

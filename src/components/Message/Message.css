@@ -1,6 +1,6 @@
 .message-container {
-  width: 100%;
   display: flex;
+  width: 100%;
 
   &:has(.outgoing-message) {
     flex-direction: row-reverse;
@@ -8,22 +8,22 @@
 }
 
 .message {
-  display: flex;
   align-items: end;
+  display: flex;
   gap: 8px;
-  padding: 12px;
   max-width: 400px;
+  padding: 12px;
   width: fit-content;
 }
 
 .incoming-message {
   background-color: #f8f8f8;
-  border-radius: 0px 12px 12px 12px;
+  border-radius: 0 12px 12px;
 }
 
 .outgoing-message {
   background-color: #e4edfd;
-  border-radius: 12px 12px 0px 12px;
+  border-radius: 12px 12px 0;
 }
 
 .message-text {
@@ -33,7 +33,7 @@
 }
 
 .message-timestamp {
-  color: #999999;
+  color: #999;
   font-size: 9px;
   line-height: 1;
   text-align: right;

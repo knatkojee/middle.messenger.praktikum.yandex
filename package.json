@@ -13,8 +13,8 @@
     "start": "tsc && vite build && vite preview",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
-    "lint:styles": "stylelint '**/*.css'",
-    "lint:styles:fix": "stylelint '**/*.css' --fix"
+    "lint:styles": "stylelint **/*.css",
+    "lint:styles:fix": "stylelint **/*.css --fix"
   },
   "devDependencies": {
     "@nabla/vite-plugin-eslint": "^2.0.6",
