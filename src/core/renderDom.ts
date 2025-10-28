@@ -3,17 +3,24 @@ import Block from './block';
 export default function renderDOM(block: Block) {
   const root = document.querySelector('#app');
 
-  root!.innerHTML = '';
-  root!.appendChild(block.getContent());
+  const content = block.getContent();
+
+  if (content) {
+    root!.innerHTML = '';
+    root!.appendChild(content);
+  }
 }
 
-export function render(query, block) {
-  const root = document.querySelector(query);
+export function render(query: string, block: Block) {
+  const root = document.querySelector(query) as Element;
 
-  // Можно завязаться на реализации вашего класса Block
-  root.appendChild(block.getContent());
+  const content = block.getContent();
 
-  block.dispatchComponentDidMount();
+  if (content) {
+    root.appendChild(content);
+
+    block.dispatchComponentDidMount();
+  }
 
   return root;
 }

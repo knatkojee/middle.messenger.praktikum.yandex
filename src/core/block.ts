@@ -11,7 +11,7 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  _element = null;
+  _element = null as null | HTMLElement;
   _meta = null;
   _id = nanoid(6);
   children: any;
@@ -40,7 +40,7 @@ export default class Block {
     eventBus.emit(Block.EVENTS.INIT);
   }
 
-  _registerEvents(eventBus) {
+  _registerEvents(eventBus: EventBus<string>) {
     eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -197,10 +197,15 @@ export default class Block {
   }
 
   _makePropsProxy(props) {
-    const eventBus = this.eventBus();
+    const eventBus = this.eventBus?.();
+
+    if (!eventBus) {
+      return;
+    }
+
     const emitBind = eventBus.emit.bind(eventBus);
 
-    return new Proxy(props as any, {
+    return new Proxy(props, {
       get(target, prop) {
         const value = target[prop];
         return typeof value === 'function' ? value.bind(target) : value;
@@ -220,16 +225,24 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName) {
+  _createDocumentElement(tagName: string) {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
     return document.createElement(tagName);
   }
 
   show() {
-    this.getContent().style.display = 'block';
+    const content = this.getContent();
+
+    if (content) {
+      content.style.display = 'block';
+    }
   }
 
   hide() {
-    this.getContent().style.display = 'none';
+    const content = this.getContent();
+
+    if (content) {
+      content.style.display = 'none';
+    }
   }
 }
