@@ -2,9 +2,161 @@
 import { Button, FormFieldProfile } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
+import { validateProfileForm } from '../../utils/validation';
 
 export default class ProfileEditPage extends Block {
   constructor() {
+    const formFields = [
+      {
+        label: 'Почта',
+        inputType: 'email',
+        inputValue: 'pochta@yandex.ru',
+        name: 'email',
+        onBlur: e => {
+          const val = (e.target as HTMLInputElement)?.value;
+          const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+
+          let error = '';
+          let isInvalid = false;
+
+          if (!emailRegex.test(val)) {
+            error = 'Введите корректный адрес электронной почты';
+            isInvalid = true;
+          }
+
+          // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+          (this as any).children.editFields[0].setProps({
+            isInvalid,
+            errorMessage: error,
+          });
+        },
+      },
+      {
+        label: 'Логин',
+        inputType: 'text',
+        inputValue: 'ivanivanov',
+        name: 'login',
+        onBlur: e => {
+          const val = (e.target as HTMLInputElement)?.value;
+          const loginRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/;
+
+          let error = '';
+          let isInvalid = false;
+
+          if (!loginRegex.test(val)) {
+            error =
+              'Логин может содержать от 3 до 20 символов, латиницу, цифры (но не состоять из них), дефис и нижнее подчёркивание';
+            isInvalid = true;
+          }
+
+          // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+          (this as any).children.editFields[1].setProps({
+            isInvalid,
+            errorMessage: error,
+          });
+        },
+      },
+      {
+        label: 'Имя',
+        inputType: 'text',
+        inputValue: 'Иван',
+        name: 'first_name',
+        onBlur: e => {
+          const val = (e.target as HTMLInputElement)?.value;
+          const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
+
+          let error = '';
+          let isInvalid = false;
+
+          if (!nameRegex.test(val)) {
+            error =
+              'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
+            isInvalid = true;
+          }
+
+          // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+          (this as any).children.editFields[2].setProps({
+            isInvalid,
+            errorMessage: error,
+          });
+        },
+      },
+      {
+        label: 'Фамилия',
+        inputType: 'text',
+        inputValue: 'Иванов',
+        name: 'second_name',
+        onBlur: e => {
+          const val = (e.target as HTMLInputElement)?.value;
+          const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
+
+          let error = '';
+          let isInvalid = false;
+
+          if (!nameRegex.test(val)) {
+            error =
+              'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
+            isInvalid = true;
+          }
+
+          // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+          (this as any).children.editFields[3].setProps({
+            isInvalid,
+            errorMessage: error,
+          });
+        },
+      },
+      {
+        label: 'Имя в чате',
+        inputType: 'text',
+        inputValue: 'Иван',
+        name: 'display_name',
+        onBlur: e => {
+          const val = (e.target as HTMLInputElement)?.value;
+          const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
+
+          let error = '';
+          let isInvalid = false;
+
+          if (!nameRegex.test(val)) {
+            error =
+              'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
+            isInvalid = true;
+          }
+
+          // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+          (this as any).children.editFields[4].setProps({
+            isInvalid,
+            errorMessage: error,
+          });
+        },
+      },
+      {
+        label: 'Телефон',
+        inputType: 'tel',
+        inputValue: '+7 (909) 967 30 30',
+        name: 'phone',
+        onBlur: e => {
+          const val = (e.target as HTMLInputElement)?.value;
+          const phoneRegex = /^\+?\d{10,15}$/;
+
+          let error = '';
+          let isInvalid = false;
+
+          if (!phoneRegex.test(val)) {
+            error = 'Введите корректный телефон';
+            isInvalid = true;
+          }
+
+          // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
+          (this as any).children.editFields[5].setProps({
+            isInvalid,
+            errorMessage: error,
+          });
+        },
+      },
+    ] as FormFieldType[];
+
     super('main', {
       className: 'profile-container',
       PrimaryButton: new Button({
@@ -13,158 +165,7 @@ export default class ProfileEditPage extends Block {
         isSecondary: false,
         type: 'submit',
       }),
-      editFields: (
-        [
-          {
-            label: 'Почта',
-            inputType: 'email',
-            inputValue: 'pochta@yandex.ru',
-            name: 'email',
-            onBlur: e => {
-              const val = (e.target as HTMLInputElement)?.value;
-              const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
-
-              let error = '';
-              let isInvalid = false;
-
-              if (!emailRegex.test(val)) {
-                error = 'Введите корректный адрес электронной почты';
-                isInvalid = true;
-              }
-
-              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
-              (this as any).children.editFields[0].setProps({
-                isInvalid,
-                errorMessage: error,
-              });
-            },
-          },
-          {
-            label: 'Логин',
-            inputType: 'text',
-            inputValue: 'ivanivanov',
-            name: 'login',
-            onBlur: e => {
-              const val = (e.target as HTMLInputElement)?.value;
-              const loginRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/;
-
-              let error = '';
-              let isInvalid = false;
-
-              if (!loginRegex.test(val)) {
-                error =
-                  'Логин может содержать от 3 до 20 символов, латиницу, цифры (но не состоять из них), дефис и нижнее подчёркивание';
-                isInvalid = true;
-              }
-
-              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
-              (this as any).children.editFields[1].setProps({
-                isInvalid,
-                errorMessage: error,
-              });
-            },
-          },
-          {
-            label: 'Имя',
-            inputType: 'text',
-            inputValue: 'Иван',
-            name: 'first_name',
-            onBlur: e => {
-              const val = (e.target as HTMLInputElement)?.value;
-              const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
-
-              let error = '';
-              let isInvalid = false;
-
-              if (!nameRegex.test(val)) {
-                error =
-                  'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
-                isInvalid = true;
-              }
-
-              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
-              (this as any).children.editFields[2].setProps({
-                isInvalid,
-                errorMessage: error,
-              });
-            },
-          },
-          {
-            label: 'Фамилия',
-            inputType: 'text',
-            inputValue: 'Иванов',
-            name: 'second_name',
-            onBlur: e => {
-              const val = (e.target as HTMLInputElement)?.value;
-              const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
-
-              let error = '';
-              let isInvalid = false;
-
-              if (!nameRegex.test(val)) {
-                error =
-                  'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
-                isInvalid = true;
-              }
-
-              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
-              (this as any).children.editFields[3].setProps({
-                isInvalid,
-                errorMessage: error,
-              });
-            },
-          },
-          {
-            label: 'Имя в чате',
-            inputType: 'text',
-            inputValue: 'Иван',
-            name: 'display_name',
-            onBlur: e => {
-              const val = (e.target as HTMLInputElement)?.value;
-              const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
-
-              let error = '';
-              let isInvalid = false;
-
-              if (!nameRegex.test(val)) {
-                error =
-                  'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
-                isInvalid = true;
-              }
-
-              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
-              (this as any).children.editFields[4].setProps({
-                isInvalid,
-                errorMessage: error,
-              });
-            },
-          },
-          {
-            label: 'Телефон',
-            inputType: 'tel',
-            inputValue: '+7 (909) 967 30 30',
-            name: 'phone',
-            onBlur: e => {
-              const val = (e.target as HTMLInputElement)?.value;
-              const phoneRegex = /^\+?\d{10,15}$/;
-
-              let error = '';
-              let isInvalid = false;
-
-              if (!phoneRegex.test(val)) {
-                error = 'Введите корректный телефон';
-                isInvalid = true;
-              }
-
-              // Используем any для this, так как структура детей динамическая и TypeScript не может её заранее знать.
-              (this as any).children.editFields[5].setProps({
-                isInvalid,
-                errorMessage: error,
-              });
-            },
-          },
-        ] as FormFieldType[]
-      ).map(props => {
+      editFields: formFields.map(props => {
         return new FormFieldProfile({
           ...props,
         });
@@ -173,10 +174,9 @@ export default class ProfileEditPage extends Block {
         submit: (e: SubmitEvent) => {
           e.preventDefault();
 
-          const formData = new FormData(e.target as HTMLFormElement);
-          const data = Object.fromEntries(formData);
+          const validationResult = validateProfileForm(this, formFields, e);
 
-          console.log(data);
+          console.log(validationResult);
         },
       },
     });

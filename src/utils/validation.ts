@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import type { FormFieldType, FormWrapperProps } from '../components/FormWrapper/FormWrapper';
+import type Block from '../core/block';
+
 // Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
 export const validateFioField = (e: FocusEvent, context: any, index: number) => {
   const val = (e.target as HTMLInputElement)?.value;
@@ -111,4 +114,59 @@ export const validateMessage = (e: FocusEvent, context: any, index: number) => {
     isInvalid,
     errorMessage: error,
   });
+};
+
+export const validateAuthForm = (context: any, props: FormWrapperProps, e: SubmitEvent) => {
+  let isFormValid = true;
+
+  (context.children.formFields as Block[]).forEach((field: Block, index: number) => {
+    const input = field.getContent()?.querySelector('input');
+    if (input) {
+      const blurEvent = new FocusEvent('blur');
+      Object.defineProperty(blurEvent, 'target', { value: input });
+
+      const originalOnBlur = props.fields[index]?.onBlur;
+      if (originalOnBlur) {
+        originalOnBlur(blurEvent as FocusEvent);
+      }
+
+      if (field.props.isInvalid) {
+        isFormValid = false;
+      }
+    }
+  });
+
+  if (isFormValid) {
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+    return data;
+  } else {
+    throw new Error('Форма содержит ошибки');
+  }
+};
+
+export const validateProfileForm = (context: any, formFields: FormFieldType[], e: SubmitEvent) => {
+  let isFormValid = true;
+
+  (context.children.editFields as Block[]).forEach((field: Block, index: number) => {
+    const input = field.getContent()?.querySelector('input');
+    if (input && formFields[index]?.onBlur) {
+      const blurEvent = new FocusEvent('blur');
+      Object.defineProperty(blurEvent, 'target', { value: input });
+
+      formFields[index].onBlur!(blurEvent as FocusEvent);
+
+      if (field.props.isInvalid) {
+        isFormValid = false;
+      }
+    }
+  });
+
+  if (isFormValid) {
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData);
+    return data;
+  } else {
+    throw new Error('Форма содержит ошибки');
+  }
 };

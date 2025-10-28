@@ -5,7 +5,7 @@ type FormFieldProfileProps = {
   label: string;
   name: string;
   inputType: string;
-  inputValue: string;
+  inputValue?: string;
   errorMessage?: string;
   isInvalid?: boolean;
   onBlur?: (e: FocusEvent) => void;
@@ -23,7 +23,7 @@ export default class FormFieldProfile extends Block {
         className: 'info-value info-input',
         name: props.name,
         inputType: props.inputType,
-        inputValue: props.inputValue,
+        inputValue: props.inputValue ?? '',
         onBlur: props.onBlur,
       }),
     });

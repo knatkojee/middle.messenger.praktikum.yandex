@@ -1,18 +1,19 @@
 import Block from '../../core/block';
+import { validateAuthForm } from '../../utils/validation';
 import { Button } from '../Button';
 import { FormField } from '../FormField';
 
 export type FormFieldType = {
   label: string;
   inputType: string;
-  inputValue: string;
+  inputValue?: string;
   isInvalid?: boolean;
   errorMessage?: string;
   name: string;
   onBlur?: (e: FocusEvent) => void;
 };
 
-type FormWrapperProps = {
+export type FormWrapperProps = {
   primaryText: string;
   secondaryText: string;
   onPrimaryClick: () => void;
@@ -49,14 +50,14 @@ export default class FormWrapper extends Block {
         submit: (e: SubmitEvent) => {
           e.preventDefault();
 
-          const formData = new FormData(e.target as HTMLFormElement);
-          const data = Object.fromEntries(formData);
+          const validationResult = validateAuthForm(this, props, e);
 
-          console.log(data);
+          console.log(validationResult);
         },
       },
     });
   }
+
   public render(): string {
     return `
     <form class="form" id="form">

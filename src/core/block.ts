@@ -121,10 +121,8 @@ export default class Block {
     this._render();
   }
 
-  componentDidUpdate(oldProps: Props, newProps: Props): boolean {
-    console.log(oldProps);
-    console.log(newProps);
-
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  componentDidUpdate(_oldProps: Props, _newProps: Props): boolean {
     return true;
   }
 
