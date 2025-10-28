@@ -1,6 +1,7 @@
 {
   "extends": ["stylelint-config-standard"],
   "plugins": ["stylelint-order"],
+  "ignoreFiles": ["dist/**", "build/**", "**/*.min.css", "node_modules/**"],
   "rules": {
     "order/properties-alphabetical-order": true
   }
