@@ -1,4 +1,3 @@
-import js from '@eslint/js';
 import tseslint from '@typescript-eslint/eslint-plugin';
 import tsParser from '@typescript-eslint/parser';
 
@@ -27,11 +26,10 @@ export default [
       '@typescript-eslint': tseslint,
     },
     rules: {
-      ...js.configs.recommended.rules,
       ...tseslint.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/no-explicit-any': 'warn',
-      '@typescript-eslint/no-unsafe-function-type': false,
+      '@typescript-eslint/no-unsafe-function-type': 'off',
     },
   },
 ];
