@@ -1,4 +1,4 @@
-import { Modal } from '../../components';
+import { Button, Modal } from '../../components';
 import Block from '../../core/block';
 
 export default class PageWithModal extends Block {
@@ -7,8 +7,15 @@ export default class PageWithModal extends Block {
       className: 'some-class',
       showModal: true,
       Modal: new Modal({
-        labelOk: 'Давай',
-        labelCancel: 'Не',
+        ButtonCancel: new Button({
+          label: 'asd',
+          type: 'button',
+        }),
+        ButtonOk: new Button({
+          label: 'asd',
+          type: 'button',
+        }),
+        labelCancel: false,
         title: 'Загрузите файл',
         body: 'Выбрать файл на компьютере',
       }),
