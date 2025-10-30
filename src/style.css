@@ -8,8 +8,12 @@
   --white: #fff;
   --white-color-hover: #f1f1f1;
   --text-secondary-color: #999;
+  --grey: #efefef;
+  --grey-darker: #999;
   --bg-grey: #fbfbfb;
-  --container-box-shadow: 0px 0px 6px rgb(0 0 0 / 14%);
+  --bg-grey-hover: #e3e3e3;
+  --container-box-shadow: 0px 0px 6px #00000024;
+  --incoming-message-color: #f8f8f8;
 }
 
 * {

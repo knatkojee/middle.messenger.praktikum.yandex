@@ -77,11 +77,6 @@ const validate = (field: Block) => {
 };
 
 export const validateForm = (formElements: Block | Block[], event: SubmitEvent | FocusEvent) => {
-  // console.log('event instanceof SubmitEvent', event instanceof SubmitEvent);
-  // console.log('event instanceof FocusEvent', event instanceof FocusEvent);
-  // console.log('event', event);
-  // console.log('form elements', formElements);
-
   let isFormValid = true;
 
   if (Array.isArray(formElements)) {

@@ -17,23 +17,23 @@
 }
 
 .incoming-message {
-  background-color: #f8f8f8;
+  background-color: var(--incoming-message-color);
   border-radius: 0 12px 12px;
 }
 
 .outgoing-message {
-  background-color: #e4edfd;
+  background-color: var(--second-color);
   border-radius: 12px 12px 0;
 }
 
 .message-text {
-  color: #1e1e1e;
+  color: var(--text-color);
   font-size: 12px;
   line-height: 1;
 }
 
 .message-timestamp {
-  color: #999;
+  color: var(--text-secondary-color);
   font-size: 9px;
   line-height: 1;
   text-align: right;

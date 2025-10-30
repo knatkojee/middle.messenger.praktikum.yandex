@@ -12,14 +12,14 @@
 }
 
 .info-value {
-  color: #999;
+  color: var(--text-secondary-color);
   font-size: 13px;
   font-weight: 500;
   text-align: right;
 }
 
 .info-divider {
-  background-color: #eaeaea;
+  background-color: var(--grey);
   height: 1px;
   margin: 0;
   width: 100%;

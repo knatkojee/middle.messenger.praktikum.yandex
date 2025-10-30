@@ -65,7 +65,7 @@
 }
 
 .action-divider {
-  background-color: #eaeaea;
+  background-color: var(--grey);
   height: 1px;
   margin-bottom: 10px;
   margin-top: 10px;
