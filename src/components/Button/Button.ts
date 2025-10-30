@@ -1,10 +1,10 @@
 import Block from '../../core/block';
 
 type ButtonProps = {
-  type: string;
+  type: 'submit' | 'button';
   label: string;
   isSecondary?: boolean;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export default class Button extends Block {
