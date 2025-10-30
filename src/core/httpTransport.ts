@@ -46,6 +46,19 @@ interface HTTPError extends Error {
   url?: string;
 }
 
+export enum HttpStatus {
+  Ok = 200,
+  Created = 201,
+  NoContent = 204,
+  MultipleChoices = 300,
+  BadRequest = 400,
+  Unauthorized = 401,
+  Forbidden = 403,
+  NotFound = 404,
+  Conflict = 409,
+  InternalServerError = 500,
+}
+
 export class HTTPTransport {
   private readonly baseURL: string;
 
@@ -73,7 +86,7 @@ export class HTTPTransport {
       xhr.responseType = 'json';
 
       xhr.onload = (): void => {
-        if (xhr.status >= 200 && xhr.status < 300) {
+        if (xhr.status >= HttpStatus.Ok && xhr.status < HttpStatus.MultipleChoices) {
           const response: HTTPResponse<T> = {
             data: xhr.response as T,
             status: xhr.status,

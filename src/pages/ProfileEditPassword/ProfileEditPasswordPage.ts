@@ -1,34 +1,34 @@
 import { Button, FormFieldProfile } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
-
-// Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const validatePassword = (e: FocusEvent, context: any, idx: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
-
-  let error = '';
-  let isInvalid = false;
-
-  if (!passwordRegex.test(val)) {
-    error = 'Пароль должен содержать верхний и нижний регистр, цифру';
-    isInvalid = true;
-  }
-
-  if (val.length < 8) {
-    error = 'Пароль должен содержать более восьми символов';
-    isInvalid = true;
-  }
-
-  context.children.editFields[idx].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
-};
+import { validateForm } from '../../utils/validation';
 
 export default class ProfileEditPasswordPage extends Block {
   constructor() {
+    const formFields = [
+      {
+        label: 'Старый пароль',
+        inputType: 'password',
+        inputValue: 'oldPassword',
+        name: 'password_old',
+        onBlur: e => validateForm((this.children.editFields as Block[])[0], e),
+      },
+      {
+        label: 'Пароль',
+        inputType: 'password',
+        inputValue: 'password-new-222',
+        name: 'password',
+        onBlur: e => validateForm((this.children.editFields as Block[])[1], e),
+      },
+      {
+        label: 'Пароль (ещё раз)',
+        inputType: 'password',
+        inputValue: 'password-new-222',
+        name: 'password_repeat',
+        onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
+      },
+    ] as FormFieldType[];
+
     super('main', {
       className: 'profile-container',
       PrimaryButton: new Button({
@@ -37,31 +37,7 @@ export default class ProfileEditPasswordPage extends Block {
         isSecondary: false,
         type: 'submit',
       }),
-      editFields: (
-        [
-          {
-            label: 'Старый пароль',
-            inputType: 'password',
-            inputValue: 'oldPassword',
-            name: 'password_old',
-            onBlur: e => validatePassword(e, this, 0),
-          },
-          {
-            label: 'Пароль',
-            inputType: 'password',
-            inputValue: 'password-new-222',
-            name: 'newPassword',
-            onBlur: e => validatePassword(e, this, 1),
-          },
-          {
-            label: 'Пароль (ещё раз)',
-            inputType: 'password',
-            inputValue: 'password-new-222',
-            name: 'newPasswordRepeat',
-            onBlur: e => validatePassword(e, this, 2),
-          },
-        ] as FormFieldType[]
-      ).map(props => {
+      editFields: formFields.map(props => {
         return new FormFieldProfile({
           ...props,
         });
@@ -69,11 +45,11 @@ export default class ProfileEditPasswordPage extends Block {
       events: {
         submit: (e: SubmitEvent) => {
           e.preventDefault();
+          e.stopImmediatePropagation();
 
-          const formData = new FormData(e.target as HTMLFormElement);
-          const data = Object.fromEntries(formData);
+          const validationResult = validateForm(this.children.editFields, e);
 
-          console.log(data);
+          console.log(validationResult);
         },
       },
     });

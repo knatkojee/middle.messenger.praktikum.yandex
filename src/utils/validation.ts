@@ -1,172 +1,109 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import type { FormFieldType, FormWrapperProps } from '../components/FormWrapper/FormWrapper';
 import type Block from '../core/block';
 
-// Используем any для context, так как структура детей динамическая и TypeScript не может её заранее знать.
-export const validateFioField = (e: FocusEvent, context: any, index: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const nameRegex = /^[A-ZА-Я][a-zа-я-]*$/;
-
-  let error = '';
-  let isInvalid = false;
-
-  if (!nameRegex.test(val)) {
-    error =
-      'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
-    isInvalid = true;
-  }
-  context.children.FormWrapper.children.formFields[index].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
+const validators = {
+  email: (val: string) => {
+    const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+    return emailRegex.test(val) ? '' : 'Введите корректный адрес электронной почты';
+  },
+  password: (val: string) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
+    return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
+  },
+  password_old: (val: string) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
+    return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
+  },
+  password_repeat: (val: string) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
+    return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
+  },
+  phone: (val: string) => {
+    const phoneRegex = /^\+?\d{10,15}$/;
+    return phoneRegex.test(val) ? '' : 'Введите корректный телефон';
+  },
+  login: (val: string) => {
+    const loginRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/;
+    return loginRegex.test(val) ? '' : 'Введите корректный логин';
+  },
+  first_name: (val: string) => {
+    const nameRegex = /^[A-ZА-ЯЁ][a-zа-яё]*$/;
+    return nameRegex.test(val)
+      ? ''
+      : 'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
+  },
+  second_name: (val: string) => {
+    const nameRegex = /^[A-ZА-ЯЁ][a-zа-яё]*$/;
+    return nameRegex.test(val)
+      ? ''
+      : 'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
+  },
+  display_name: (val: string) => {
+    const nameRegex = /^[A-ZА-ЯЁ][a-zа-яё]*$/;
+    return nameRegex.test(val)
+      ? ''
+      : 'Допустимы латиница или кириллица, первая буква заглавная, без пробелов и цифр, допустим дефис';
+  },
+  message: (val: string) => {
+    const messageRegex = /.+/;
+    return messageRegex.test(val) ? '' : 'Сообщение не может быть пустым';
+  },
 };
 
-export const validateLoginField = (e: FocusEvent, context: any, index: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const loginRegex = /^(?=.*[a-zA-Z])[a-zA-Z0-9_-]{3,20}$/;
+const validate = (field: Block) => {
+  const input = field.getContent()?.querySelector('input');
+  let isInputValid = true;
 
-  let error = '';
-  let isInvalid = false;
+  if (input) {
+    const value = input.value;
+    const fieldName = input.name;
 
-  if (!loginRegex.test(val)) {
-    error =
-      'Логин может содержать от 3 до 20 символов, латиницу, цифры (но не состоять из них), дефис и нижнее подчёркивание';
-    isInvalid = true;
+    const error = validators[fieldName as keyof typeof validators]?.(value);
+
+    if (error) {
+      isInputValid = false;
+      field.setProps({
+        isInvalid: true,
+        errorMessage: error,
+      });
+    } else {
+      field.setProps({
+        isInvalid: false,
+        errorMessage: '',
+      });
+    }
   }
-  context.children.FormWrapper.children.formFields[index].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
+
+  return isInputValid;
 };
 
-export const validateEmail = (e: FocusEvent, context: any, index: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z]+\.[a-zA-Z]+$/;
+export const validateForm = (formElements: Block | Block[], event: SubmitEvent | FocusEvent) => {
+  // console.log('event instanceof SubmitEvent', event instanceof SubmitEvent);
+  // console.log('event instanceof FocusEvent', event instanceof FocusEvent);
+  // console.log('event', event);
+  // console.log('form elements', formElements);
 
-  let error = '';
-  let isInvalid = false;
-
-  if (!emailRegex.test(val)) {
-    error = 'Введите корректный адрес электронной почты';
-    isInvalid = true;
-  }
-
-  context.children.FormWrapper.children.formFields[index].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
-};
-
-export const validatePhone = (e: FocusEvent, context: any, index: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const phoneRegex = /^\+?\d{10,15}$/;
-
-  let error = '';
-  let isInvalid = false;
-
-  if (!phoneRegex.test(val)) {
-    error = 'Введите корректный телефон';
-    isInvalid = true;
-  }
-
-  context.children.FormWrapper.children.formFields[index].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
-};
-
-export const validatePassword = (e: FocusEvent, context: any, index: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
-
-  let error = '';
-  let isInvalid = false;
-
-  if (!passwordRegex.test(val)) {
-    error = 'Пароль должен содержать верхний и нижний регистр, цифру';
-    isInvalid = true;
-  }
-
-  if (val.length < 8) {
-    error = 'Пароль должен содержать более восьми символов';
-    isInvalid = true;
-  }
-
-  context.children.FormWrapper.children.formFields[index].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
-};
-
-export const validateMessage = (e: FocusEvent, context: any, index: number) => {
-  const val = (e.target as HTMLInputElement)?.value;
-  const messageRegex = /.+/;
-
-  let error = '';
-  let isInvalid = false;
-
-  if (!messageRegex.test(val)) {
-    error = 'Сообщение не может быть пустым';
-    isInvalid = true;
-  }
-
-  context.children.FormWrapper.children.formFields[index].setProps({
-    isInvalid,
-    errorMessage: error,
-  });
-};
-
-export const validateAuthForm = (context: any, props: FormWrapperProps, e: SubmitEvent) => {
   let isFormValid = true;
 
-  (context.children.formFields as Block[]).forEach((field: Block, index: number) => {
-    const input = field.getContent()?.querySelector('input');
-    if (input) {
-      const blurEvent = new FocusEvent('blur');
-      Object.defineProperty(blurEvent, 'target', { value: input });
-
-      const originalOnBlur = props.fields[index]?.onBlur;
-      if (originalOnBlur) {
-        originalOnBlur(blurEvent as FocusEvent);
-      }
-
-      if (field.props.isInvalid) {
-        isFormValid = false;
-      }
+  if (Array.isArray(formElements)) {
+    if (formElements.map(validate).includes(false)) {
+      isFormValid = false;
     }
-  });
-
-  if (isFormValid) {
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData);
-    return data;
   } else {
-    throw new Error('Форма содержит ошибки');
-  }
-};
-
-export const validateProfileForm = (context: any, formFields: FormFieldType[], e: SubmitEvent) => {
-  let isFormValid = true;
-
-  (context.children.editFields as Block[]).forEach((field: Block, index: number) => {
-    const input = field.getContent()?.querySelector('input');
-    if (input && formFields[index]?.onBlur) {
-      const blurEvent = new FocusEvent('blur');
-      Object.defineProperty(blurEvent, 'target', { value: input });
-
-      formFields[index].onBlur!(blurEvent as FocusEvent);
-
-      if (field.props.isInvalid) {
-        isFormValid = false;
-      }
+    if (!validate(formElements)) {
+      isFormValid = false;
     }
-  });
-
-  if (isFormValid) {
-    const formData = new FormData(e.target as HTMLFormElement);
-    const data = Object.fromEntries(formData);
-    return data;
-  } else {
-    throw new Error('Форма содержит ошибки');
   }
+
+  if (event instanceof SubmitEvent && event.target instanceof HTMLFormElement) {
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    if (isFormValid) {
+      return data;
+    } else {
+      throw new Error('Форма содержит ошибки');
+    }
+  }
+
+  return;
 };

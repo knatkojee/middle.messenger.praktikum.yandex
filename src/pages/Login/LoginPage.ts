@@ -1,6 +1,6 @@
 import { FormWrapper } from '../../components';
 import Block from '../../core/block';
-import { validateLoginField, validatePassword } from '../../utils/validation';
+import { validateForm } from '../../utils/validation';
 
 export default class LoginPage extends Block {
   constructor() {
@@ -16,16 +16,24 @@ export default class LoginPage extends Block {
           {
             label: 'Логин',
             inputType: 'text',
-            inputValue: 'ivanivanov',
+            // inputValue: 'ivanivanov',
             name: 'login',
-            onBlur: e => validateLoginField(e, this, 0),
+            onBlur: event =>
+              validateForm(
+                ((this.children.FormWrapper as Block).children.formFields as Block[])[0],
+                event
+              ),
           },
           {
             label: 'Пароль',
             inputType: 'password',
-            inputValue: 'password',
+            // inputValue: 'password',
             name: 'password',
-            onBlur: e => validatePassword(e, this, 1),
+            onBlur: event =>
+              validateForm(
+                ((this.children.FormWrapper as Block).children.formFields as Block[])[1],
+                event
+              ),
           },
         ],
       }),

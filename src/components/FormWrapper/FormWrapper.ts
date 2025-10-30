@@ -1,5 +1,5 @@
 import Block from '../../core/block';
-import { validateAuthForm } from '../../utils/validation';
+import { validateForm } from '../../utils/validation';
 import { Button } from '../Button';
 import { FormField } from '../FormField';
 
@@ -49,8 +49,9 @@ export default class FormWrapper extends Block {
       events: {
         submit: (e: SubmitEvent) => {
           e.preventDefault();
+          e.stopImmediatePropagation();
 
-          const validationResult = validateAuthForm(this, props, e);
+          const validationResult = validateForm(this.children.formFields, e);
 
           console.log(validationResult);
         },

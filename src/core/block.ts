@@ -18,7 +18,7 @@ interface BlockChildren {
   [key: string]: Block | Block[];
 }
 
-export default class Block {
+export default abstract class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -29,6 +29,7 @@ export default class Block {
   _element: HTMLElement | null = null;
   _meta: { tagName: string; props: Props } | null = null;
   _id: string = nanoid(6);
+  _isRendering = false;
   children: BlockChildren;
   props: Props;
   eventBus: () => EventBus<Events>;
@@ -191,16 +192,26 @@ export default class Block {
   }
 
   _render(): void {
-    this._removeEvents();
-    const block = this._compile();
-
-    if (this._element!.children.length === 0) {
-      this._element!.appendChild(block);
-    } else {
-      this._element!.replaceChildren(block);
+    if (this._isRendering) {
+      return;
     }
 
-    this._addEvents();
+    this._isRendering = true;
+
+    try {
+      this._removeEvents();
+      const block = this._compile();
+
+      if (this._element!.children.length === 0) {
+        this._element!.appendChild(block);
+      } else {
+        this._element!.replaceChildren(block);
+      }
+
+      this._addEvents();
+    } finally {
+      this._isRendering = false;
+    }
   }
 
   render(): string {
