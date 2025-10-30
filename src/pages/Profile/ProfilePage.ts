@@ -129,13 +129,16 @@ export default class ProfilePage extends Block {
                 <h1 class="profile-name">{{ profileName }}</h1>
 
                 <div class="profile-info">
-                    {{{ infoRows }}}
-
-                    <div class="action-buttons">
-                        {{> ActionButton text="Изменить данные" withDivider=true}}
-                        {{> ActionButton text="Изменить пароль" withDivider=true}}
-                        {{> ActionButton text="Выйти" red=true}}
-                    </div>
+                
+                {{#each infoRows}}
+                  {{{ this }}}
+                {{/each}}
+                
+                  <div class="action-buttons">
+                      {{> ActionButton text="Изменить данные" withDivider=true}}
+                      {{> ActionButton text="Изменить пароль" withDivider=true}}
+                      {{> ActionButton text="Выйти" red=true}}
+                  </div>
                 </div>
             </section>
 
