@@ -1,4 +1,4 @@
-import { Button, FormFieldProfile } from '../../components';
+import { Avatar, Button, FormFieldProfile } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
 import { validateForm } from '../../utils/validation';
@@ -9,42 +9,42 @@ export default class ProfileEditPage extends Block {
       {
         label: 'Почта',
         inputType: 'email',
-        // inputValue: 'pochta@yandex.ru',
+        inputValue: 'pochta@yandex.ru',
         name: 'email',
         onBlur: e => validateForm((this.children.editFields as Block[])[0], e),
       },
       {
         label: 'Логин',
         inputType: 'text',
-        // inputValue: 'ivanivanov',
+        inputValue: 'ivanivanov',
         name: 'login',
         onBlur: e => validateForm((this.children.editFields as Block[])[1], e),
       },
       {
         label: 'Имя',
         inputType: 'text',
-        // inputValue: 'Иван',
+        inputValue: 'Иван',
         name: 'first_name',
         onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
       },
       {
         label: 'Фамилия',
         inputType: 'text',
-        // inputValue: 'Иванов',
+        inputValue: 'Иванов',
         name: 'second_name',
         onBlur: e => validateForm((this.children.editFields as Block[])[3], e),
       },
       {
         label: 'Имя в чате',
         inputType: 'text',
-        // inputValue: 'Иван',
+        inputValue: 'Иван',
         name: 'display_name',
         onBlur: e => validateForm((this.children.editFields as Block[])[4], e),
       },
       {
         label: 'Телефон',
         inputType: 'tel',
-        // inputValue: '+7 (909) 967 30 30',
+        inputValue: '+7 (909) 967 30 30',
         name: 'phone',
         onBlur: e => validateForm((this.children.editFields as Block[])[5], e),
       },
@@ -54,9 +54,17 @@ export default class ProfileEditPage extends Block {
       className: 'profile-container',
       PrimaryButton: new Button({
         label: 'Сохранить',
-        onClick: () => {},
         isSecondary: false,
         type: 'submit',
+      }),
+      Avatar: new Avatar({
+        onClick: (e: PointerEvent) => {
+          e.preventDefault();
+
+          this.setProps({
+            showModal: true,
+          });
+        },
       }),
       editFields: formFields.map(props => {
         return new FormFieldProfile({
@@ -108,7 +116,7 @@ export default class ProfileEditPage extends Block {
         </aside>
 
         <section class="profile-section">
-          {{> Avatar}}
+          {{{ Avatar }}}
 
           <form action="#">
             <div class="profile-info">

@@ -81,14 +81,12 @@ export default class ProfilePage extends Block {
         }),
       }),
       Avatar: new Avatar({
-        onClick: () => {
-          setTimeout(() => {
-            console.log(
-              this.setProps({
-                showModal: true,
-              })
-            );
-          }, 100);
+        onClick: (e: PointerEvent) => {
+          e.preventDefault();
+
+          this.setProps({
+            showModal: true,
+          });
         },
       }),
     });

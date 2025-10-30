@@ -18,7 +18,7 @@ export default class Avatar extends Block {
   render(): string {
     return `
            <div class="profile-avatar">
-                <button class="edit-avatar-button" id="avatarButton" onclick="{{onClick}}">
+                <button class="edit-avatar-button" id="avatarButton">
                     <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="40"

@@ -1,4 +1,4 @@
-import { Button, FormFieldProfile } from '../../components';
+import { Avatar, Button, FormFieldProfile } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import Block from '../../core/block';
 import { validateForm } from '../../utils/validation';
@@ -36,6 +36,15 @@ export default class ProfileEditPasswordPage extends Block {
         onClick: () => {},
         isSecondary: false,
         type: 'submit',
+      }),
+      Avatar: new Avatar({
+        onClick: (e: PointerEvent) => {
+          e.preventDefault();
+
+          this.setProps({
+            showModal: true,
+          });
+        },
       }),
       editFields: formFields.map(props => {
         return new FormFieldProfile({
@@ -87,7 +96,7 @@ export default class ProfileEditPasswordPage extends Block {
         </aside>
 
         <section class="profile-section">
-          {{> Avatar}}
+          {{{ Avatar }}}
 
           <form action="#">
             <div class="profile-info">
