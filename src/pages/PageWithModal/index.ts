@@ -1,1 +1,1 @@
-export {default as PageWithModal} from './PageWithModal.hbs?raw'
+export { default as PageWithModal } from './PageWithModal';

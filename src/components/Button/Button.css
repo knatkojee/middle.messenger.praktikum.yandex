@@ -1,26 +1,22 @@
 .button {
-  display: flex;
-  justify-content: center;
-
-  width: 100%;
-  max-width: 280px;
-  padding: 12px 24px;
-
   background-color: var(--main-color);
-  cursor: pointer;
   border: none;
   border-radius: 8px;
-
-  font-size: 13px;
   color: var(--white);
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
+  justify-content: center;
+  max-width: 280px;
+  padding: 12px 24px;
   text-align: center;
-
   transition: background-color 0.2s ease;
+  width: 100%;
 }
 
 .button-secondary {
-  color: var(--main-color);
   background-color: transparent;
+  color: var(--main-color);
   font-size: 11px;
 }
 
@@ -41,6 +37,6 @@
 }
 
 .button:focus {
-  outline: 2px solid rgba(51, 105, 243, 0.5);
+  outline: 2px solid rgb(51 105 243 / 50%);
   outline-offset: 2px;
 }

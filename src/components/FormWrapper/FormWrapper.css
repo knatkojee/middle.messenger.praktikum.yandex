@@ -1,27 +1,23 @@
 .form-container {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .form {
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--container-box-shadow);
   display: flex;
   flex-direction: column;
-
-  width: 340px;
-
   padding: 50px 30px 30px;
-
-  background-color: var(--white);
-  box-shadow: var(--container-box-shadow);
-  border-radius: 12px;
+  width: 340px;
 }
 
 .form-title {
-  margin-bottom: 40px;
-
+  color: var(--text-color);
   font-size: 20px;
   font-weight: 500;
-  color: var(--text-color);
+  margin-bottom: 40px;
   text-align: center;
 }

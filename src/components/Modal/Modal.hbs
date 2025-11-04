@@ -1,14 +1,14 @@
-<div class="modal-container">
+<form class="modal-container" onsubmit="">
     <div class="modal">
-        <h2 class="modal__title">{{title}}</h2>
-        <div class="modal__body">
+        <h2 class="modal-title">{{title}}</h2>
+        <div class="modal-body">
             {{> @partial-block }}
         </div>
-        <div class="modal__footer">
+        <div class="modal-footer">
             {{> Button text=labelOk type="submit" }}
             {{#if labelCancel}}
                 {{> Button text=labelCancel isSecondary="true" }}
             {{/if}}
         </div>
     </div>
-</div>
+</form>

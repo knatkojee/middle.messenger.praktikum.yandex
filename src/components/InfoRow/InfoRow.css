@@ -1,36 +1,34 @@
 .info-row {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .info-label {
-  min-width: 160px;
+  color: var(--text-color);
   font-size: 13px;
   font-weight: 500;
-  color: var(--text-color);
+  min-width: 160px;
 }
 
 .info-value {
+  color: var(--text-secondary-color);
   font-size: 13px;
   font-weight: 500;
-  color: #999;
   text-align: right;
 }
 
 .info-divider {
-  width: 100%;
+  background-color: var(--grey);
   height: 1px;
   margin: 0;
-  background-color: #eaeaea;
+  width: 100%;
 }
 
 .info-value.info-input {
-  width: 100%;
-
   background: transparent;
   border: none;
-
   font-size: 13px;
   outline: none;
+  width: 100%;
 }

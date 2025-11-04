@@ -5,41 +5,49 @@
   --second-color: #e4edfd;
   --error-color: #ff2f2f;
   --text-color: #1e1e1e;
-  --white: #ffffff;
+  --white: #fff;
   --white-color-hover: #f1f1f1;
   --text-secondary-color: #999;
-  --container-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+  --grey: #efefef;
+  --grey-darker: #999;
+  --bg-grey: #fbfbfb;
+  --bg-grey-hover: #e3e3e3;
+  --container-box-shadow: 0px 0px 6px #00000024;
+  --incoming-message-color: #f8f8f8;
 }
 
 * {
+  box-sizing: border-box;
+  font-family: -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: -apple-system, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell,
-    sans-serif;
 }
 
 body {
-  width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
   position: relative;
+  width: 100vw;
+}
+
+#app {
+  width: 100%;
 }
 
 img {
-  max-width: 100%;
   height: auto;
+  max-width: 100%;
 }
 
 #modal {
+  background-color: #0003;
   display: none;
+  height: 100vh;
   position: absolute;
   width: 100vw;
-  height: 100vh;
-  background-color: #00000033;
 }
 
 #modal.active {
