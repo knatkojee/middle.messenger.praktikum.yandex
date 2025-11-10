@@ -1,9 +1,7 @@
 // Базовые типы
 type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-// Без any получается слишком большое и плохо читаемое перечисление
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type QueryParams = Record<string, any>;
+type QueryParams = Record<string, unknown>;
 
 type RequestData =
   | Record<string, unknown>
