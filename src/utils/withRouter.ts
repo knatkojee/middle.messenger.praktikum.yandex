@@ -3,5 +3,5 @@ export function withRouter(WrappedBlock) {
     constructor(props) {
       super({ ...props, router: window.router });
     }
-  }
+  };
 }

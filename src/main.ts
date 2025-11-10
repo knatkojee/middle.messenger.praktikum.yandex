@@ -1,21 +1,10 @@
 import Handlebars from 'handlebars';
-
 import * as Components from './components';
 import * as Pages from './pages';
-import renderDOM from './core/renderDom';
+import { Store, StoreEvents } from './core/store';
+import Router from './core/router';
+import { ROUTER } from './constants';
 
-const pages = {
-  login: [Pages.LoginPage],
-  registration: [Pages.RegistrationPage],
-  main: [Pages.MainPage],
-  profile: [Pages.ProfilePage],
-  profileEdit: [Pages.ProfileEditPage],
-  profileEditPassword: [Pages.ProfileEditPasswordPage],
-  '404': [Pages.Page404],
-  '500': [Pages.Page500],
-  modalPage: [Pages.PageWithModal],
-  nav: [Pages.NavigatePage],
-};
 Object.entries(Components).forEach(([name, template]) => {
   if (typeof template === 'function') {
     return;
@@ -23,29 +12,29 @@ Object.entries(Components).forEach(([name, template]) => {
   Handlebars.registerPartial(name, template);
 });
 
-function navigate(page: string) {
-  // @ts-ignore
-  const [source, context] = pages[page];
-  if (typeof source === 'function') {
-    renderDOM(new source({}));
-    return;
-  }
-
-  const container = document.getElementById('app')!;
-
-  const templatingFunction = Handlebars.compile(source);
-  container.innerHTML = templatingFunction(context);
-}
-
-document.addEventListener('DOMContentLoaded', () => navigate('nav'));
-
-document.addEventListener('click', e => {
-  //@ts-ignore
-  const page = e.target.getAttribute('page');
-  if (page) {
-    navigate(page);
-
-    e.preventDefault();
-    e.stopImmediatePropagation();
-  }
+window.store = new Store({
+  isLoading: false,
+  user: {},
+  chats: [],
+  selectedChat: 1,
+  messages: [],
+  apiError: null,
 });
+
+window.store.on(StoreEvents.Updated, (prevState, newState) => {
+  console.log('prevState', prevState);
+  console.log('newState', newState);
+});
+
+// authServices.checkLoginUser();
+
+const APP_ROOT_ELEMNT = '#app';
+
+window.router = new Router(APP_ROOT_ELEMNT);
+window.router
+  .use(ROUTER.registration, Pages.RegistrationPage)
+  .use(ROUTER.login, Pages.LoginPage)
+  .use(ROUTER.main, Pages.MainPage)
+  .use(ROUTER.profile, Pages.ProfilePage)
+  .use('*', Pages.Page404)
+  .start();
