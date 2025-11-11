@@ -58,6 +58,11 @@
   width: 5px;
 }
 
+.profile-link {
+  color: inherit;
+  text-decoration: none;
+}
+
 .search-bar {
   align-items: center;
   background-color: var(--grey);

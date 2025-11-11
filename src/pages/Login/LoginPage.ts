@@ -18,7 +18,7 @@ class LoginPage extends Block {
         primaryText: 'Авторизоваться',
         secondaryText: 'Нет аккаунта?',
         onPrimaryClick: () => {
-          props.router.go(ROUTER.main);
+          props.router.go(ROUTER.chats);
         },
         onSecondaryClick: () => {
           props.router.go(ROUTER.registration);

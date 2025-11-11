@@ -1,16 +1,29 @@
 import { FormWrapper } from '../../components';
+import { ROUTER } from '../../constants';
 import Block from '../../core/block';
+import type Router from '../../core/router';
+import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
+import { withRouter } from '../../utils/withRouter';
 
-export default class RegistrationPage extends Block {
-  constructor() {
+type RegistrationPageProps = {
+  router: Router;
+};
+
+class RegistrationPage extends Block {
+  constructor(props: RegistrationPageProps) {
     super('main', {
+      ...props,
       FormWrapper: new FormWrapper({
-        primaryText: 'Регистрация',
-        secondaryText: 'Зарегистрироваться',
-        onPrimaryClick: () => {},
-        onSecondaryClick: () => {},
-        title: 'Вход',
+        primaryText: 'Зарегистрироваться',
+        secondaryText: 'Войти',
+        onPrimaryClick: () => {
+          props.router.go(ROUTER.login);
+        },
+        onSecondaryClick: () => {
+          props.router.go(ROUTER.login);
+        },
+        title: 'Регистрация',
         showSecondaryButton: true,
         fields: [
           {
@@ -99,3 +112,12 @@ export default class RegistrationPage extends Block {
     return `{{{ FormWrapper }}}`;
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {
+    isLoading: state.isLoading,
+    loginError: state.loginError,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(RegistrationPage));

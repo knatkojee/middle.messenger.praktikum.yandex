@@ -24,7 +24,7 @@ export default class MainPage extends Block {
             error = 'Нельзя отправить пустое сообщение';
             isInvalid = true;
           }
-          console.log(this);
+          console.log(val);
 
           this.setProps({
             isInvalid,

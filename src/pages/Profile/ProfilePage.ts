@@ -1,16 +1,29 @@
-import { Avatar, Button, InfoRow, Modal } from '../../components';
+import { ActionButton, Avatar, Button, FormFieldProfile, InfoRow, Modal } from '../../components';
+import Aside from '../../components/Aside/Aside';
+import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import type { InfoRowProps } from '../../components/InfoRow/InfoRow';
 import Block from '../../core/block';
+import { connect } from '../../utils/connect';
+import { validateForm } from '../../utils/validation';
+import { withRouter } from '../../utils/withRouter';
+import profileTemplate from './profileTemplate.hbs?raw';
+import editDataTemplate from './EditDataTemplate.hbs?raw';
+import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
+import { ROUTER } from '../../constants';
+import type Router from '../../core/router';
 
 type ProfilePageProps = {
   title: string;
   labelOk: string;
   labelCancel: string;
   body: string;
+  currentView: 'profile' | 'change_data' | 'change_password';
+  router: Router;
 };
 
-export default class ProfilePage extends Block {
+class ProfilePage extends Block {
   constructor(props: ProfilePageProps) {
+    const { currentView = 'profile' } = props;
     const infoRows = [
       {
         label: 'Почта',
@@ -38,9 +51,84 @@ export default class ProfilePage extends Block {
       },
     ] as InfoRowProps[];
 
+    const editPasswordFields = [
+      {
+        label: 'Старый пароль',
+        inputType: 'password',
+        inputValue: 'oldPassword',
+        name: 'password_old',
+        onBlur: e => validateForm((this.children.editFields as Block[])[0], e),
+      },
+      {
+        label: 'Пароль',
+        inputType: 'password',
+        inputValue: 'password-new-222',
+        name: 'password',
+        onBlur: e => validateForm((this.children.editFields as Block[])[1], e),
+      },
+      {
+        label: 'Пароль (ещё раз)',
+        inputType: 'password',
+        inputValue: 'password-new-222',
+        name: 'password_repeat',
+        onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
+      },
+    ] as FormFieldType[];
+
+    const editDataFields = [
+      {
+        label: 'Почта',
+        inputType: 'email',
+        inputValue: 'pochta@yandex.ru',
+        name: 'email',
+        onBlur: e => validateForm((this.children.editFields as Block[])[0], e),
+      },
+      {
+        label: 'Логин',
+        inputType: 'text',
+        inputValue: 'ivanivanov',
+        name: 'login',
+        onBlur: e => validateForm((this.children.editFields as Block[])[1], e),
+      },
+      {
+        label: 'Имя',
+        inputType: 'text',
+        inputValue: 'Иван',
+        name: 'first_name',
+        onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
+      },
+      {
+        label: 'Фамилия',
+        inputType: 'text',
+        inputValue: 'Иванов',
+        name: 'second_name',
+        onBlur: e => validateForm((this.children.editFields as Block[])[3], e),
+      },
+      {
+        label: 'Имя в чате',
+        inputType: 'text',
+        inputValue: 'Иван',
+        name: 'display_name',
+        onBlur: e => validateForm((this.children.editFields as Block[])[4], e),
+      },
+      {
+        label: 'Телефон',
+        inputType: 'tel',
+        inputValue: '+7 (909) 967 30 30',
+        name: 'phone',
+        onBlur: e => validateForm((this.children.editFields as Block[])[5], e),
+      },
+    ] as FormFieldType[];
+
     super('main', {
       ...props,
       className: 'profile-container',
+      Aside: new Aside({
+        onButtonBackClick: () => {
+          window.history.back();
+        },
+      }),
+      currentView: currentView,
       showModal: false,
       infoRows: infoRows.map(
         el =>
@@ -89,63 +177,78 @@ export default class ProfilePage extends Block {
           });
         },
       }),
+      ButtonChangeData: new ActionButton({
+        label: 'Изменить данные',
+        onClick: () => {
+          this.setProps({
+            currentView: 'change_data',
+          });
+        },
+      }),
+      ButtonChangePassword: new ActionButton({
+        label: 'Изменить пароль',
+        onClick: () => {
+          this.setProps({
+            currentView: 'change_password',
+          });
+        },
+      }),
+      ButtonLogout: new ActionButton({
+        label: 'Выйти',
+        red: true,
+        onClick: () => {
+          props.router.go(ROUTER.login);
+        },
+      }),
+
+      // data edit
+
+      EditDataButton: new Button({
+        label: 'Сохранить',
+        onClick: () => {},
+        isSecondary: false,
+        type: 'submit',
+      }),
+      editDataFields: editDataFields.map(props => {
+        return new FormFieldProfile({
+          ...props,
+        });
+      }),
+
+      // password edit
+
+      EditPasswordButton: new Button({
+        label: 'Сохранить',
+        onClick: () => {},
+        isSecondary: false,
+        type: 'submit',
+      }),
+      editPasswordFields: editPasswordFields.map(props => {
+        return new FormFieldProfile({
+          ...props,
+        });
+      }),
     });
   }
 
   render(): string {
-    return `
-            <aside class="sidebar">
-                <button class="back-button" aria-label="Go back">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 28 28"
-                    fill="none"
-                >
-                    <circle
-                    cx="14"
-                    cy="14"
-                    r="14"
-                    transform="rotate(-180 14 14)"
-                    fill="var(--main-color)"
-                    />
-                    <rect
-                    x="20"
-                    y="14.8"
-                    width="11"
-                    height="1.6"
-                    transform="rotate(-180 20 14.8)"
-                    fill="white"
-                    />
-                    <path d="M13 19L9 14L13 9" stroke="white" stroke-width="1.6" />
-                </svg>
-                </button>
-            </aside>
-
-            <section class="profile-section">
-                {{{ Avatar }}}
-
-                <h1 class="profile-name">{{ profileName }}</h1>
-
-                <div class="profile-info">
-                
-                {{#each infoRows}}
-                  {{{ this }}}
-                {{/each}}
-                
-                  <div class="action-buttons">
-                      {{> ActionButton text="Изменить данные" withDivider=true}}
-                      {{> ActionButton text="Изменить пароль" withDivider=true}}
-                      {{> ActionButton text="Выйти" red=true}}
-                  </div>
-                </div>
-            </section>
-
-
-            {{#if showModal}} 
-                {{{ Modal }}}
-            {{/if}}
-        `;
+    if (this.props.currentView === 'change_data') {
+      return editDataTemplate;
+    }
+    if (this.props.currentView === 'change_password') {
+      return editPasswordTemplate;
+    }
+    return profileTemplate;
   }
 }
+
+const mapStateToProps = (state: any) => {
+  console.log(state);
+
+  return {
+    isLoading: state.isLoading,
+    loginError: state.loginError,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(ProfilePage));

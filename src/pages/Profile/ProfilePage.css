@@ -13,27 +13,6 @@
   width: 64px;
 }
 
-.back-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  height: 28px;
-  margin-left: 18px;
-  padding: 0;
-  position: absolute;
-  top: 50%;
-  width: 28px;
-}
-
-.back-button:hover {
-  opacity: 0.8;
-}
-
-.back-button:focus {
-  outline: 2px solid var(--main-color);
-  outline-offset: 2px;
-}
-
 .profile-section {
   align-items: center;
   display: flex;
