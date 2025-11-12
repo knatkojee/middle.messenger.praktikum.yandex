@@ -3,14 +3,14 @@ import type { ChatListItemProps } from '../../components/ChatListItem/ChatListIt
 import type { MessageProps } from '../../components/Message/Message';
 import Message from '../../components/Message/Message';
 import Block from '../../core/block';
-import template from './MainPage.hbs?raw';
+import template from './ChatsPage.hbs?raw';
 
-type MainPageProps = {
+type ChatsPageProps = {
   messages: MessageProps[];
 };
 
-export default class MainPage extends Block {
-  constructor(props: MainPageProps) {
+export default class ChatsPage extends Block {
+  constructor(props: ChatsPageProps) {
     const chatsList: ChatListItemProps[] = [
       {
         name: 'Андрей',

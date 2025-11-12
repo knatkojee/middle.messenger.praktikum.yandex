@@ -1,6 +1,6 @@
 export { LoginPage } from './Login';
 export { RegistrationPage } from './Registration';
-export { MainPage } from './MainPage';
+export { ChatsPage } from './ChatsPage';
 export { ProfilePage } from './Profile';
 export { ProfileEditPage } from './ProfileEdit';
 export { ProfileEditPasswordPage } from './ProfileEditPassword';

@@ -35,7 +35,7 @@ window.router
   .use(ROUTER.home, Pages.LoginPage)
   .use(ROUTER.login, Pages.LoginPage)
   .use(ROUTER.registration, Pages.RegistrationPage)
-  .use(ROUTER.chats, Pages.MainPage)
+  .use(ROUTER.chats, Pages.ChatsPage)
   .use(ROUTER.profile, Pages.ProfilePage)
   .use('*', Pages.Page404)
   .start();
