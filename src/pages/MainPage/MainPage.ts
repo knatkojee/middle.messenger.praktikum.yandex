@@ -1,4 +1,5 @@
-import { MessageField } from '../../components';
+import { MessageField, Sidebar } from '../../components';
+import type { ChatListItemProps } from '../../components/ChatListItem/ChatListItem';
 import type { MessageProps } from '../../components/Message/Message';
 import Message from '../../components/Message/Message';
 import Block from '../../core/block';
@@ -10,6 +11,25 @@ type MainPageProps = {
 
 export default class MainPage extends Block {
   constructor(props: MainPageProps) {
+    const chatsList: ChatListItemProps[] = [
+      {
+        name: 'Андрей',
+        time: '10:32',
+        text: 'Шалом',
+        unread: 3,
+      },
+      {
+        name: 'Иван',
+        time: '11:02',
+        text: 'Хало',
+        unread: 1,
+      },
+      {
+        name: 'Семён',
+        time: '00:19',
+        text: 'Доброй ночи',
+      },
+    ];
     super('main', {
       ...props,
       className: 'chat-container',
@@ -68,6 +88,9 @@ export default class MainPage extends Block {
             time: el.time,
           })
       ),
+      Sidebar: new Sidebar({
+        chatsList,
+      }),
     });
   }
 

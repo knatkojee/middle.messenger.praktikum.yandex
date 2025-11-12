@@ -1,5 +1,12 @@
-import { ActionButton, Avatar, Button, FormFieldProfile, InfoRow, Modal } from '../../components';
-import Aside from '../../components/Aside/Aside';
+import {
+  ActionButton,
+  Aside,
+  Avatar,
+  Button,
+  FormFieldProfile,
+  InfoRow,
+  Modal,
+} from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
 import type { InfoRowProps } from '../../components/InfoRow/InfoRow';
 import Block from '../../core/block';

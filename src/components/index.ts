@@ -10,3 +10,6 @@ export { Message } from './Message';
 export { Input } from './Input';
 export { MessageField } from './MessageField';
 export { BackButton } from './BackButton';
+export { Sidebar } from './Sidebar';
+export { ChatListItem } from './ChatListItem';
+export { Aside } from './Aside';
