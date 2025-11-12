@@ -1,11 +1,11 @@
 import type Router from '../core/router';
-import type { Store } from '../core/store';
+import type { Store, StoreProps } from '../core/store';
 
 export {};
 
 declare global {
   interface Window {
-    store: Store;
+    store: Store<StoreProps>;
     router: Router;
   }
 }

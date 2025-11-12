@@ -13,3 +13,4 @@ export { BackButton } from './BackButton';
 export { Sidebar } from './Sidebar';
 export { ChatListItem } from './ChatListItem';
 export { Aside } from './Aside';
+export { Chat } from './Chat';

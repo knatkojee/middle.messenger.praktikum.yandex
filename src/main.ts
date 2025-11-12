@@ -22,8 +22,8 @@ window.store = new Store({
 });
 
 window.store.on(StoreEvents.Updated, (prevState, newState) => {
-  console.log('prevState', prevState);
-  console.log('newState', newState);
+  // console.log('prevState', prevState);
+  // console.log('newState', newState);
 });
 
 // authServices.checkLoginUser();

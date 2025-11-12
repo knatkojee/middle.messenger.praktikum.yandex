@@ -1,0 +1,26 @@
+.messages-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  height: 100%;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.messages-container {
+  display: flex;
+  flex-flow: column wrap;
+  gap: 20px;
+}
+
+.message-inner-container {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.empty-chat {
+  inset: 50%;
+  position: absolute;
+  text-wrap: nowrap;
+}

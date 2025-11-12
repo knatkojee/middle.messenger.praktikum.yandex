@@ -81,15 +81,7 @@
         <div class='date-label'>19 июня</div>
       </header>
 
-      <div class='messages-wrapper'>
-        <div class='messages-container'>
-
-          {{#each messages}}
-            {{{this}}}
-          {{/each}}
-
-        </div>
-      </div>
+      {{{ Chat }}}
 
       <form class='message-container-wrapper'>
         <div class='bottom-divider'></div>
@@ -145,9 +137,10 @@
                 fill='var(--main-color)'
               />
             </svg>
-
           </button>
+
           {{{Input}}}
+
           <button class='message-page-button' type='submit'>
             <svg
               width='28'

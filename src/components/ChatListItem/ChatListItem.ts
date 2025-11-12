@@ -3,6 +3,7 @@ import Block from '../../core/block';
 export type ChatListItemProps = {
   name: string;
   time: string;
+  onChatClick: (e: MouseEvent) => void;
   text?: string;
   unread?: number;
   pic?: string;
@@ -15,6 +16,9 @@ export default class ChatListItem extends Block {
       className: 'chat-item',
       attrs: {
         type: 'button',
+      },
+      events: {
+        click: props.onChatClick,
       },
       name: props.name,
       time: props.time,
