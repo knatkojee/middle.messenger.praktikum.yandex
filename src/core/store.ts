@@ -11,6 +11,10 @@ export type StoreProps = {
   chats: [];
   selectedChat: 1;
   messages: MessageProps[];
+  chatHeader: {
+    title: string;
+    pic?: string;
+  };
   apiError: null;
 };
 

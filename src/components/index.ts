@@ -14,3 +14,4 @@ export { Sidebar } from './Sidebar';
 export { ChatListItem } from './ChatListItem';
 export { Aside } from './Aside';
 export { Chat } from './Chat';
+export { ChatHeader } from './ChatHeader';

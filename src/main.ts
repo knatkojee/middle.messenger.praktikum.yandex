@@ -18,6 +18,10 @@ window.store = new Store({
   chats: [],
   selectedChat: 1,
   messages: [],
+  chatHeader: {
+    title: '',
+    pic: '',
+  },
   apiError: null,
 });
 

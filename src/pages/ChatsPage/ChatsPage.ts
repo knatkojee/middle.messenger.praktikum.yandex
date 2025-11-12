@@ -2,8 +2,6 @@ import { Chat, MessageField, Sidebar } from '../../components';
 import type { ChatListItemProps } from '../../components/ChatListItem/ChatListItem';
 import type { MessageProps } from '../../components/Message/Message';
 import Block from '../../core/block';
-import type { StoreProps } from '../../core/Store';
-import { connect } from '../../utils/connect';
 import { withRouter } from '../../utils/withRouter';
 import template from './ChatPage.hbs?raw';
 
@@ -80,6 +78,9 @@ class ChatsPage extends Block {
         onChatClick: () => {
           window.store.set({
             messages: messages1,
+            chatHeader: {
+              title: 'Андрей',
+            },
           });
         },
       },
@@ -91,6 +92,9 @@ class ChatsPage extends Block {
         onChatClick: () => {
           window.store.set({
             messages: messages2,
+            chatHeader: {
+              title: 'Иван',
+            },
           });
         },
       },
@@ -101,6 +105,9 @@ class ChatsPage extends Block {
         onChatClick: () => {
           window.store.set({
             messages: messages3,
+            chatHeader: {
+              title: 'Семён',
+            },
           });
         },
       },
@@ -139,8 +146,5 @@ class ChatsPage extends Block {
     return template;
   }
 }
-const mapStateToProps = (state: StoreProps) => ({
-  messages: state.messages,
-});
 
-export default connect(mapStateToProps)(withRouter(ChatsPage));
+export default withRouter(ChatsPage);

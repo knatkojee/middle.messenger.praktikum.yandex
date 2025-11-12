@@ -1,6 +1,7 @@
 import Block from '../../core/block';
 import type { StoreProps } from '../../core/Store';
 import { connect } from '../../utils/connect';
+import { ChatHeader } from '../ChatHeader';
 import Message from '../Message/Message';
 import type { MessageProps } from '../Message/Message';
 
@@ -16,7 +17,15 @@ class Chat extends Block {
     });
   }
 
+  // TODO вынести шапку
   render(): string {
+    const ChatHeaderComponent = new ChatHeader({
+      title: this.props.chatHeader.title,
+      pic: this.props.chatHeader.pic,
+    });
+
+    this.children.chatHeader = ChatHeaderComponent;
+
     const messageComponents = ((this.props.messages || []) as MessageProps[]).map(
       message =>
         new Message({
@@ -33,6 +42,7 @@ class Chat extends Block {
     }
 
     return `
+      <div data-id="${ChatHeaderComponent.id}"></div>
       <div class='messages-container'>
         ${messageComponents
           .map((_, index) => `<div data-id="${messageComponents[index].id}"></div>`)
@@ -42,8 +52,13 @@ class Chat extends Block {
   }
 }
 
-const mapStateToProps = (state: StoreProps) => ({
-  messages: state.messages,
-});
+const mapStateToProps = (state: StoreProps) => {
+  console.log(state);
+
+  return {
+    messages: state.messages,
+    chatHeader: state.chatHeader,
+  };
+};
 
 export default connect(mapStateToProps)(Chat);
