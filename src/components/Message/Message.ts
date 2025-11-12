@@ -1,6 +1,4 @@
 import Block from '../../core/block';
-import type { StoreProps } from '../../core/Store';
-import { connect } from '../../utils/connect';
 
 export type MessageProps = {
   isIncoming?: boolean;
@@ -10,8 +8,6 @@ export type MessageProps = {
 
 class Message extends Block {
   constructor(props: MessageProps) {
-    console.log('alo');
-
     super('div', {
       className: 'message-container',
       isIncoming: props.isIncoming,
@@ -30,11 +26,4 @@ class Message extends Block {
   }
 }
 
-const mapStateToProps = (state: StoreProps): StoreProps => {
-  return {
-    ...window.store,
-    messages: state.messages,
-  };
-};
-
-export default connect(mapStateToProps)(Message);
+export default Message;

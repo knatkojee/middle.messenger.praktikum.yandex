@@ -1,7 +1,8 @@
 import Block from '../../core/block';
+import type { StoreProps } from '../../core/Store';
 import { connect } from '../../utils/connect';
-import type { MessageProps } from '../Message/Message';
 import Message from '../Message/Message';
+import type { MessageProps } from '../Message/Message';
 
 type ChatProps = {
   messages?: MessageProps[];
@@ -16,26 +17,31 @@ class Chat extends Block {
   }
 
   render(): string {
-    console.log('Chat render with messages:', this.props.messages);
-
-    const messageComponents = (this.props.messages || []).map(
+    const messageComponents = ((this.props.messages || []) as MessageProps[]).map(
       message =>
         new Message({
           text: message.text,
           isIncoming: message.isIncoming,
           time: message.time,
         })
-    );
+    ) as Message[];
 
-    console.log(messageComponents);
+    this.children.messages = messageComponents;
+
+    if (messageComponents.length === 0) {
+      return `<h1 class='empty-chat'>Выберите чат</h1>`;
+    }
 
     return `
       <div class='messages-container'>
-        ${messageComponents.length > 0 ? messageComponents.map(() => '{{{this}}}').join('') : '<h1 class="empty-chat">Выберите чат</h1>'}
+        ${messageComponents
+          .map((_, index) => `<div data-id="${messageComponents[index].id}"></div>`)
+          .join('')}
       </div>
     `;
   }
 }
+
 const mapStateToProps = (state: StoreProps) => ({
   messages: state.messages,
 });

@@ -131,21 +131,8 @@ class ChatsPage extends Block {
           });
         },
       }),
-      Chat: new Chat({
-        messages: props.messages,
-      }),
+      Chat: new Chat({}),
     });
-  }
-
-  componentDidUpdate(oldProps: ChatsPageProps, newProps: ChatsPageProps): boolean {
-    if (oldProps.messages !== newProps.messages) {
-      this.children.Chat = new Chat({
-        messages: newProps.messages,
-      });
-
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    }
-    return false;
   }
 
   public render(): string {
