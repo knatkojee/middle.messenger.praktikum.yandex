@@ -7,17 +7,20 @@ import type { MessageProps } from '../Message/Message';
 
 type ChatProps = {
   messages?: MessageProps[];
+  chatHeader?: {
+    title: string;
+    pic: string;
+  };
 };
 
 class Chat extends Block {
   constructor(props: ChatProps) {
     super('div', {
       ...props,
-      className: 'messages-wrapper',
+      className: 'chat-wrapper',
     });
   }
 
-  // TODO вынести шапку
   render(): string {
     const ChatHeaderComponent = new ChatHeader({
       title: this.props.chatHeader.title,
@@ -42,19 +45,20 @@ class Chat extends Block {
     }
 
     return `
-      <div data-id="${ChatHeaderComponent.id}"></div>
+    <div data-id="${ChatHeaderComponent.id}"></div>
+    
+    <div class='messages-wrapper'>
       <div class='messages-container'>
         ${messageComponents
           .map((_, index) => `<div data-id="${messageComponents[index].id}"></div>`)
           .join('')}
       </div>
+    </div>
     `;
   }
 }
 
 const mapStateToProps = (state: StoreProps) => {
-  console.log(state);
-
   return {
     messages: state.messages,
     chatHeader: state.chatHeader,

@@ -1,10 +1,12 @@
-import { Chat, MessageField, Sidebar } from '../../components';
+import { Chat, ChatInputForm, Sidebar } from '../../components';
 import type { ChatListItemProps } from '../../components/ChatListItem/ChatListItem';
 import type { MessageProps } from '../../components/Message/Message';
 import Block from '../../core/block';
+import type { StoreProps } from '../../core/Store';
+import { connect } from '../../utils/connect';
 import { withRouter } from '../../utils/withRouter';
 import template from './ChatPage.hbs?raw';
-
+import templateWithNoChat from './ChatPageWithNoChat.hbs?raw';
 type ChatsPageProps = {
   messages?: MessageProps[];
 };
@@ -119,32 +121,51 @@ class ChatsPage extends Block {
       Sidebar: new Sidebar({
         chatsList,
       }),
-      Input: new MessageField({
-        onBlur: e => {
-          const val = (e.target as HTMLInputElement)?.value;
+      Chat: new Chat({}),
+      ChatInputForm: new ChatInputForm({
+        onSubmit: e => {
+          e.preventDefault();
 
-          let error = '';
-          let isInvalid = false;
+          if (e.target instanceof HTMLFormElement) {
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
 
-          if (!val) {
-            error = 'Нельзя отправить пустое сообщение';
-            isInvalid = true;
+            const now = new Date();
+            const newMessages = [...window.store.state.messages];
+
+            newMessages.push({
+              text: data.message,
+              time: `${now.getHours()}:${now.getMinutes()}`,
+            });
+
+            window.store.set({
+              messages: newMessages,
+            });
+
+            const input = this._element?.querySelector('input') as HTMLInputElement;
+            if (input) {
+              input.value = '';
+            }
           }
-          console.log(val);
-
-          this.setProps({
-            isInvalid,
-            errorMessage: error,
-          });
         },
       }),
-      Chat: new Chat({}),
     });
   }
 
   public render(): string {
+    if (!this.props.messages) {
+      return templateWithNoChat;
+    }
+
     return template;
   }
 }
 
-export default withRouter(ChatsPage);
+const mapStateToProps = (state: StoreProps) => {
+  return {
+    messages: state.messages,
+    chatHeader: state.chatHeader,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(ChatsPage));

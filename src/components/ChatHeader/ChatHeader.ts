@@ -1,6 +1,4 @@
 import Block from '../../core/block';
-import type { connect } from '../../utils/connect';
-import { withRouter } from '../../utils/withRouter';
 
 type ChatHeaderProps = {
   title: string;
@@ -9,7 +7,6 @@ type ChatHeaderProps = {
 
 class ChatHeader extends Block {
   constructor(props: ChatHeaderProps) {
-    console.log(props);
     super('header', {
       ...props,
       className: 'chat-header',

@@ -4,7 +4,7 @@ import { Input } from '../Input';
 type MessageFieldProps = {
   isInvalid?: boolean;
   errorMessage?: string;
-  onBlur: (e: FocusEvent) => void;
+  onBlur?: (e: FocusEvent) => void;
 };
 
 export default class MessageField extends Block {

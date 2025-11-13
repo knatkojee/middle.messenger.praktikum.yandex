@@ -2,8 +2,8 @@ import Block from '../../core/block';
 
 type InputProps = {
   name: string;
-  inputType: string;
-  inputValue: string;
+  inputType?: string;
+  inputValue?: string;
   onBlur?: (e: FocusEvent) => void;
   onClick?: () => void;
   className?: string;
@@ -17,8 +17,8 @@ export default class Input extends Block {
       attrs: {
         id: props.name,
         name: props.name,
-        type: props.inputType,
-        value: props.inputValue,
+        type: props.inputType as string,
+        value: props.inputValue as string,
         autocomplete: false,
         required: true,
       },
