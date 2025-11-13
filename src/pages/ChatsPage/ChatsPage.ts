@@ -142,10 +142,7 @@ class ChatsPage extends Block {
               messages: newMessages,
             });
 
-            const input = this._element?.querySelector('input') as HTMLInputElement;
-            if (input) {
-              input.value = '';
-            }
+            e.target.reset();
           }
         },
       }),
