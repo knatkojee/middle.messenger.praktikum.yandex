@@ -18,6 +18,7 @@ import editDataTemplate from './EditDataTemplate.hbs?raw';
 import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
 import type Router from '../../core/router';
 import * as authServices from '../../services/auth';
+import type { StoreProps } from '../../core/Store';
 
 type ProfilePageProps = {
   title: string;
@@ -249,12 +250,13 @@ class ProfilePage extends Block {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StoreProps) => {
   console.log(state);
 
   return {
     isLoading: state.isLoading,
-    loginError: state.loginError,
+    apiRequestError: state.apiRequestError,
+    user: state.user,
   };
 };
 
