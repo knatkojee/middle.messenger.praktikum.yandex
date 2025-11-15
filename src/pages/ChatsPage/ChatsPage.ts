@@ -143,6 +143,8 @@ class ChatsPage extends Block {
             });
 
             e.target.reset();
+
+            this._element?.querySelector('input')?.focus();
           }
         },
       }),

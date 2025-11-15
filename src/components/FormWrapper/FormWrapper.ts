@@ -16,8 +16,9 @@ export type FormFieldType = {
 export type FormWrapperProps = {
   primaryText: string;
   secondaryText: string;
-  onPrimaryClick: () => void;
+  onPrimaryClick?: (e: PointerEvent) => void;
   onSecondaryClick: () => void;
+  onFormSubmit: (e: any) => void;
   fields: FormFieldType[];
   title: string;
   showSecondaryButton?: boolean;
@@ -53,7 +54,7 @@ export default class FormWrapper extends Block {
 
           const validationResult = validateForm(this.children.formFields, e);
 
-          console.log(validationResult);
+          props.onFormSubmit(validationResult);
         },
       },
     });

@@ -29,7 +29,7 @@ class Chat extends Block {
 
     this.children.chatHeader = ChatHeaderComponent;
 
-    const messageComponents = ((this.props.messages || []) as MessageProps[]).map(
+    const messageComponents = ((this.props.messages ?? []) as MessageProps[]).map(
       message =>
         new Message({
           text: message.text,

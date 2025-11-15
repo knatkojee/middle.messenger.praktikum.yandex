@@ -5,6 +5,7 @@ import type Router from '../../core/router';
 import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
 import { withRouter } from '../../utils/withRouter';
+import * as authServices from '../../services/auth';
 
 type LoginPageProps = {
   router: Router;
@@ -17,8 +18,8 @@ class LoginPage extends Block {
       FormWrapper: new FormWrapper({
         primaryText: 'Авторизоваться',
         secondaryText: 'Нет аккаунта?',
-        onPrimaryClick: () => {
-          props.router.go(ROUTER.chats);
+        onFormSubmit: (data: any) => {
+          authServices.login(data);
         },
         onSecondaryClick: () => {
           props.router.go(ROUTER.registration);
@@ -29,7 +30,7 @@ class LoginPage extends Block {
           {
             label: 'Логин',
             inputType: 'text',
-            inputValue: 'ivanivansov',
+            inputValue: 'yar',
             name: 'login',
             onBlur: event =>
               validateForm(
@@ -40,7 +41,7 @@ class LoginPage extends Block {
           {
             label: 'Пароль',
             inputType: 'password',
-            inputValue: 'Password123',
+            inputValue: 'asdQWE123',
             name: 'password',
             onBlur: event =>
               validateForm(

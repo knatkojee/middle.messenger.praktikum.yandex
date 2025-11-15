@@ -4,6 +4,7 @@ import Block from '../../core/block';
 import type Router from '../../core/router';
 import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
+import * as authServices from '../../services/auth';
 import { withRouter } from '../../utils/withRouter';
 
 type RegistrationPageProps = {
@@ -17,11 +18,11 @@ class RegistrationPage extends Block {
       FormWrapper: new FormWrapper({
         primaryText: 'Зарегистрироваться',
         secondaryText: 'Войти',
-        onPrimaryClick: () => {
-          props.router.go(ROUTER.login);
-        },
         onSecondaryClick: () => {
           props.router.go(ROUTER.login);
+        },
+        onFormSubmit: (data: any) => {
+          authServices.register(data);
         },
         title: 'Регистрация',
         showSecondaryButton: true,
