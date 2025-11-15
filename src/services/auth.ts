@@ -70,7 +70,10 @@ export const me = async () => {
   window.store.set({ isLoading: true });
 
   try {
-    await authApi.me();
+    const userData = await authApi.me();
+    window.store.set({
+      user: userData.data,
+    });
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {

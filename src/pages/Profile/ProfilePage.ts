@@ -237,6 +237,12 @@ class ProfilePage extends Block {
         });
       }),
     });
+
+    this.getUserData();
+  }
+
+  async getUserData() {
+    await authServices.me();
   }
 
   render(): string {
@@ -250,7 +256,7 @@ class ProfilePage extends Block {
   }
 }
 
-const mapStateToProps = (state: StoreProps) => {
+const mapStateToProps = async (state: StoreProps) => {
   console.log(state);
 
   return {
