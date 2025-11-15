@@ -40,3 +40,21 @@ export const register = async (model: RegisterData) => {
     window.store.set({ isLoading: false });
   }
 };
+
+export const logout = async () => {
+  window.store.set({ isLoading: true });
+
+  try {
+    await authApi.logout();
+    window.router.go(ROUTER.login);
+  } catch (responseError: unknown) {
+    const error = responseError as HTTPError;
+    if (error.data?.reason) {
+      window.store.set({ apiRequestError: error.data.reason });
+    } else {
+      window.store.set({ apiRequestError: error.message ?? DEFAULT_ERROR_MESSAGE });
+    }
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};

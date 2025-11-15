@@ -16,8 +16,8 @@ import { withRouter } from '../../utils/withRouter';
 import profileTemplate from './profileTemplate.hbs?raw';
 import editDataTemplate from './EditDataTemplate.hbs?raw';
 import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
-import { ROUTER } from '../../constants';
 import type Router from '../../core/router';
+import * as authServices from '../../services/auth';
 
 type ProfilePageProps = {
   title: string;
@@ -204,7 +204,7 @@ class ProfilePage extends Block {
         label: 'Выйти',
         red: true,
         onClick: () => {
-          props.router.go(ROUTER.login);
+          authServices.logout();
         },
       }),
 

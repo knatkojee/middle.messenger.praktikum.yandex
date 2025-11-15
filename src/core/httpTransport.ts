@@ -77,6 +77,8 @@ export class HTTPTransport {
 
       xhr.open(method, fullURL);
 
+      xhr.withCredentials = true;
+
       Object.keys(headers).forEach((key: string) => {
         xhr.setRequestHeader(key, headers[key]);
       });
