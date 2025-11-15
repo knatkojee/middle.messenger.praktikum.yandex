@@ -6,6 +6,8 @@ import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
 import { withRouter } from '../../utils/withRouter';
 import * as authServices from '../../services/auth';
+import type { LoginData } from '../../types';
+import type { StoreProps } from '../../core/Store';
 
 type LoginPageProps = {
   router: Router;
@@ -18,8 +20,8 @@ class LoginPage extends Block {
       FormWrapper: new FormWrapper({
         primaryText: 'Авторизоваться',
         secondaryText: 'Нет аккаунта?',
-        onFormSubmit: (data: any) => {
-          authServices.login(data);
+        onFormSubmit: data => {
+          authServices.login(data as LoginData);
         },
         onSecondaryClick: () => {
           props.router.go(ROUTER.registration);
@@ -65,11 +67,10 @@ class LoginPage extends Block {
   }
 }
 
-// TODO any
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StoreProps) => {
   return {
     isLoading: state.isLoading,
-    loginError: state.loginError,
+    apiRequestError: state.apiRequestError,
   };
 };
 

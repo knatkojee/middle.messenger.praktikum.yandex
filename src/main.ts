@@ -3,7 +3,7 @@ import * as Components from './components';
 import * as Pages from './pages';
 import Router from './core/router';
 import { ROUTER } from './constants';
-import { Store, StoreEvents } from './core/Store';
+import { Store, StoreEvents, type StoreProps } from './core/Store';
 
 Object.entries(Components).forEach(([name, template]) => {
   if (typeof template === 'function') {
@@ -22,12 +22,12 @@ window.store = new Store({
     title: '',
     pic: '',
   },
-  apiError: null,
+  apiRequestError: null,
 });
 
-window.store.on(StoreEvents.Updated, (prevState, newState) => {
-  // console.log('prevState', prevState);
-  // console.log('newState', newState);
+window.store.on(StoreEvents.Updated, (prevState: StoreProps, newState: StoreProps) => {
+  console.log('prevState', prevState);
+  console.log('newState', newState);
 });
 
 // authServices.checkLoginUser();

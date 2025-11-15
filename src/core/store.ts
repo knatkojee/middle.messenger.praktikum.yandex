@@ -6,20 +6,21 @@ export enum StoreEvents {
 }
 
 export type StoreProps = {
-  isLoading: false;
-  user: object;
-  chats: [];
-  selectedChat: 1;
-  messages: MessageProps[];
-  chatHeader: {
+  isLoading?: false;
+  user?: object;
+  chats?: [];
+  selectedChat?: 1;
+  messages?: MessageProps[];
+  chatHeader?: {
     title: string;
     pic?: string;
   };
-  apiError: null;
+  apiRequestError?: null;
 };
 
 export class Store extends EventBus<StoreEvents> {
   private state: StoreProps = {};
+  static __instance: Store;
 
   constructor(defaultState: StoreProps) {
     if (Store.__instance) {
@@ -36,7 +37,7 @@ export class Store extends EventBus<StoreEvents> {
     return this.state;
   }
 
-  public set(nextState) {
+  public set(nextState: StoreProps) {
     const prevState = { ...this.state };
 
     this.state = { ...this.state, ...nextState };

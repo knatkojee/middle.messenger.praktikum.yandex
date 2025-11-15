@@ -6,6 +6,8 @@ import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
 import * as authServices from '../../services/auth';
 import { withRouter } from '../../utils/withRouter';
+import type { RegisterData } from '../../types';
+import type { StoreProps } from '../../core/Store';
 
 type RegistrationPageProps = {
   router: Router;
@@ -21,8 +23,8 @@ class RegistrationPage extends Block {
         onSecondaryClick: () => {
           props.router.go(ROUTER.login);
         },
-        onFormSubmit: (data: any) => {
-          authServices.register(data);
+        onFormSubmit: data => {
+          authServices.register(data as RegisterData);
         },
         title: 'Регистрация',
         showSecondaryButton: true,
@@ -30,7 +32,6 @@ class RegistrationPage extends Block {
           {
             label: 'Почта',
             inputType: 'email',
-            inputValue: 'pochta@yandex.ru',
             name: 'email',
             onBlur: event =>
               validateForm(
@@ -41,7 +42,6 @@ class RegistrationPage extends Block {
           {
             label: 'Логин',
             inputType: 'text',
-            inputValue: 'ivanivanov',
             name: 'login',
             onBlur: event =>
               validateForm(
@@ -52,7 +52,6 @@ class RegistrationPage extends Block {
           {
             label: 'Имя',
             inputType: 'text',
-            inputValue: 'Иван',
             name: 'first_name',
             onBlur: event =>
               validateForm(
@@ -63,7 +62,6 @@ class RegistrationPage extends Block {
           {
             label: 'Фамилия',
             inputType: 'text',
-            inputValue: 'Иванов',
             name: 'second_name',
             onBlur: event =>
               validateForm(
@@ -74,7 +72,6 @@ class RegistrationPage extends Block {
           {
             label: 'Телефон',
             inputType: 'tel',
-            inputValue: '+7 (909) 967 30 30',
             name: 'phone',
             onBlur: event =>
               validateForm(
@@ -85,7 +82,6 @@ class RegistrationPage extends Block {
           {
             label: 'Пароль',
             inputType: 'password',
-            inputValue: 'password',
             name: 'password',
             onBlur: event =>
               validateForm(
@@ -96,7 +92,6 @@ class RegistrationPage extends Block {
           {
             label: 'Пароль (ещё раз)',
             inputType: 'password',
-            inputValue: 'password1',
             name: 'password_repeat',
             onBlur: event =>
               validateForm(
@@ -114,10 +109,10 @@ class RegistrationPage extends Block {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: StoreProps) => {
   return {
     isLoading: state.isLoading,
-    loginError: state.loginError,
+    apiRequestError: state.apiRequestError,
   };
 };
 

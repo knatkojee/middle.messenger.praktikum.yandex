@@ -22,7 +22,7 @@ interface HTTPRequestOptions {
   timeout?: number;
 }
 
-interface HTTPResponse<T = unknown> {
+export interface HTTPResponse<T = unknown> {
   data: T;
   status: number;
   statusText: string;
@@ -38,10 +38,11 @@ type PutOptions = Omit<HTTPRequestOptions, 'method'>;
 type PatchOptions = Omit<HTTPRequestOptions, 'method'>;
 type DeleteOptions = Omit<HTTPRequestOptions, 'method' | 'data'>;
 
-interface HTTPError extends Error {
+export interface HTTPError extends Error {
   status?: number;
   method?: string;
   url?: string;
+  data?: { reason: string };
 }
 
 export enum HttpStatus {
@@ -99,6 +100,7 @@ export class HTTPTransport {
           error.status = xhr.status;
           error.method = method;
           error.url = fullURL;
+          error.data = xhr.response;
           reject(error);
         }
       };

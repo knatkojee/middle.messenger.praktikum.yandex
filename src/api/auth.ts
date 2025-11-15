@@ -1,23 +1,23 @@
 import { HOST } from '../constants';
-import { HTTPTransport } from '../core/httpTransport';
-import type { APIError, CreateUser, LoginRequestData, SignUpResponse, UserDTO } from './type';
+import { HTTPTransport, type HTTPResponse } from '../core/httpTransport';
+import type { CreateUser, LoginRequestData, SignUpResponse, UserDTO } from './type';
 
 const authApi = new HTTPTransport(`${HOST}/auth`);
 
 export default class AuthApi {
-  async create(data: CreateUser): Promise<SignUpResponse> {
+  async create(data: CreateUser): Promise<HTTPResponse<SignUpResponse>> {
     return authApi.post<SignUpResponse>('/signup', data);
   }
 
-  async login(data: LoginRequestData): Promise<void | APIError> {
-    return authApi.post('/signin', data);
+  async login(data: LoginRequestData): Promise<HTTPResponse<void>> {
+    return authApi.post<void>('/signin', data);
   }
 
-  async me(): Promise<UserDTO | APIError> {
-    return authApi.get('/user');
+  async me(): Promise<HTTPResponse<UserDTO>> {
+    return authApi.get<UserDTO>('/user');
   }
 
-  async logout(): Promise<void | APIError> {
-    return authApi.post('/logout');
+  async logout(): Promise<HTTPResponse<void>> {
+    return authApi.post<void>('/logout');
   }
 }
