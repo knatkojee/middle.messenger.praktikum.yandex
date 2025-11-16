@@ -1,5 +1,5 @@
-import { StoreEvents } from "../core/Store";
-import isEqual from "./isEqual";
+import { StoreEvents } from '../core/Store';
+import isEqual from './isEqual';
 
 export function connect(mapStateToProps) {
   return function (Component) {

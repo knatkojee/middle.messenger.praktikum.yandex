@@ -14,7 +14,7 @@ Object.entries(Components).forEach(([name, template]) => {
 
 window.store = new Store({
   isLoading: false,
-  user: {},
+  user: undefined,
   chats: [],
   selectedChat: 1,
   messages: [],
@@ -25,9 +25,9 @@ window.store = new Store({
   apiRequestError: null,
 });
 
-window.store.on(StoreEvents.Updated, (prevState: StoreProps, newState: StoreProps) => {
-  console.log('prevState', prevState);
-  console.log('newState', newState);
+window.store.on(StoreEvents.Updated, (_prevState: StoreProps, _newState: StoreProps) => {
+  // console.log('_prevState', _prevState);
+  // console.log('_newState', _newState);
 });
 
 // authServices.checkLoginUser();

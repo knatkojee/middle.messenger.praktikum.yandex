@@ -1,3 +1,4 @@
+import type { UserDTO } from '../api/type';
 import type { MessageProps } from '../components/Message/Message';
 import EventBus from './eventBus';
 
@@ -7,7 +8,7 @@ export enum StoreEvents {
 
 export type StoreProps = {
   isLoading?: false;
-  user?: object;
+  user?: UserDTO;
   chats?: [];
   selectedChat?: 1;
   messages?: MessageProps[];

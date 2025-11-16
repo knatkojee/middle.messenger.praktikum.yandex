@@ -7,9 +7,12 @@
 
   <div class='profile-info'>
 
-    {{#each infoRows}}
+    {{!-- {{#each infoRows}}
       {{{this}}}
-    {{/each}}
+    {{/each}} --}}
+
+    ${infoRowsComponents .map((_, index) => `<div data-id='${infoRowsComponents[index].id}'></div>`)
+    .join('')}
 
     <div class='action-buttons'>
 

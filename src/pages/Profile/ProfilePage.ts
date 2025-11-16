@@ -13,7 +13,6 @@ import Block from '../../core/block';
 import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
 import { withRouter } from '../../utils/withRouter';
-import profileTemplate from './profileTemplate.hbs?raw';
 import editDataTemplate from './EditDataTemplate.hbs?raw';
 import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
 import type Router from '../../core/router';
@@ -27,37 +26,12 @@ type ProfilePageProps = {
   body: string;
   currentView: 'profile' | 'change_data' | 'change_password';
   router: Router;
+  userData?: InfoRowProps[];
 };
 
 class ProfilePage extends Block {
   constructor(props: ProfilePageProps) {
     const { currentView = 'profile' } = props;
-    const infoRows = [
-      {
-        label: 'Почта',
-        value: 'pochta@yandex.ru',
-      },
-      {
-        label: 'Логин',
-        value: 'ivanivanov',
-      },
-      {
-        label: 'Имя',
-        value: 'Иван',
-      },
-      {
-        label: 'Фамилия',
-        value: 'Иванов',
-      },
-      {
-        label: 'Имя в чате',
-        value: 'Иван',
-      },
-      {
-        label: 'Телефон',
-        value: '+7 (909) 967 30 30',
-      },
-    ] as InfoRowProps[];
 
     const editPasswordFields = [
       {
@@ -138,13 +112,7 @@ class ProfilePage extends Block {
       }),
       currentView: currentView,
       showModal: false,
-      infoRows: infoRows.map(
-        el =>
-          new InfoRow({
-            label: el.label,
-            value: el.value,
-          })
-      ),
+      infoRows: [],
       Modal: new Modal({
         title: 'Загрузите файл',
         labelCancel: true,
@@ -246,23 +214,98 @@ class ProfilePage extends Block {
   }
 
   render(): string {
+    const infoRowsComponents = ((this.props.userData ?? []) as InfoRowProps[]).map(
+      el =>
+        new InfoRow({
+          label: el.label,
+          value: el.value,
+        })
+    ) as InfoRow[];
+
+    this.children.userData = infoRowsComponents;
+
+    if (this.props.isLoading) {
+      return `<h1>loading</h1>`;
+    }
+
     if (this.props.currentView === 'change_data') {
       return editDataTemplate;
     }
     if (this.props.currentView === 'change_password') {
       return editPasswordTemplate;
     }
-    return profileTemplate;
+
+    return `
+    {{{Aside}}}
+
+    <section class='profile-section'>
+      {{{Avatar}}}
+
+      <h1 class='profile-name'>{{profileName}}</h1>
+
+      <div class='profile-info'>
+
+        ${infoRowsComponents
+          .map((_, index) => `<div data-id='${infoRowsComponents[index].id}'></div>`)
+          .join('')}
+
+        <div class='action-buttons'>
+
+          <div class='action-button-row'>
+            {{{ButtonChangeData}}}
+            <div class='action-divider'></div>
+          </div>
+
+          <div class='action-button-row'>
+            {{{ButtonChangePassword}}}
+            <div class='action-divider'></div>
+          </div>
+
+          <div class='action-button-row'>
+            {{{ButtonLogout}}}
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    {{#if showModal}}
+      {{{Modal}}}
+    {{/if}}
+    `;
   }
 }
 
-const mapStateToProps = async (state: StoreProps) => {
-  console.log(state);
-
+const mapStateToProps = (state: StoreProps) => {
   return {
     isLoading: state.isLoading,
     apiRequestError: state.apiRequestError,
-    user: state.user,
+    userData: [
+      {
+        label: 'Почта',
+        value: state.user?.email,
+      },
+      {
+        label: 'Логин',
+        value: state.user?.login,
+      },
+      {
+        label: 'Имя',
+        value: state.user?.first_name,
+      },
+      {
+        label: 'Фамилия',
+        value: state.user?.second_name,
+      },
+      {
+        label: 'Имя в чате',
+        value: state.user?.display_name,
+      },
+      {
+        label: 'Телефон',
+        value: state.user?.phone,
+      },
+    ],
   };
 };
 
