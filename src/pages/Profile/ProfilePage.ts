@@ -34,30 +34,6 @@ class ProfilePage extends Block {
   constructor(props: ProfilePageProps) {
     const { currentView = 'profile' } = props;
 
-    const editPasswordFields = [
-      {
-        label: 'Старый пароль',
-        inputType: 'password',
-        inputValue: 'oldPassword',
-        name: 'password_old',
-        onBlur: e => validateForm((this.children.editFields as Block[])[0], e),
-      },
-      {
-        label: 'Пароль',
-        inputType: 'password',
-        inputValue: 'password-new-222',
-        name: 'password',
-        onBlur: e => validateForm((this.children.editFields as Block[])[1], e),
-      },
-      {
-        label: 'Пароль (ещё раз)',
-        inputType: 'password',
-        inputValue: 'password-new-222',
-        name: 'password_repeat',
-        onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
-      },
-    ] as FormFieldType[];
-
     super('main', {
       ...props,
       className: 'profile-container',
@@ -155,23 +131,29 @@ class ProfilePage extends Block {
         isSecondary: false,
         type: 'submit',
       }),
-      editPasswordFields: editPasswordFields.map(props => {
-        return new FormFieldProfile({
-          ...props,
-        });
-      }),
+      editPasswordFields: [],
+
+      // form submit
+
       events: {
         submit: e => {
           e.preventDefault();
           e.stopImmediatePropagation();
 
+          console.log(this.children.editDataFields);
+          console.log(this.children.editPasswordFields);
+
+          // TODO this.children.editDataFields = []
           const validationResult = validateForm(this.children.editDataFields, e);
 
-          if (validationResult) {
-            console.log(validationResult);
+          console.log(validationResult);
 
-            userServices.changeUser(validationResult as UserUpdateRequest);
-          }
+          // TODO условие на то что сейчас редактируется
+          // if (validationResult) {
+          //   console.log(validationResult);
+
+          //   userServices.changeUser(validationResult as UserUpdateRequest);
+          // }
         },
       },
     });
@@ -230,7 +212,63 @@ class ProfilePage extends Block {
     }
 
     if (this.props.currentView === 'change_password') {
-      return editPasswordTemplate;
+      const editPasswordFields = [
+        {
+          label: 'Старый пароль',
+          inputType: 'password',
+          name: 'oldPassword',
+          onBlur: e => validateForm((this.children.editPasswordFields as Block[])[0], e),
+        },
+        {
+          label: 'Пароль',
+          inputType: 'password',
+          name: 'newPassword',
+          onBlur: e => validateForm((this.children.editPasswordFields as Block[])[1], e),
+        },
+        {
+          label: 'Пароль (ещё раз)',
+          inputType: 'password',
+          name: 'repeatPassword',
+          onBlur: e => validateForm((this.children.editPasswordFields as Block[])[2], e),
+        },
+      ] as FormFieldType[];
+
+      const editPasswordComponents = editPasswordFields.map((el, idx) => {
+        return new FormFieldProfile({
+          label: el.label,
+          inputType: el.inputType,
+          name: el.name,
+          onBlur: e => validateForm((this.children.editPasswordFields as Block[])[idx], e),
+        });
+      });
+
+      this.children.userData = editPasswordComponents;
+
+      return `
+      {{{Aside}}}
+
+      <section class='profile-section'>
+        {{{Avatar}}}
+
+        <form action='#'>
+          <div class='profile-info'>
+
+             ${editPasswordComponents
+               .map((_, index) => `<div data-id='${editPasswordComponents[index].id}'></div>`)
+               .join('')}
+
+            <div class='buttons-container'>
+              {{{EditPasswordButton}}}
+            </div>
+          </div>
+        </form>
+      </section>
+
+      {{#if showModal}}
+        {{{Modal}}}
+      {{/if}}
+
+      `;
     }
 
     const infoRowsComponents = ((this.props.userData ?? []) as InfoRowProps[]).map(

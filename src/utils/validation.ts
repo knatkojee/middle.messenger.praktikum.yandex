@@ -9,11 +9,15 @@ const validators = {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
     return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
   },
-  password_old: (val: string) => {
+  newPassword: (val: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
     return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
   },
-  password_repeat: (val: string) => {
+  oldPassword: (val: string) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
+    return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
+  },
+  repeatPassword: (val: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
     return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
   },

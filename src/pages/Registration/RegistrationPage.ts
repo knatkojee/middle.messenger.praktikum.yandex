@@ -92,7 +92,7 @@ class RegistrationPage extends Block {
           {
             label: 'Пароль (ещё раз)',
             inputType: 'password',
-            name: 'password_repeat',
+            name: 'repeatPassword',
             onBlur: event =>
               validateForm(
                 ((this.children.FormWrapper as Block).children.formFields as Block[])[6],

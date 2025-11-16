@@ -8,7 +8,7 @@ export type RegisterData = {
   first_name: string;
   login: string;
   password: string;
-  password_repeat: string;
+  repeatPassword: string;
   phone: string;
   second_name: string;
 };
