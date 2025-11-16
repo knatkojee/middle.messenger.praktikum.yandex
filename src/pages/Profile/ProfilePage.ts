@@ -16,7 +16,9 @@ import { withRouter } from '../../utils/withRouter';
 import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
 import type Router from '../../core/router';
 import * as authServices from '../../services/auth';
+import * as userServices from '../../services/user';
 import type { StoreProps } from '../../core/Store';
+import type { UserDTO, UserUpdateRequest } from '../../api/type';
 
 type ProfilePageProps = {
   title: string;
@@ -135,11 +137,11 @@ class ProfilePage extends Block {
 
       EditDataButton: new Button({
         label: 'Сохранить',
-        onClick: e => {
-          e.preventDefault();
+        // onClick: e => {
+        //   e.preventDefault();
 
-          console.log(e.target);
-        },
+        //   console.log(e.target);
+        // },
         isSecondary: false,
         type: 'submit',
       }),
@@ -158,6 +160,20 @@ class ProfilePage extends Block {
           ...props,
         });
       }),
+      events: {
+        submit: e => {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+
+          const validationResult = validateForm(this.children.editDataFields, e);
+
+          if (validationResult) {
+            console.log(validationResult);
+
+            userServices.changeUser(validationResult as UserUpdateRequest);
+          }
+        },
+      },
     });
 
     this.getUserData();
@@ -272,6 +288,7 @@ const mapStateToProps = (state: StoreProps) => {
   return {
     isLoading: state.isLoading,
     apiRequestError: state.apiRequestError,
+    profileName: state.user?.display_name,
     userData: [
       {
         label: 'Почта',

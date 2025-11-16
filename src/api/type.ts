@@ -17,6 +17,8 @@ export type UserDTO = {
   email: string;
 };
 
+export type UserUpdateRequest = Omit<Partial<UserDTO>, 'id'>;
+
 export type CreateUser = Omit<UserDTO, 'avatar' | 'display_name' | 'id'> & {
   password: string;
 };
