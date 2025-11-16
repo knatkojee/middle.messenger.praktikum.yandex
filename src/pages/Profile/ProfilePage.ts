@@ -13,7 +13,6 @@ import Block from '../../core/block';
 import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
 import { withRouter } from '../../utils/withRouter';
-import editDataTemplate from './EditDataTemplate.hbs?raw';
 import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
 import type Router from '../../core/router';
 import * as authServices from '../../services/auth';
@@ -54,51 +53,6 @@ class ProfilePage extends Block {
         inputValue: 'password-new-222',
         name: 'password_repeat',
         onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
-      },
-    ] as FormFieldType[];
-
-    const editDataFields = [
-      {
-        label: 'Почта',
-        inputType: 'email',
-        inputValue: 'pochta@yandex.ru',
-        name: 'email',
-        onBlur: e => validateForm((this.children.editFields as Block[])[0], e),
-      },
-      {
-        label: 'Логин',
-        inputType: 'text',
-        inputValue: 'ivanivanov',
-        name: 'login',
-        onBlur: e => validateForm((this.children.editFields as Block[])[1], e),
-      },
-      {
-        label: 'Имя',
-        inputType: 'text',
-        inputValue: 'Иван',
-        name: 'first_name',
-        onBlur: e => validateForm((this.children.editFields as Block[])[2], e),
-      },
-      {
-        label: 'Фамилия',
-        inputType: 'text',
-        inputValue: 'Иванов',
-        name: 'second_name',
-        onBlur: e => validateForm((this.children.editFields as Block[])[3], e),
-      },
-      {
-        label: 'Имя в чате',
-        inputType: 'text',
-        inputValue: 'Иван',
-        name: 'display_name',
-        onBlur: e => validateForm((this.children.editFields as Block[])[4], e),
-      },
-      {
-        label: 'Телефон',
-        inputType: 'tel',
-        inputValue: '+7 (909) 967 30 30',
-        name: 'phone',
-        onBlur: e => validateForm((this.children.editFields as Block[])[5], e),
       },
     ] as FormFieldType[];
 
@@ -181,15 +135,15 @@ class ProfilePage extends Block {
 
       EditDataButton: new Button({
         label: 'Сохранить',
-        onClick: () => {},
+        onClick: e => {
+          e.preventDefault();
+
+          console.log(e.target);
+        },
         isSecondary: false,
         type: 'submit',
       }),
-      editDataFields: editDataFields.map(props => {
-        return new FormFieldProfile({
-          ...props,
-        });
-      }),
+      editDataFields: [],
 
       // password edit
 
@@ -214,6 +168,55 @@ class ProfilePage extends Block {
   }
 
   render(): string {
+    if (this.props.isLoading) {
+      return `<h1>loading</h1>`;
+    }
+
+    if (this.props.currentView === 'change_data') {
+      const editDataComponents = (this.props.userData as FormFieldType[]).map((el, idx) => {
+        return new FormFieldProfile({
+          label: el.label,
+          inputType: el.inputType,
+          inputValue: this.props.userData[idx].value,
+          name: el.name,
+          onBlur: e => validateForm((this.children.editDataFields as Block[])[idx], e),
+        });
+      });
+
+      this.children.userData = editDataComponents;
+
+      return `
+      {{{Aside}}}
+
+      <section class='profile-section'>
+        {{{Avatar}}}
+
+        <form action='#'>
+          <div class='profile-info'>
+
+            ${editDataComponents
+              .map((_, index) => `<div data-id='${editDataComponents[index].id}'></div>`)
+              .join('')}
+
+
+            <div class='buttons-container'>
+              {{{EditDataButton}}}
+            </div>
+          </div>
+        </form>
+      </section>
+
+      {{#if showModal}}
+        {{{Modal}}}
+      {{/if}}
+
+      `;
+    }
+
+    if (this.props.currentView === 'change_password') {
+      return editPasswordTemplate;
+    }
+
     const infoRowsComponents = ((this.props.userData ?? []) as InfoRowProps[]).map(
       el =>
         new InfoRow({
@@ -223,17 +226,6 @@ class ProfilePage extends Block {
     ) as InfoRow[];
 
     this.children.userData = infoRowsComponents;
-
-    if (this.props.isLoading) {
-      return `<h1>loading</h1>`;
-    }
-
-    if (this.props.currentView === 'change_data') {
-      return editDataTemplate;
-    }
-    if (this.props.currentView === 'change_password') {
-      return editPasswordTemplate;
-    }
 
     return `
     {{{Aside}}}
@@ -284,26 +276,38 @@ const mapStateToProps = (state: StoreProps) => {
       {
         label: 'Почта',
         value: state.user?.email,
+        inputType: 'email',
+        name: 'email',
       },
       {
         label: 'Логин',
         value: state.user?.login,
+        inputType: 'text',
+        name: 'login',
       },
       {
         label: 'Имя',
         value: state.user?.first_name,
+        inputType: 'text',
+        name: 'first_name',
       },
       {
         label: 'Фамилия',
         value: state.user?.second_name,
+        inputType: 'text',
+        name: 'second_name',
       },
       {
         label: 'Имя в чате',
         value: state.user?.display_name,
+        inputType: 'text',
+        name: 'display_name',
       },
       {
         label: 'Телефон',
         value: state.user?.phone,
+        inputType: 'tel',
+        name: 'phone',
       },
     ],
   };

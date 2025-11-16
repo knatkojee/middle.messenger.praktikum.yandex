@@ -22,8 +22,6 @@ class Sidebar extends Block {
   }
 
   render(): string {
-    console.log(this.props);
-
     return `
   <div class='sidebar-wrapper'>
     <nav class='sidebar-content'>
