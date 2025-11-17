@@ -1,7 +1,11 @@
 import Block from '../../core/block';
 import { withRouter } from '../../utils/withRouter';
+import { ActionButton } from '../ActionButton';
 import ChatListItem, { type ChatListItemProps } from '../ChatListItem/ChatListItem';
 import { ProfileLink } from '../ProfileLink';
+import * as chatsApi from '../../services/chats';
+import { connect } from '../../utils/connect';
+import type { StoreProps } from '../../core/Store';
 
 type SidebarProps = {
   chatsList: ChatListItemProps[];
@@ -18,21 +22,27 @@ class Sidebar extends Block {
         });
       }),
       ProfileLink: new ProfileLink({}),
+      AddChatButton: new ActionButton({
+        label: 'Создать чат',
+        onClick: () => {
+          chatsApi.postCreateChat({
+            title: 'Новый чат 2',
+          });
+        },
+      }),
     });
   }
 
   render(): string {
+    console.log(this);
+
     return `
   <div class='sidebar-wrapper'>
     <nav class='sidebar-content'>
       <header class='profile-header'>
+        {{{ AddChatButton }}}
+
         {{{ ProfileLink }}}
-        <svg width='6' height='9' viewBox='0 0 6 9' fill='none' xmlns='http://www.w3.org/2000/svg'>
-          <path
-            d='M0.353554 8.35355L4.35355 4.35355L0.353554 0.353546'
-            stroke='var(--text-secondary-color)999'
-          />
-        </svg>
 
       </header>
 
@@ -51,4 +61,12 @@ class Sidebar extends Block {
   }
 }
 
-export default withRouter(Sidebar);
+const mapStateToProps = (state: StoreProps) => {
+  console.log(state);
+
+  return {
+    chatsList: state.chats,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(Sidebar));

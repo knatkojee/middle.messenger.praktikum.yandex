@@ -57,3 +57,28 @@ export type ChatDTO = {
   unread_count: number;
   last_message: LastMessage | null;
 };
+
+export type ChatsResponse = ChatResponse[];
+
+export type ChatResponse = {
+  id: number;
+  title: string;
+  avatar: string;
+  unread_count: number;
+  created_by: number;
+  last_message: MessageContent;
+};
+
+export type MessageContent = {
+  user: Omit<UserDTO, 'id' | 'display_name'>;
+  time: string;
+  content: string;
+};
+
+export type CreateChatRequest = { title: string };
+export type CreateChatResponse = { id: number };
+
+export type UsersRequest = {
+  users: number[];
+  chatId: number;
+};

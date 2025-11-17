@@ -29,14 +29,14 @@ export interface HTTPResponse<T = unknown> {
   headers: string;
 }
 
-interface GetOptions extends Omit<HTTPRequestOptions, 'method' | 'data'> {
+export interface GetOptions extends Omit<HTTPRequestOptions, 'method' | 'data'> {
   data?: QueryParams;
 }
 
-type PostOptions = Omit<HTTPRequestOptions, 'method'>;
-type PutOptions = Omit<HTTPRequestOptions, 'method'>;
-type PatchOptions = Omit<HTTPRequestOptions, 'method'>;
-type DeleteOptions = Omit<HTTPRequestOptions, 'method' | 'data'>;
+export type PostOptions = Omit<HTTPRequestOptions, 'method'>;
+export type PutOptions = Omit<HTTPRequestOptions, 'method'>;
+export type PatchOptions = Omit<HTTPRequestOptions, 'method'>;
+export type DeleteOptions = Omit<HTTPRequestOptions, 'method' | 'data'>;
 
 export interface HTTPError extends Error {
   status?: number;
