@@ -13,12 +13,15 @@ import Block from '../../core/block';
 import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
 import { withRouter } from '../../utils/withRouter';
-import editPasswordTemplate from './EditPasswordTemplate.hbs?raw';
 import type Router from '../../core/router';
 import * as authServices from '../../services/auth';
 import * as userServices from '../../services/user';
 import type { StoreProps } from '../../core/Store';
-import type { UserDTO, UserUpdateRequest } from '../../api/type';
+import type {
+  UserDTOFromState,
+  UserUpdatePasswordRequest,
+  UserUpdateRequest,
+} from '../../api/type';
 
 type ProfilePageProps = {
   title: string;
@@ -113,11 +116,6 @@ class ProfilePage extends Block {
 
       EditDataButton: new Button({
         label: 'Сохранить',
-        // onClick: e => {
-        //   e.preventDefault();
-
-        //   console.log(e.target);
-        // },
         isSecondary: false,
         type: 'submit',
       }),
@@ -140,20 +138,19 @@ class ProfilePage extends Block {
           e.preventDefault();
           e.stopImmediatePropagation();
 
-          console.log(this.children.editDataFields);
-          console.log(this.children.editPasswordFields);
+          const validationResult = validateForm(this.children.userData, e);
 
-          // TODO this.children.editDataFields = []
-          const validationResult = validateForm(this.children.editDataFields, e);
+          if (validationResult) {
+            if ((this.children.userData as FormFieldProfile[])?.[0].props.inputType === 'email') {
+              userServices.changeUser(validationResult as UserUpdateRequest);
+            }
 
-          console.log(validationResult);
-
-          // TODO условие на то что сейчас редактируется
-          // if (validationResult) {
-          //   console.log(validationResult);
-
-          //   userServices.changeUser(validationResult as UserUpdateRequest);
-          // }
+            if (
+              (this.children.userData as FormFieldProfile[])?.[0].props.inputType === 'password'
+            ) {
+              userServices.changeUserPassword(validationResult as UserUpdatePasswordRequest);
+            }
+          }
         },
       },
     });
@@ -171,13 +168,15 @@ class ProfilePage extends Block {
     }
 
     if (this.props.currentView === 'change_data') {
-      const editDataComponents = (this.props.userData as FormFieldType[]).map((el, idx) => {
+      console.log(this.props.userData);
+
+      const editDataComponents = (this.props.userData as UserDTOFromState[]).map((el, idx) => {
         return new FormFieldProfile({
           label: el.label,
           inputType: el.inputType,
-          inputValue: this.props.userData[idx].value,
+          inputValue: (this.props.userData as UserDTOFromState[])[idx].value,
           name: el.name,
-          onBlur: e => validateForm((this.children.editDataFields as Block[])[idx], e),
+          onBlur: e => validateForm((this.children.userData as Block[])[idx], e),
         });
       });
 
@@ -238,7 +237,7 @@ class ProfilePage extends Block {
           label: el.label,
           inputType: el.inputType,
           name: el.name,
-          onBlur: e => validateForm((this.children.editPasswordFields as Block[])[idx], e),
+          onBlur: e => validateForm((this.children.userData as Block[])[idx], e),
         });
       });
 
@@ -271,7 +270,7 @@ class ProfilePage extends Block {
       `;
     }
 
-    const infoRowsComponents = ((this.props.userData ?? []) as InfoRowProps[]).map(
+    const infoRowsComponents = ((this.props.userData ?? []) as UserDTOFromState[]).map(
       el =>
         new InfoRow({
           label: el.label,
@@ -364,7 +363,7 @@ const mapStateToProps = (state: StoreProps) => {
         inputType: 'tel',
         name: 'phone',
       },
-    ],
+    ] as UserDTOFromState[],
   };
 };
 

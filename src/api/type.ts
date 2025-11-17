@@ -17,7 +17,19 @@ export type UserDTO = {
   email: string;
 };
 
+export type UserDTOFromState = {
+  label: string;
+  value: string;
+  inputType: string;
+  name: string;
+};
+
 export type UserUpdateRequest = Omit<Partial<UserDTO>, 'id'>;
+export type UserUpdatePasswordRequest = {
+  oldPassword: string;
+  newPassword: string;
+  repeatPassword: string;
+};
 
 export type CreateUser = Omit<UserDTO, 'avatar' | 'display_name' | 'id'> & {
   password: string;

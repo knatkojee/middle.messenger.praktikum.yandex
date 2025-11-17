@@ -54,6 +54,8 @@ const validators = {
 };
 
 const validate = (field: Block) => {
+  console.log(field);
+
   const input = field.getContent()?.querySelector('input');
   let isInputValid = true;
 

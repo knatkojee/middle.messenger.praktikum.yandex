@@ -1,6 +1,6 @@
-import type { UserUpdateRequest } from '../api/type';
+import type { UserUpdatePasswordRequest, UserUpdateRequest } from '../api/type';
 import UserApi from '../api/user';
-import { DEFAULT_ERROR_MESSAGE, ROUTER } from '../constants';
+import { DEFAULT_ERROR_MESSAGE } from '../constants';
 import type { HTTPError } from '../core/httpTransport';
 
 const userApi = new UserApi();
@@ -13,7 +13,27 @@ export const changeUser = async (model: UserUpdateRequest) => {
     window.store.set({
       user: userData.data,
     });
-    window.router.go(ROUTER.profile);
+    window.location.reload();
+  } catch (responseError: unknown) {
+    const error = responseError as HTTPError;
+    if (error.data?.reason) {
+      window.store.set({ apiRequestError: error.data.reason });
+    } else {
+      window.store.set({ apiRequestError: error.message ?? DEFAULT_ERROR_MESSAGE });
+    }
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};
+
+export const changeUserPassword = async (model: UserUpdatePasswordRequest) => {
+  window.store.set({ isLoading: true });
+  try {
+    const userData = await userApi.changeUserPassword(model);
+    window.store.set({
+      user: userData.data,
+    });
+    window.location.reload();
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
