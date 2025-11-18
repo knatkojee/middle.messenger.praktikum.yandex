@@ -1,6 +1,6 @@
 import Block from '../../core/block';
 
-type ChatHeaderProps = {
+export type ChatHeaderProps = {
   title: string;
   pic?: string;
 };

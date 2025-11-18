@@ -28,6 +28,7 @@
 
 .empty-chat {
   inset: 50%;
+  left: 35%;
   position: absolute;
   text-wrap: nowrap;
 }

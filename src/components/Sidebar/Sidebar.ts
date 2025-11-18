@@ -6,6 +6,7 @@ import { ProfileLink } from '../ProfileLink';
 import * as chatsApi from '../../services/chats';
 import { connect } from '../../utils/connect';
 import type { StoreProps } from '../../core/Store';
+import type { ChatResponse, ChatsResponse } from '../../api/type';
 
 type SidebarProps = {
   chatsList: ChatListItemProps[];
@@ -26,15 +27,47 @@ class Sidebar extends Block {
         label: 'Создать чат',
         onClick: () => {
           chatsApi.postCreateChat({
-            title: 'Новый чат 2',
+            title: 'Новый чат 3',
           });
         },
       }),
     });
+
+    this.getChats();
+  }
+
+  async getChats() {
+    await chatsApi.getChats();
   }
 
   render(): string {
-    console.log(this);
+    console.log('chatsList in Sidebar', this);
+
+    if (!this.props.chatsList) {
+      return 'Loading';
+    }
+
+    const chatComponents = (this.props.chatsList as ChatsResponse)?.map(el => {
+      console.log(this.props);
+
+      return new ChatListItem({
+        name: el.title,
+        onChatClick: () => {
+          window.store.set({
+            messages: window.store.state.messages,
+            chatHeader: {
+              title: el.title,
+            },
+          });
+        },
+        time: el.last_message?.time,
+        pic: el.avatar,
+        text: el.last_message?.content,
+        unread: el.unread_count,
+      });
+    });
+
+    this.children.chatsList = chatComponents;
 
     return `
   <div class='sidebar-wrapper'>
@@ -50,9 +83,9 @@ class Sidebar extends Block {
         <span>Поиск</span>
       </div>
 
-      {{#each chatsList}}
-        {{{ this }}}
-      {{/each}}
+       ${chatComponents
+         .map((_, index) => `<div data-id="${chatComponents[index].id}"></div>`)
+         .join('')}
 
     </nav>
     <div class='sidebar-divider'></div>
@@ -62,10 +95,9 @@ class Sidebar extends Block {
 }
 
 const mapStateToProps = (state: StoreProps) => {
-  console.log(state);
-
   return {
     chatsList: state.chats,
+    chatHeader: state.chatHeader,
   };
 };
 

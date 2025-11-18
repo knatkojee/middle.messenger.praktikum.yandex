@@ -6,9 +6,8 @@ import type { StoreProps } from '../../core/Store';
 import { connect } from '../../utils/connect';
 import { withRouter } from '../../utils/withRouter';
 import template from './ChatPage.hbs?raw';
-import * as chatsApi from '../../services/chats';
 import templateWithNoChat from './ChatPageWithNoChat.hbs?raw';
-import type { ChatResponse } from '../../api/type';
+
 type ChatsPageProps = {
   messages?: MessageProps[];
   chatsList: ChatListItemProps[];
@@ -48,34 +47,6 @@ class ChatsPage extends Block {
             this._element?.querySelector('input')?.focus();
           }
         },
-      }),
-    });
-
-    this.getChats();
-  }
-
-  async getChats() {
-    await chatsApi.getChats();
-
-    console.log(window.store.state);
-
-    this.setProps({
-      chatsList: window.store.state?.chats?.map((el: ChatResponse): ChatListItemProps => {
-        return {
-          name: el.title,
-          onChatClick: () => {
-            window.store.set({
-              messages: [],
-              chatHeader: {
-                title: 'Андрей',
-              },
-            });
-          },
-          time: el.last_message?.time,
-          pic: el.avatar,
-          text: el.last_message?.content,
-          unread: el.unread_count,
-        };
       }),
     });
   }

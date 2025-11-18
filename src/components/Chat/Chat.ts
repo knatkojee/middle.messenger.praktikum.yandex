@@ -2,6 +2,7 @@ import Block from '../../core/block';
 import type { StoreProps } from '../../core/Store';
 import { connect } from '../../utils/connect';
 import { ChatHeader } from '../ChatHeader';
+import type { ChatHeaderProps } from '../ChatHeader/ChatHeader';
 import Message from '../Message/Message';
 import type { MessageProps } from '../Message/Message';
 
@@ -23,8 +24,8 @@ class Chat extends Block {
 
   render(): string {
     const ChatHeaderComponent = new ChatHeader({
-      title: this.props.chatHeader.title,
-      pic: this.props.chatHeader.pic,
+      title: (window.store.state.chatHeader as ChatHeaderProps).title,
+      pic: (this.props.chatHeader as ChatHeaderProps).pic,
     });
 
     this.children.chatHeader = ChatHeaderComponent;
@@ -41,7 +42,11 @@ class Chat extends Block {
     this.children.messages = messageComponents;
 
     if (messageComponents.length === 0) {
-      return `<h1 class='empty-chat'>Выберите чат</h1>`;
+      if (window.store.state.chats.length !== 0) {
+        return `<h1 class='empty-chat'>Сообщений пока нет</h1>`;
+      } else {
+        return `<h1 class='empty-chat'>Выберите чат</h1>`;
+      }
     }
 
     return `
