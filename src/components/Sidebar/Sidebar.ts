@@ -41,15 +41,11 @@ class Sidebar extends Block {
   }
 
   render(): string {
-    console.log('chatsList in Sidebar', this);
-
     if (!this.props.chatsList) {
       return 'Loading';
     }
 
     const chatComponents = (this.props.chatsList as ChatsResponse)?.map(el => {
-      console.log(this.props);
-
       return new ChatListItem({
         name: el.title,
         onChatClick: () => {

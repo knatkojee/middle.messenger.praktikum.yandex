@@ -20,7 +20,11 @@ export default class ChatsApi {
     return chatsApi.post<CreateChatResponse>('', data);
   }
 
-  async postAddChatUsers(data: UsersRequest) {
+  async putAddChatUsers(data: UsersRequest) {
+    return chatsApi.put<string>('users', data);
+  }
+
+  async putDeleteChatUsers(data: UsersRequest) {
     return chatsApi.put<string>('users', data);
   }
 }

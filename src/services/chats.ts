@@ -45,14 +45,32 @@ export const postCreateChat = async (data: CreateChatRequest) => {
   }
 };
 
-export const postAddChatUsers = async (data: UsersRequest) => {
+export const putAddChatUsers = async (data: UsersRequest) => {
   window.store.set({ isLoading: true });
 
   try {
-    const chats = await chatsApi.postAddChatUsers(data);
-    window.store.set({
-      chats,
-    });
+    await chatsApi.putAddChatUsers(data);
+
+    // TODO set users data
+  } catch (responseError: unknown) {
+    const error = responseError as HTTPError;
+    if (error.data?.reason) {
+      window.store.set({ apiRequestError: error.data.reason });
+    } else {
+      window.store.set({ apiRequestError: error.message ?? DEFAULT_ERROR_MESSAGE });
+    }
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};
+
+export const putDeleteChatUsers = async (data: UsersRequest) => {
+  window.store.set({ isLoading: true });
+
+  try {
+    await chatsApi.putDeleteChatUsers(data);
+
+    // TODO set users data
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
