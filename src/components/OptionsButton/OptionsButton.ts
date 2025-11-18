@@ -1,0 +1,48 @@
+import Block from '../../core/block';
+import { SystemAction } from '../SystemAction';
+
+type ButtonProps = {
+  isOpen?: boolean;
+};
+
+export default class OptionsButton extends Block {
+  constructor(props: ButtonProps) {
+    super('button', {
+      ...props,
+      className: 'message-page-button chat-options',
+      ButtonAdd: new SystemAction({
+        label: 'Добавить пользователя',
+        isAddIcon: true,
+        onClick: () => {},
+      }),
+      ButtonDelete: new SystemAction({
+        label: 'Удалить пользователя',
+        isDeleteIcon: true,
+        onClick: () => {},
+      }),
+      events: {
+        click: () => {
+          this.setProps({
+            isOpen: !this.props.isOpen,
+          });
+        },
+      },
+    });
+  }
+  public render(): string {
+    console.log(this.props);
+
+    return `
+        <svg width='3' height='15' viewBox='0 0 3 15' fill='none' xmlns='http://www.w3.org/2000/svg' >
+          <circle cx='1.5' cy='1.5' r='1.5' fill='var(--main-color)' />
+          <circle cx='1.5' cy='7.5' r='1.5' fill='var(--main-color)' />
+          <circle cx='1.5' cy='13.5' r='1.5' fill='var(--main-color)' />
+        </svg>
+
+        <div class='system-message {{#if isOpen}}popup-open{{/if}}'>
+            {{{ ButtonAdd }}}
+            {{{ ButtonDelete }}}
+          </div>
+    `;
+  }
+}

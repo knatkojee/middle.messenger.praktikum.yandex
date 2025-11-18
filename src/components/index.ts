@@ -17,3 +17,5 @@ export { Chat } from './Chat';
 export { ChatHeader } from './ChatHeader';
 export { ChatInputForm } from './ChatInputForm';
 export { ProfileLink } from './ProfileLink';
+export { OptionsButton } from './OptionsButton';
+export { SystemAction } from './SystemAction';

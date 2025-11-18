@@ -43,7 +43,10 @@ class Chat extends Block {
 
     if (messageComponents.length === 0) {
       if (window.store.state.chats.length !== 0) {
-        return `<h1 class='empty-chat'>Сообщений пока нет</h1>`;
+        return `
+          <div data-id="${ChatHeaderComponent.id}">
+          </div><h1 class='empty-chat'>Сообщений пока нет</h1>
+        `;
       } else {
         return `<h1 class='empty-chat'>Выберите чат</h1>`;
       }

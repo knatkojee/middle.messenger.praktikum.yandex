@@ -6,7 +6,7 @@ import { ProfileLink } from '../ProfileLink';
 import * as chatsApi from '../../services/chats';
 import { connect } from '../../utils/connect';
 import type { StoreProps } from '../../core/Store';
-import type { ChatResponse, ChatsResponse } from '../../api/type';
+import type { ChatsResponse } from '../../api/type';
 
 type SidebarProps = {
   chatsList: ChatListItemProps[];

@@ -47,28 +47,6 @@
   white-space: nowrap;
 }
 
-.chat-options {
-  align-items: center;
-  background-color: var(--bg-grey);
-  border-radius: 50%;
-  display: flex;
-  height: 25px;
-  justify-content: center;
-  width: 25px;
-
-  &:hover {
-    background-color: var(--bg-grey-hover);
-
-    + .system-message {
-      display: block;
-    }
-  }
-}
-
-.system-action:not(:first-child) {
-  margin-top: 16px;
-}
-
 .bottom-divider {
   background-color: var(--grey);
   display: flex;
