@@ -26,6 +26,11 @@ class Chat extends Block {
     const ChatHeaderComponent = new ChatHeader({
       title: (window.store.state.chatHeader as ChatHeaderProps).title,
       pic: (this.props.chatHeader as ChatHeaderProps).pic,
+      modalText: 'string',
+      onModalSubmit: (e: SubmitEvent) => {
+        e.preventDefault();
+        console.log(e);
+      },
     });
 
     this.children.chatHeader = ChatHeaderComponent;

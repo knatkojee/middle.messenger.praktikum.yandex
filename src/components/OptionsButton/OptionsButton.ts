@@ -15,6 +15,16 @@ export default class OptionsButton extends Block {
         isAddIcon: true,
         onClick: () => {
           console.log('add user to chat');
+          window.store.set({
+            inputModal: {
+              isOpen: true,
+              text: 'Введите id юзера',
+              onSubmit: (e: SubmitEvent) => {
+                e.preventDefault();
+                console.log(e);
+              },
+            },
+          });
         },
       }),
       ButtonDelete: new SystemAction({

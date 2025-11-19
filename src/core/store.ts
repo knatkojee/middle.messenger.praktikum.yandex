@@ -17,6 +17,11 @@ export type StoreProps = {
     pic?: string;
   };
   apiRequestError?: null;
+  inputModal?: {
+    isOpen: boolean;
+    text: string;
+    onSubmit: (data: SubmitEvent) => void;
+  };
 };
 
 export class Store extends EventBus<StoreEvents> {
