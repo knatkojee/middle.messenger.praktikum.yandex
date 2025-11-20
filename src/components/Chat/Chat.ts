@@ -22,13 +22,10 @@ class Chat extends Block {
       ...props,
       className: 'chat-wrapper',
     });
-
-    this.getChatUsers(this.props.selectedChat);
   }
 
   async getChatUsers(selectedChat: number) {
-    const selectedChatData = await chatsApi.getChatUsers(selectedChat);
-    console.log(selectedChatData);
+    await chatsApi.getChatUsers(selectedChat);
   }
 
   render(): string {
@@ -49,6 +46,10 @@ class Chat extends Block {
     ) as Message[];
 
     this.children.messages = messageComponents;
+
+    if (this.props?.selectedChat) {
+      this.getChatUsers(this.props.selectedChat);
+    }
 
     if (messageComponents.length === 0) {
       if (window.store.state.chats.length !== 0) {

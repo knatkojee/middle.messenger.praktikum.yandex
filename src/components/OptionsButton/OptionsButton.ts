@@ -15,7 +15,6 @@ export default class OptionsButton extends Block {
         label: 'Добавить пользователя',
         isAddIcon: true,
         onClick: () => {
-          console.log('add user to chat');
           window.store.set({
             inputModal: {
               isOpen: true,
@@ -27,13 +26,9 @@ export default class OptionsButton extends Block {
                   const formData = new FormData(e.target);
                   const data = Object.fromEntries(formData);
 
-                  console.log(data);
-                  console.log('selectedChat', window.store.state.selectedChat);
-                  console.log('user.id', window.store.state.user.id);
-
                   chatsApi.putChatUsers({
                     chatId: window.store.state.selectedChat,
-                    users: [window.store.state.user.id],
+                    users: [Number(data.modal_input)],
                   });
                 }
               },

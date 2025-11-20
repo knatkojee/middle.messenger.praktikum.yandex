@@ -31,7 +31,7 @@ export const postCreateChat = async (data: CreateChatRequest) => {
   try {
     await chatsApi.postCreateChat(data);
     window.store.set({
-      isModalOpen: false,
+      inputModal: { isOpen: false },
     });
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
@@ -50,8 +50,9 @@ export const putChatUsers = async (data: UsersRequest) => {
 
   try {
     await chatsApi.putChatUsers(data);
-
-    // TODO set users data
+    window.store.set({
+      inputModal: { isOpen: false },
+    });
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
@@ -69,8 +70,9 @@ export const deleteChatUsers = async (data: UsersRequest) => {
 
   try {
     await chatsApi.deleteChatUsers(data);
-
-    // TODO set users data
+    window.store.set({
+      inputModal: { isOpen: false },
+    });
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
@@ -88,9 +90,9 @@ export const getChatUsers = async (id: number) => {
 
   try {
     const response = await chatsApi.getChatUsers(id);
-    console.log(response.data);
-
-    // TODO set users data
+    window.store.set({
+      selectedChatUsers: response.data,
+    });
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
