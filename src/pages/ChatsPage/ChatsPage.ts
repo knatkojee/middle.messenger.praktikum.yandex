@@ -7,6 +7,7 @@ import { connect } from '../../utils/connect';
 import { withRouter } from '../../utils/withRouter';
 import template from './ChatPage.hbs?raw';
 import templateWithNoChat from './ChatPageWithNoChat.hbs?raw';
+import * as authApi from '../../services/auth';
 
 type ChatsPageProps = {
   messages?: MessageProps[];
@@ -49,6 +50,12 @@ class ChatsPage extends Block {
         },
       }),
     });
+
+    this.setUserData();
+  }
+
+  async setUserData() {
+    await authApi.me();
   }
 
   public render(): string {

@@ -10,7 +10,7 @@ export type StoreProps = {
   isLoading?: false;
   user?: UserDTO;
   chats?: [];
-  selectedChat?: 1;
+  selectedChat?: number;
   messages?: MessageProps[];
   chatHeader?: {
     title: string;

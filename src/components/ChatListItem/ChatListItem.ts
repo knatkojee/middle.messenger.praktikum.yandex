@@ -1,6 +1,7 @@
 import Block from '../../core/block';
 
 export type ChatListItemProps = {
+  id: number;
   name: string;
   time: string;
   onChatClick: (e: MouseEvent) => void;
@@ -25,6 +26,7 @@ export default class ChatListItem extends Block {
       text: props.text,
       unread: props.unread,
       pic: props.pic,
+      id: props.id,
     });
   }
 

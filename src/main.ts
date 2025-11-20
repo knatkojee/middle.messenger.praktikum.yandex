@@ -16,7 +16,7 @@ window.store = new Store({
   isLoading: false,
   user: undefined,
   chats: [],
-  selectedChat: 1,
+  selectedChat: undefined,
   messages: [],
   chatHeader: {
     title: '',

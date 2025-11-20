@@ -1,6 +1,12 @@
 import { HOST } from '../constants';
 import { HTTPTransport, type GetOptions } from '../core/httpTransport';
-import type { ChatsResponse, CreateChatRequest, CreateChatResponse, UsersRequest } from './type';
+import type {
+  ChatsResponse,
+  ChatUserResponse,
+  CreateChatRequest,
+  CreateChatResponse,
+  UsersRequest,
+} from './type';
 
 const chatsApi = new HTTPTransport(`${HOST}/chats`);
 
@@ -20,11 +26,23 @@ export default class ChatsApi {
     return chatsApi.post<CreateChatResponse>('', data);
   }
 
-  async putAddChatUsers(data: UsersRequest) {
-    return chatsApi.put<string>('users', data);
+  async putChatUsers(data: UsersRequest) {
+    return chatsApi.put<string>('/users', data);
   }
 
-  async putDeleteChatUsers(data: UsersRequest) {
-    return chatsApi.put<string>('users', data);
+  async deleteChatUsers(data: UsersRequest) {
+    return chatsApi.delete<string>('/users', data);
+  }
+
+  async getChatUsers(
+    id: number,
+    options: GetOptions = {
+      data: {
+        offset: 0,
+        limit: 20,
+      },
+    }
+  ) {
+    return chatsApi.get<ChatUserResponse>(`/${id}/users`, options);
   }
 }

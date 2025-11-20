@@ -29,9 +29,9 @@ export const postCreateChat = async (data: CreateChatRequest) => {
   window.store.set({ isLoading: true });
 
   try {
-    const chatsData = await chatsApi.postCreateChat(data);
+    await chatsApi.postCreateChat(data);
     window.store.set({
-      chats: chatsData.data,
+      isModalOpen: false,
     });
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
@@ -45,11 +45,11 @@ export const postCreateChat = async (data: CreateChatRequest) => {
   }
 };
 
-export const putAddChatUsers = async (data: UsersRequest) => {
+export const putChatUsers = async (data: UsersRequest) => {
   window.store.set({ isLoading: true });
 
   try {
-    await chatsApi.putAddChatUsers(data);
+    await chatsApi.putChatUsers(data);
 
     // TODO set users data
   } catch (responseError: unknown) {
@@ -64,11 +64,31 @@ export const putAddChatUsers = async (data: UsersRequest) => {
   }
 };
 
-export const putDeleteChatUsers = async (data: UsersRequest) => {
+export const deleteChatUsers = async (data: UsersRequest) => {
   window.store.set({ isLoading: true });
 
   try {
-    await chatsApi.putDeleteChatUsers(data);
+    await chatsApi.deleteChatUsers(data);
+
+    // TODO set users data
+  } catch (responseError: unknown) {
+    const error = responseError as HTTPError;
+    if (error.data?.reason) {
+      window.store.set({ apiRequestError: error.data.reason });
+    } else {
+      window.store.set({ apiRequestError: error.message ?? DEFAULT_ERROR_MESSAGE });
+    }
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};
+
+export const getChatUsers = async (id: number) => {
+  window.store.set({ isLoading: true });
+
+  try {
+    const response = await chatsApi.getChatUsers(id);
+    console.log(response.data);
 
     // TODO set users data
   } catch (responseError: unknown) {

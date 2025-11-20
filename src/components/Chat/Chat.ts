@@ -5,6 +5,7 @@ import { ChatHeader } from '../ChatHeader';
 import type { ChatHeaderProps } from '../ChatHeader/ChatHeader';
 import Message from '../Message/Message';
 import type { MessageProps } from '../Message/Message';
+import * as chatsApi from '../../services/chats';
 
 type ChatProps = {
   messages?: MessageProps[];
@@ -12,6 +13,7 @@ type ChatProps = {
     title: string;
     pic: string;
   };
+  selectedChat: number;
 };
 
 class Chat extends Block {
@@ -20,17 +22,19 @@ class Chat extends Block {
       ...props,
       className: 'chat-wrapper',
     });
+
+    this.getChatUsers(this.props.selectedChat);
+  }
+
+  async getChatUsers(selectedChat: number) {
+    const selectedChatData = await chatsApi.getChatUsers(selectedChat);
+    console.log(selectedChatData);
   }
 
   render(): string {
     const ChatHeaderComponent = new ChatHeader({
       title: (window.store.state.chatHeader as ChatHeaderProps).title,
       pic: (this.props.chatHeader as ChatHeaderProps).pic,
-      modalText: 'string',
-      onModalSubmit: (e: SubmitEvent) => {
-        e.preventDefault();
-        console.log(e);
-      },
     });
 
     this.children.chatHeader = ChatHeaderComponent;
@@ -75,6 +79,7 @@ const mapStateToProps = (state: StoreProps) => {
   return {
     messages: state.messages,
     chatHeader: state.chatHeader,
+    selectedChat: state.selectedChat,
   };
 };
 

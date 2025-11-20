@@ -7,6 +7,7 @@ type InputModalProps = {
   text: string;
   onSubmit: (e: SubmitEvent) => void;
   onCancel: (e: PointerEvent) => void;
+  selectedChat?: number;
 };
 
 export default class InputModal extends Block {

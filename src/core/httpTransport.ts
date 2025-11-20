@@ -166,8 +166,12 @@ export class HTTPTransport {
     return this.request<T>(url, { ...options, method: 'PATCH', data });
   }
 
-  public delete<T = unknown>(url: string, options: DeleteOptions = {}): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'DELETE' });
+  public delete<T = unknown>(
+    url: string,
+    data?: RequestData,
+    options: DeleteOptions = {}
+  ): Promise<HTTPResponse<T>> {
+    return this.request<T>(url, { ...options, method: 'DELETE', data });
   }
 
   private sendRequestData(

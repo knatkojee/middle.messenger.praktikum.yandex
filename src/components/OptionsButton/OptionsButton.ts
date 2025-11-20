@@ -1,5 +1,6 @@
 import Block from '../../core/block';
 import { SystemAction } from '../SystemAction';
+import * as chatsApi from '../../services/chats';
 
 type ButtonProps = {
   isOpen?: boolean;
@@ -18,10 +19,23 @@ export default class OptionsButton extends Block {
           window.store.set({
             inputModal: {
               isOpen: true,
-              text: 'Введите id юзера',
+              text: `Введите id юзера (ваш id: ${window.store.state?.user?.id})`,
               onSubmit: (e: SubmitEvent) => {
                 e.preventDefault();
-                console.log(e);
+
+                if (e.target instanceof HTMLFormElement) {
+                  const formData = new FormData(e.target);
+                  const data = Object.fromEntries(formData);
+
+                  console.log(data);
+                  console.log('selectedChat', window.store.state.selectedChat);
+                  console.log('user.id', window.store.state.user.id);
+
+                  chatsApi.putChatUsers({
+                    chatId: window.store.state.selectedChat,
+                    users: [window.store.state.user.id],
+                  });
+                }
               },
             },
           });
