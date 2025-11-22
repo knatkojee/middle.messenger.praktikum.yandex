@@ -31,17 +31,7 @@ class ChatsPage extends Block {
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
 
-            const now = new Date();
-            const newMessages = [...window.store.state.messages];
-
-            newMessages.push({
-              text: data.message,
-              time: `${now.getHours()}:${now.getMinutes()}`,
-            });
-
-            window.store.set({
-              messages: newMessages,
-            });
+            this.children.Chat.socket.sendMessage(data.message);
 
             e.target.reset();
 

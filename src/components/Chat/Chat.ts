@@ -7,6 +7,7 @@ import Message from '../Message/Message';
 import type { MessageProps } from '../Message/Message';
 import * as chatsApi from '../../services/chats';
 import { openWebsocket, type WebSocketObject } from '../../services/websocket';
+import { toTimeFormat } from '../../utils/utils';
 
 type ChatProps = {
   messages?: MessageProps[];
@@ -26,7 +27,7 @@ class Chat extends Block {
   }
 
   private selectedChat: string | undefined = undefined;
-  private socket: WebSocketObject | undefined = undefined;
+  public socket: WebSocketObject | undefined = undefined;
 
   private updateWebsocket(chatId: string) {
     if (this.socket) {
@@ -36,8 +37,18 @@ class Chat extends Block {
 
     openWebsocket({
       chatId,
-      onMessageReceive: () => {
-        throw new Error('asdasd');
+      onMessageReceive: messages => {
+        const mappedMessages: MessageProps[] = messages.map(el => {
+          return {
+            text: el.content,
+            time: toTimeFormat(el.time),
+            isIncoming: el.user_id !== window.store.state.user.id,
+          };
+        });
+
+        this.setProps({
+          messages: this.props.messages.concat(mappedMessages),
+        });
       },
       userId: window.store.state.user.id,
     }).then(socket => {

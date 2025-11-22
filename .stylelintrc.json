@@ -1,8 +1,15 @@
 {
-  "extends": ["stylelint-config-standard"],
+  "extends": ["stylelint-config-standard", "stylelint-config-rational-order"],
   "plugins": ["stylelint-order"],
   "ignoreFiles": ["dist/**", "build/**", "**/*.min.css", "node_modules/**"],
   "rules": {
-    "order/properties-alphabetical-order": true
+    "order/properties-order": [],
+    "plugin/rational-order": [
+      true,
+      {
+        "border-in-box-model": false,
+        "empty-line-between-groups": true
+      }
+    ]
   }
 }

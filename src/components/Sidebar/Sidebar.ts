@@ -8,6 +8,7 @@ import { connect } from '../../utils/connect';
 import type { StoreProps } from '../../core/Store';
 import type { ChatsResponse } from '../../api/type';
 import { InputModal } from '../InputModal';
+import { toTimeFormat } from '../../utils/utils';
 
 type SidebarProps = {
   chatsList: ChatListItemProps[];
@@ -54,7 +55,7 @@ class Sidebar extends Block {
             selectedChat: el.id,
           });
         },
-        time: el.last_message?.time,
+        time: toTimeFormat(el.last_message?.time),
         pic: el.avatar,
         text: el.last_message?.content,
         unread: el.unread_count,

@@ -1,10 +1,32 @@
 import { HOST } from '../constants';
 import { HTTPTransport } from '../core/httpTransport';
 
+export type MessageFileResponse = {
+  id: number;
+  user_id: number;
+  path: string;
+  filename: string;
+  content_type: string;
+  content_size: number;
+  upload_date: string;
+};
+
+export type MessageResponse = {
+  chat_id: number;
+  time: string;
+  type: string;
+  user_id: string;
+  content: string;
+  file?: MessageFileResponse;
+};
+
+export type MessagesResponse = MessageResponse[];
+
 export interface WebSocketConfig {
   chatId: string;
   userId: string;
-  onMessageReceive: (message: string) => void;
+  onMessageReceive: (message: MessagesResponse) => void;
+  onUserConnected?: (data: { content: string; type: string }) => void;
 }
 
 export interface WebSocketObject {
@@ -22,10 +44,24 @@ export async function openWebsocket(config: WebSocketConfig): Promise<WebSocketO
 
   socket.addEventListener('open', () => {
     console.log('Соединение установлено');
+    socket.send(
+      JSON.stringify({
+        content: '0',
+        type: 'get old',
+      })
+    );
   });
 
   socket.addEventListener('message', event => {
-    console.log('Получены данные', event.data);
+    const parsedData = JSON.parse(event.data);
+    console.log('Получены данные', parsedData);
+
+    if ('type' in parsedData && parsedData.type === 'user connected') {
+      config.onUserConnected?.(parsedData);
+    } else {
+      const processedData = Array.isArray(parsedData) ? parsedData : [parsedData];
+      config.onMessageReceive(processedData);
+    }
   });
 
   return {
