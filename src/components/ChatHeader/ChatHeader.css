@@ -1,16 +1,16 @@
 .active-user-info {
-  align-items: stretch;
   display: flex;
   gap: 10px;
+  align-items: stretch;
 }
 
 .active-user-avatar {
-  background-color: var(--grey);
-  border-radius: 50%;
   display: flex;
   flex-shrink: 0;
-  height: 34px;
   width: 34px;
+  height: 34px;
+  background-color: var(--grey);
+  border-radius: 50%;
 }
 
 .active-user-name {
@@ -22,25 +22,25 @@
 }
 
 .date-section {
-  align-items: stretch;
-  align-self: end;
   display: flex;
   flex-wrap: wrap;
-  font-size: 12px;
   gap: 20px;
+  align-items: stretch;
+  align-self: end;
   justify-content: space-between;
-  margin-top: 10px;
-  max-width: 100%;
   width: 499px;
+  max-width: 100%;
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 .date-label {
-  color: var(--text-secondary-color);
-  left: 50%;
-  line-height: 1;
-  margin: auto 0;
   position: absolute;
-  right: 50%;
-  text-align: center;
   top: 100px;
+  right: 50%;
+  left: 50%;
+  margin: auto 0;
+  color: var(--text-secondary-color);
+  line-height: 1;
+  text-align: center;
 }

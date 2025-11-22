@@ -1,23 +1,23 @@
 .form-container {
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+  padding: 50px 30px 30px;
   background-color: var(--white);
   border-radius: 12px;
   box-shadow: var(--container-box-shadow);
-  display: flex;
-  flex-direction: column;
-  padding: 50px 30px 30px;
-  width: 340px;
 }
 
 .form-title {
-  color: var(--text-color);
-  font-size: 20px;
-  font-weight: 500;
   margin-bottom: 40px;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 20px;
   text-align: center;
 }

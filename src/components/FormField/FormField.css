@@ -1,23 +1,23 @@
 .form-field {
-  margin-bottom: 16px;
   width: 100%;
+  margin-bottom: 16px;
 }
 
 .field-label {
-  color: var(--text-color);
   display: block;
-  font-size: 9px;
   margin-bottom: 8px;
+  color: var(--text-color);
+  font-size: 9px;
 }
 
 .field-input {
-  background: transparent;
-  border: none;
+  width: 100%;
+  padding: 0 0 7px;
   color: var(--text-color);
   font-size: 13px;
+  background: transparent;
+  border: none;
   outline: none;
-  padding: 0 0 7px;
-  width: 100%;
 }
 
 .error-state .field-input {
@@ -25,22 +25,22 @@
 }
 
 .field-underline {
-  border: 1px solid var(--main-color);
-  height: 1px;
   width: 100%;
+  height: 1px;
+  border: 1px solid var(--main-color);
 }
 
 .error-message {
+  margin-top: 7px;
   color: var(--error-color);
   font-size: 8px;
-  margin-top: 7px;
 }
 
 .buttons-container {
-  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
   margin-top: 47px;
 }
 

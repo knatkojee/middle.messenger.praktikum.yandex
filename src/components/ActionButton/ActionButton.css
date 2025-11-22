@@ -1,14 +1,14 @@
 .action-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  color: var(--main-color);
+  font-weight: 500;
+  font-size: 13px;
+  text-align: left;
   background: none;
   border: none;
-  color: var(--main-color);
   cursor: pointer;
-  display: block;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 0;
-  text-align: left;
-  width: 100%;
 }
 
 .action-button:hover {

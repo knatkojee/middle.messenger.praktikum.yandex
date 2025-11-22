@@ -1,8 +1,8 @@
 .chat-container {
-  background-color: var(--white);
   height: 100vh;
-  overflow: hidden;
   padding-right: 10px;
+  overflow: hidden;
+  background-color: var(--white);
 }
 
 .chat-layout {
@@ -12,46 +12,46 @@
 }
 
 .main-column {
-  align-items: stretch;
+  position: relative;
   display: flex;
   flex-direction: column;
-  line-height: normal;
-  position: relative;
+  align-items: stretch;
   width: 75%;
+  line-height: normal;
 }
 
 .main-content {
-  align-items: stretch;
   display: flex;
   flex-direction: column;
-  font-weight: 500;
+  align-items: stretch;
+  width: 100%;
   height: 100%;
   padding: 10px 0;
-  width: 100%;
+  font-weight: 500;
 }
 
 .chat-header {
-  align-items: stretch;
-  border-bottom: 1px solid var(--grey);
-  color: var(--text-color);
+  position: relative;
   display: flex;
   flex-wrap: wrap;
-  font-size: 13px;
-  font-weight: 600;
   gap: 20px;
+  align-items: stretch;
   justify-content: space-between;
-  line-height: 1;
   margin: 0 10px;
   padding-bottom: 10px;
-  position: relative;
+  color: var(--text-color);
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
   white-space: nowrap;
+  border-bottom: 1px solid var(--grey);
 }
 
 .bottom-divider {
-  background-color: var(--grey);
   display: flex;
   flex-shrink: 0;
+  max-width: 100%;
   height: 1px;
   margin: 10px;
-  max-width: 100%;
+  background-color: var(--grey);
 }

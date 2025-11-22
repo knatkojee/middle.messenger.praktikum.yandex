@@ -1,57 +1,57 @@
 .message-input-wrapper {
-  align-items: start;
-  align-self: center;
-  background-color: var(--grey);
-  border-radius: 30px;
-  color: var(--text-secondary-color);
   display: flex;
   flex-direction: column;
-  font-size: 12px;
+  align-items: start;
+  align-self: center;
   justify-content: center;
-  line-height: 1;
-  padding: 10px 20px;
-  white-space: nowrap;
   width: 100%;
+  padding: 10px 20px;
+  color: var(--text-secondary-color);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  background-color: var(--grey);
+  border-radius: 30px;
 }
 
 .message-input {
+  width: 100%;
   background-color: transparent;
   border: none;
   outline: none;
-  width: 100%;
 }
 
 .message-page-button {
+  position: relative;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  position: relative;
 }
 
 .media-menu {
-  align-items: start;
-  background-color: var(--white);
-  border-radius: 12px;
+  position: absolute;
   bottom: 65px;
-  box-shadow: var(--container-box-shadow);
-  color: var(--text-color);
+  z-index: 2000;
   display: flex;
   display: none;
   flex-direction: column;
-  font-size: 12px;
-  line-height: 1;
+  align-items: start;
+  width: 162px;
   max-width: 100%;
   padding: 15px;
-  position: absolute;
-  width: 162px;
-  z-index: 2000;
+  color: var(--text-color);
+  font-size: 12px;
+  line-height: 1;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--container-box-shadow);
 }
 
 .media-option {
-  align-items: stretch;
-  align-self: stretch;
   display: flex;
   gap: 15px;
+  align-items: stretch;
+  align-self: stretch;
 }
 
 .media-option:not(:first-child) {
@@ -59,11 +59,11 @@
 }
 
 .media-icon {
-  aspect-ratio: 1;
   flex-shrink: 0;
+  width: 22px;
   object-fit: contain;
   object-position: center;
-  width: 22px;
+  aspect-ratio: 1;
 }
 
 .media-label {
@@ -71,17 +71,17 @@
 }
 
 .media-option-file {
-  align-items: stretch;
   display: flex;
   gap: 15px;
+  align-items: stretch;
   margin-top: 16px;
   white-space: nowrap;
 }
 
 .media-option-location {
-  align-items: stretch;
   display: flex;
   gap: 15px;
+  align-items: stretch;
   margin-top: 16px;
   white-space: nowrap;
 }

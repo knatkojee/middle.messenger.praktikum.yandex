@@ -1,34 +1,34 @@
 .info-row {
-  align-items: center;
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 
 .info-label {
-  color: var(--text-color);
-  font-size: 13px;
-  font-weight: 500;
   min-width: 160px;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 13px;
 }
 
 .info-value {
   color: var(--text-secondary-color);
-  font-size: 13px;
   font-weight: 500;
+  font-size: 13px;
   text-align: right;
 }
 
 .info-divider {
-  background-color: var(--grey);
+  width: 100%;
   height: 1px;
   margin: 0;
-  width: 100%;
+  background-color: var(--grey);
 }
 
 .info-value.info-input {
+  width: 100%;
+  font-size: 13px;
   background: transparent;
   border: none;
-  font-size: 13px;
   outline: none;
-  width: 100%;
 }

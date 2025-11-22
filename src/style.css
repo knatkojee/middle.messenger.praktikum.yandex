@@ -18,19 +18,19 @@
 
 * {
   box-sizing: border-box;
-  font-family: -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   margin: 0;
   padding: 0;
+  font-family: -apple-system, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 body {
-  align-items: center;
+  position: relative;
   display: flex;
+  align-items: center;
   justify-content: center;
+  width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
-  position: relative;
-  width: 100vw;
 }
 
 #app {
@@ -38,16 +38,16 @@ body {
 }
 
 img {
-  height: auto;
   max-width: 100%;
+  height: auto;
 }
 
 #modal {
-  background-color: #0003;
-  display: none;
-  height: 100vh;
   position: absolute;
+  display: none;
   width: 100vw;
+  height: 100vh;
+  background-color: #0003;
 }
 
 #modal.active {

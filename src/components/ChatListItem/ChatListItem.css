@@ -1,14 +1,14 @@
 .chat-item {
-  align-items: stretch;
-  background-color: transparent;
-  border: none;
   display: flex;
   gap: 20px;
+  align-items: stretch;
   justify-content: space-between;
+  width: 100%;
   margin-top: 12px;
   padding: 4px;
   white-space: nowrap;
-  width: 100%;
+  background-color: transparent;
+  border: none;
 
   &:hover {
     background-color: var(--white-color-hover);
@@ -17,41 +17,41 @@
 }
 
 .chat-user-info {
-  align-items: stretch;
   display: flex;
   gap: 10px;
+  align-items: stretch;
 }
 
 .user-avatar {
-  background-color: var(--grey);
-  border-radius: 50%;
   display: flex;
   flex-shrink: 0;
-  height: 47px;
   width: 47px;
+  height: 47px;
+  background-color: var(--grey);
+  border-radius: 50%;
 }
 
 .user-details {
-  align-items: stretch;
-  align-self: start;
   display: flex;
   flex-direction: column;
+  align-items: stretch;
+  align-self: start;
 }
 
 .user-name {
   align-self: start;
   color: var(--text-color);
-  font-size: 13px;
   font-weight: 600;
+  font-size: 13px;
   line-height: 1;
 }
 
 .last-message {
-  color: var(--grey-darker);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1;
   margin-top: 4px;
+  color: var(--grey-darker);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1;
   text-align: left;
 }
 
@@ -67,18 +67,18 @@
 }
 
 .unread-badge {
-  align-items: center;
-  background-color: var(--main-color);
-  border-radius: 50%;
-  color: var(--white);
   display: flex;
   flex-direction: column;
-  font-size: 11px;
-  height: 20px;
+  align-items: center;
   justify-content: center;
-  line-height: 1;
+  width: 20px;
+  height: 20px;
   margin-top: 14px;
   padding: 0 7px;
+  color: var(--white);
+  font-size: 11px;
+  line-height: 1;
   text-align: center;
-  width: 20px;
+  background-color: var(--main-color);
+  border-radius: 50%;
 }
