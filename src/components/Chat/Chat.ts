@@ -6,6 +6,7 @@ import type { ChatHeaderProps } from '../ChatHeader/ChatHeader';
 import Message from '../Message/Message';
 import type { MessageProps } from '../Message/Message';
 import * as chatsApi from '../../services/chats';
+import { openWebsocket, type WebSocketObject } from '../../services/websocket';
 
 type ChatProps = {
   messages?: MessageProps[];
@@ -24,11 +25,36 @@ class Chat extends Block {
     });
   }
 
+  private selectedChat: string | undefined = undefined;
+  private socket: WebSocketObject | undefined = undefined;
+
+  private updateWebsocket(chatId: string) {
+    if (this.socket) {
+      this.socket.close();
+      this.socket = undefined;
+    }
+
+    openWebsocket({
+      chatId,
+      onMessageReceive: () => {
+        throw new Error('asdasd');
+      },
+      userId: window.store.state.user.id,
+    }).then(socket => {
+      this.socket = socket;
+    });
+  }
+
   async getChatUsers(selectedChat: number) {
     await chatsApi.getChatUsers(selectedChat);
   }
 
   render(): string {
+    if (this.selectedChat !== this.props.selectedChat) {
+      this.selectedChat = this.props.selectedChat as string;
+      this.updateWebsocket(this.selectedChat);
+    }
+
     const ChatHeaderComponent = new ChatHeader({
       title: (window.store.state.chatHeader as ChatHeaderProps).title,
       pic: (this.props.chatHeader as ChatHeaderProps).pic,

@@ -1,4 +1,5 @@
-const HOST = 'https://ya-praktikum.tech/api/v2/';
+import { HOST } from '../constants';
+import { HTTPTransport } from './httpTransport';
 
 let me = null;
 
