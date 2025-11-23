@@ -85,3 +85,22 @@ export const me = async () => {
     window.store.set({ isLoading: false });
   }
 };
+
+export const checkLoginUser = async () => {
+  window.store.set({ isLoading: true });
+
+  try {
+    await authApi.me();
+  } catch (responseError: unknown) {
+    const error = responseError as HTTPError;
+    if (error.data?.reason) {
+      window.store.set({ apiRequestError: error.data.reason });
+    } else {
+      window.store.set({ apiRequestError: error.message ?? DEFAULT_ERROR_MESSAGE });
+    }
+
+    window.router.go(ROUTER.login);
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};

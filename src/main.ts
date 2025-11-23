@@ -4,6 +4,7 @@ import * as Pages from './pages';
 import Router from './core/router';
 import { ROUTER } from './constants';
 import { Store, StoreEvents, type StoreProps } from './core/store';
+import * as authServices from './services/auth';
 
 Object.entries(Components).forEach(([name, template]) => {
   if (typeof template === 'function') {
@@ -30,7 +31,7 @@ window.store.on(StoreEvents.Updated, (_prevState: StoreProps, _newState: StorePr
   // console.log('_newState', _newState);
 });
 
-// authServices.checkLoginUser();
+authServices.checkLoginUser();
 
 const APP_ROOT_ELEMNT = '#app';
 
