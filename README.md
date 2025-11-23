@@ -35,7 +35,7 @@
 
 ## Netlify
 
-Посмотреть рабочую версию приложения можно тут: https://6903f8a8e4ef6e000873637c--astonishing-dasik-53f712.netlify.app/
+Посмотреть рабочую версию приложения можно тут: https://astonishing-dasik-53f712.netlify.app
 
 ## Что нового
 
