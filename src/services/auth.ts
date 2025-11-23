@@ -91,6 +91,9 @@ export const checkLoginUser = async () => {
 
   try {
     await authApi.me();
+    if (window.location.href.endsWith(ROUTER.login)) {
+      window.router.go(ROUTER.chats);
+    }
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
