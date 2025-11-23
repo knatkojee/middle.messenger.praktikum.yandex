@@ -6,4 +6,3 @@ export { ProfileEditPage } from './ProfileEdit';
 export { ProfileEditPasswordPage } from './ProfileEditPassword';
 export { Page500 } from './Page500';
 export { Page404 } from './Page404';
-export { PageWithModal } from './PageWithModal';

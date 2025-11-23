@@ -5,7 +5,7 @@ import ChatListItem, { type ChatListItemProps } from '../ChatListItem/ChatListIt
 import { ProfileLink } from '../ProfileLink';
 import * as chatsApi from '../../services/chats';
 import { connect } from '../../utils/connect';
-import type { StoreProps } from '../../core/Store';
+import type { StoreProps } from '../../core/store';
 import type { ChatsResponse } from '../../api/type';
 import { InputModal } from '../InputModal';
 import { toTimeFormat } from '../../utils/utils';

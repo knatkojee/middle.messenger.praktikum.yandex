@@ -113,8 +113,8 @@ export default abstract class Block<P extends BaseProps = BaseProps> {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  componentDidMount(oldProps?: P): void {
-    // console.log(oldProps);
+  componentDidMount(_oldProps?: P): void {
+    // console.log(_oldProps);
   }
 
   dispatchComponentDidMount(): void {

@@ -14,3 +14,5 @@ export type RegisterData = {
 };
 
 export type SubmitData = { [k: string]: FormDataEntryValue };
+
+export * from './components';

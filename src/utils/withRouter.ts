@@ -1,6 +1,6 @@
-export function withRouter(WrappedBlock) {
+export function withRouter(WrappedBlock: any) {
   return class extends WrappedBlock {
-    constructor(props) {
+    constructor(props: any) {
       super({ ...props, router: window.router });
     }
   };

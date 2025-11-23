@@ -1,6 +1,6 @@
 import Block from '../../core/block';
 
-export type InfoRowProps = {
+type InfoRowProps = {
   label: string;
   value: string;
 };

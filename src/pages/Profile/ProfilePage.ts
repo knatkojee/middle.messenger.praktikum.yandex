@@ -8,7 +8,6 @@ import {
   Modal,
 } from '../../components';
 import type { FormFieldType } from '../../components/FormWrapper/FormWrapper';
-import type { InfoRowProps } from '../../components/InfoRow/InfoRow';
 import Block from '../../core/block';
 import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
@@ -16,21 +15,25 @@ import { withRouter } from '../../utils/withRouter';
 import type Router from '../../core/router';
 import * as authServices from '../../services/auth';
 import * as userServices from '../../services/user';
-import type { StoreProps } from '../../core/Store';
+import type { StoreProps } from '../../core/store';
 import type {
   UserDTOFromState,
   UserUpdatePasswordRequest,
   UserUpdateRequest,
 } from '../../api/type';
 
+
 type ProfilePageProps = {
-  title: string;
-  labelOk: string;
-  labelCancel: string;
-  body: string;
-  currentView: 'profile' | 'change_data' | 'change_password';
+  title?: string;
+  labelOk?: string;
+  labelCancel?: string;
+  body?: string;
+  currentView?: 'profile' | 'change_data' | 'change_password';
   router: Router;
-  userData?: InfoRowProps[];
+  userData?: UserDTOFromState[];
+  profileName?: string;
+  isLoading?: boolean;
+  showModal?: boolean;
 };
 
 class ProfilePage extends Block {

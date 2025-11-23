@@ -7,7 +7,7 @@ import { validateForm } from '../../utils/validation';
 import { withRouter } from '../../utils/withRouter';
 import * as authServices from '../../services/auth';
 import type { LoginData } from '../../types';
-import type { StoreProps } from '../../core/Store';
+import type { StoreProps } from '../../core/store';
 
 type LoginPageProps = {
   router: Router;

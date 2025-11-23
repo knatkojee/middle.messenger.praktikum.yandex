@@ -1,7 +1,7 @@
 import Block from '../../core/block';
-import type { StoreProps } from '../../core/Store';
+import type { StoreProps } from '../../core/store';
 import { connect } from '../../utils/connect';
-import { ChatHeader } from '../ChatHeader';
+import ChatHeaderClass from '../ChatHeader/ChatHeader';
 import type { ChatHeaderProps } from '../ChatHeader/ChatHeader';
 import Message from '../Message/Message';
 import type { MessageProps } from '../Message/Message';
@@ -16,17 +16,18 @@ type ChatProps = {
     pic: string;
   };
   selectedChat: number;
+  className?: string;
 };
 
-class Chat extends Block {
-  constructor(props: ChatProps) {
+class Chat extends Block<ChatProps> {
+  constructor(props: ChatProps = {} as ChatProps) {
     super('div', {
       ...props,
       className: 'chat-wrapper',
     });
   }
 
-  private selectedChat: string | undefined = undefined;
+  private selectedChat: number | undefined = undefined;
   public socket: WebSocketObject | undefined = undefined;
 
   private updateWebsocket(chatId: string) {
@@ -47,7 +48,8 @@ class Chat extends Block {
         });
 
         this.setProps({
-          messages: this.props.messages.concat(mappedMessages),
+          messages: (this.props.messages || []).concat(mappedMessages),
+          selectedChat: this.props.selectedChat
         });
       },
       userId: window.store.state.user.id,
@@ -62,16 +64,16 @@ class Chat extends Block {
 
   render(): string {
     if (this.selectedChat !== this.props.selectedChat) {
-      this.selectedChat = this.props.selectedChat as string;
-      this.updateWebsocket(this.selectedChat);
+      this.selectedChat = this.props.selectedChat;
+      this.updateWebsocket(this.selectedChat?.toString());
     }
 
-    const ChatHeaderComponent = new ChatHeader({
+    const ChatHeaderComponent = new ChatHeaderClass({
       title: (window.store.state.chatHeader as ChatHeaderProps).title,
       pic: (this.props.chatHeader as ChatHeaderProps).pic,
     });
 
-    this.children.chatHeader = ChatHeaderComponent;
+    this.children.chatHeader = ChatHeaderComponent as unknown as Block;
 
     const messageComponents = ((this.props.messages ?? []) as MessageProps[]).map(
       message =>
@@ -105,8 +107,8 @@ class Chat extends Block {
     <div class='messages-wrapper'>
       <div class='messages-container'>
         ${messageComponents
-          .map((_, index) => `<div data-id="${messageComponents[index].id}"></div>`)
-          .join('')}
+        .map((_, index) => `<div data-id="${messageComponents[index].id}"></div>`)
+        .join('')}
       </div>
     </div>
     `;

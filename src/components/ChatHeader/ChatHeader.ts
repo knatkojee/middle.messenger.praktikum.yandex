@@ -1,5 +1,5 @@
 import Block from '../../core/block';
-import type { StoreProps } from '../../core/Store';
+import type { StoreProps } from '../../core/store';
 import { connect } from '../../utils/connect';
 import { InputModal } from '../InputModal';
 import { OptionsButton } from '../OptionsButton';

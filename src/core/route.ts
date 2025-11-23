@@ -9,8 +9,9 @@ class Route implements RouteInterface {
   private _blockClass: BlockConstructable;
   private _block: Block | null;
   private _pathname: string;
+  private _props: { rootQuery: string };
 
-  constructor(pathname: string, view: BlockConstructable, props) {
+  constructor(pathname: string, view: BlockConstructable, props: { rootQuery: string }) {
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
@@ -30,14 +31,19 @@ class Route implements RouteInterface {
     }
   }
 
-  match(pathname) {
+  match(pathname: string) {
     return pathname === this._pathname;
   }
 
-  _renderDom(query, block) {
+  _renderDom(query: string, block: Block) {
     const root = document.querySelector(query);
-    root.innerHTML = '';
-    root.append(block.getContent());
+    if (root) {
+      root.innerHTML = '';
+      const content = block.getContent();
+      if (content) {
+        root.append(content);
+      }
+    }
   }
 
   render() {

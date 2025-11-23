@@ -1,8 +1,8 @@
 import { connect } from './connect';
 
-export function protectedRoute(WrappedBlock) {
+export function protectedRoute(WrappedBlock: any) {
   class Protected extends WrappedBlock {
-    constructor(props) {
+    constructor(props: any) {
       super(props);
     }
 

@@ -3,7 +3,7 @@ import * as Components from './components';
 import * as Pages from './pages';
 import Router from './core/router';
 import { ROUTER } from './constants';
-import { Store, StoreEvents, type StoreProps } from './core/Store';
+import { Store, StoreEvents, type StoreProps } from './core/store';
 
 Object.entries(Components).forEach(([name, template]) => {
   if (typeof template === 'function') {
