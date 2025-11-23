@@ -15,8 +15,8 @@
 
 .messages-container {
   display: flex;
-  flex-flow: column wrap;
-  gap: 20px;
+  flex-flow: column;
+  gap: 4px;
 }
 
 .message-inner-container {

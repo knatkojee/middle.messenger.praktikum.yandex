@@ -39,7 +39,7 @@ class Chat extends Block<ChatProps> {
     openWebsocket({
       chatId,
       onMessageReceive: messages => {
-        const mappedMessages: MessageProps[] = messages.map(el => {
+        const mappedMessages: MessageProps[] = messages.reverse().map(el => {
           return {
             text: el.content,
             time: toTimeFormat(el.time),
