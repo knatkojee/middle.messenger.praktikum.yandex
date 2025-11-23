@@ -20,7 +20,7 @@ class ChatsPage extends Block {
 
   constructor(props: ChatsPageProps) {
     const chatInstance = new ChatClass({});
-    
+
     super('main', {
       ...props,
       className: 'chat-container',

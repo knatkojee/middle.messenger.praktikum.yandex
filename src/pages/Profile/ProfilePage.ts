@@ -22,7 +22,6 @@ import type {
   UserUpdateRequest,
 } from '../../api/type';
 
-
 type ProfilePageProps = {
   title?: string;
   labelOk?: string;

@@ -1,4 +1,3 @@
-
 import { StoreEvents } from '../core/store';
 import isEqual from './isEqual';
 
