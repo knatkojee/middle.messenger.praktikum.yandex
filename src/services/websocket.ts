@@ -53,14 +53,18 @@ export async function openWebsocket(config: WebSocketConfig): Promise<WebSocketO
   });
 
   socket.addEventListener('message', event => {
-    const parsedData = JSON.parse(event.data);
-    console.log('Получены данные', parsedData);
+    try {
+      const parsedData = JSON.parse(event.data);
+      console.log('Получены данные', parsedData);
 
-    if ('type' in parsedData && parsedData.type === 'user connected') {
-      config.onUserConnected?.(parsedData);
-    } else {
-      const processedData = Array.isArray(parsedData) ? parsedData : [parsedData];
-      config.onMessageReceive(processedData);
+      if ('type' in parsedData && parsedData.type === 'user connected') {
+        config.onUserConnected?.(parsedData);
+      } else {
+        const processedData = Array.isArray(parsedData) ? parsedData : [parsedData];
+        config.onMessageReceive(processedData);
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
     }
   });
 
