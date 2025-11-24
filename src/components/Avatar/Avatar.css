@@ -8,6 +8,11 @@
   border-radius: 50%;
 }
 
+.chat-avatar .profile-avatar {
+  width: 37px;
+  height: 37px;
+}
+
 .edit-avatar-button {
   top: calc(50% - 20px);
   left: calc(50% - 20px);

@@ -51,8 +51,10 @@ class Sidebar extends Block {
             messages: window.store.state.messages,
             chatHeader: {
               title: el.title,
+              pic: el.avatar
             },
             selectedChat: el.id,
+            avatar: el.avatar,
           });
         },
         time: toTimeFormat(el.last_message?.time),

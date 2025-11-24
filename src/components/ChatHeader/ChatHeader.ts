@@ -1,6 +1,7 @@
 import Block from '../../core/block';
 import type { StoreProps } from '../../core/store';
 import { connect } from '../../utils/connect';
+import { Avatar } from '../Avatar';
 import { InputModal } from '../InputModal';
 import { OptionsButton } from '../OptionsButton';
 
@@ -19,6 +20,12 @@ class ChatHeader extends Block {
       pic: props.pic,
       members: props.members,
       OptionsButton: new OptionsButton({}),
+      Avatar: new Avatar({
+        src: props.pic,
+        alt: props.title,
+        className: 'chat-avatar',
+        canChange: true,
+      })
     });
   }
 
@@ -39,7 +46,11 @@ class ChatHeader extends Block {
 
     return `
         <div class='active-user-info'>
-          <div class='active-user-avatar'></div>
+          <div class='active-user-avatar'>
+          {{#if pic}}
+            {{{ Avatar }}}
+          {{/if}}
+          </div>
           <div class='chat-header-container'>
             <h2 class='active-user-name'>{{ title }}</h2>
             <p class='active-user-members'>участников: {{ members }}</p>

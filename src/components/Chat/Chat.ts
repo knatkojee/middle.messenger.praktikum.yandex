@@ -74,6 +74,10 @@ class Chat extends Block<ChatProps> {
       members: window.store.state.selectedChatUsers?.length,
     });
 
+    window.store.set({
+      avatar: this.props.chatHeader?.pic
+    })
+
     this.children.chatHeader = ChatHeaderComponent as unknown as Block;
 
     const messageComponents = ((this.props.messages ?? []) as MessageProps[]).map(

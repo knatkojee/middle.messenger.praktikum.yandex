@@ -8,13 +8,14 @@ type AvatarProps = {
   src?: string;
   alt?: string;
   canChange?: boolean;
+  className?: string;
 };
 
 class Avatar extends Block {
   constructor(props: AvatarProps) {
     super('div', {
       ...props,
-      className: 'avatar-container',
+      className: `avatar-container ${props.className ?? 'avatar-container'}`,
       canChange: props.canChange,
       events: {
         click: props.canChange ? props.onClick : () => {},
@@ -23,8 +24,6 @@ class Avatar extends Block {
   }
 
   render(): string {
-    console.log(window.store.state.user);
-
     return `
         <div class='profile-avatar'>
           <img class='avatar' src='${HOST}/resources/${this.props.src}' alt='{{ alt }}' />
@@ -55,7 +54,6 @@ class Avatar extends Block {
 }
 
 const mapStateToProps = (state: StoreProps) => ({
-  src: state.user?.avatar,
   alt: state.user?.first_name,
 });
 
