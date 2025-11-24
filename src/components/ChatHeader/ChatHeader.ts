@@ -7,6 +7,7 @@ import { OptionsButton } from '../OptionsButton';
 export type ChatHeaderProps = {
   title: string;
   pic?: string;
+  members?: number;
 };
 
 class ChatHeader extends Block {
@@ -16,6 +17,7 @@ class ChatHeader extends Block {
       className: 'chat-header',
       title: props.title,
       pic: props.pic,
+      members: props.members,
       OptionsButton: new OptionsButton({}),
     });
   }
@@ -25,8 +27,8 @@ class ChatHeader extends Block {
       isOpen: (this.props.isModalOpen as boolean) ?? false,
       text: (this.props.modalText as string) ?? '',
       onCancel: () => {
-        this.setProps({
-          isModalOpen: false,
+        window.store.set({
+          inputModal: { isOpen: false },
         });
       },
       onSubmit: this.props.onModalSubmit as () => void,
@@ -38,7 +40,10 @@ class ChatHeader extends Block {
     return `
         <div class='active-user-info'>
           <div class='active-user-avatar'></div>
-          <h2 class='active-user-name'>{{ title }}</h2>
+          <div class='chat-header-container'>
+            <h2 class='active-user-name'>{{ title }}</h2>
+            <p class='active-user-members'>участников: {{ members }}</p>
+          </div>
         </div>
         <div class='header-button-wrapper'>
           {{{ OptionsButton }}}

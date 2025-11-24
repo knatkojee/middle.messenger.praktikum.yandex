@@ -71,6 +71,7 @@ class Chat extends Block<ChatProps> {
     const ChatHeaderComponent = new ChatHeaderClass({
       title: (window.store.state.chatHeader as ChatHeaderProps).title,
       pic: (this.props.chatHeader as ChatHeaderProps).pic,
+      members: window.store.state.selectedChatUsers?.length,
     });
 
     this.children.chatHeader = ChatHeaderComponent as unknown as Block;

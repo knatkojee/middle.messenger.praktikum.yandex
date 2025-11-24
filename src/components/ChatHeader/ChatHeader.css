@@ -44,3 +44,8 @@
   line-height: 1;
   text-align: center;
 }
+
+.active-user-members {
+  margin-top: 4px;
+  font-weight: normal;
+}

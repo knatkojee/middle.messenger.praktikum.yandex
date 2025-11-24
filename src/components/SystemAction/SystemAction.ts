@@ -5,13 +5,14 @@ type SystemActionProps = {
   label: string;
   isAddIcon?: boolean;
   isDeleteIcon?: boolean;
+  className?: string;
 };
 
 export default class SystemAction extends Block {
   constructor(props: SystemActionProps) {
     super('div', {
       ...props,
-      className: 'system-action',
+      className: `system-action ${props.className ? props.className : 'system-action'}`,
       events: {
         click: props.onClick,
       },

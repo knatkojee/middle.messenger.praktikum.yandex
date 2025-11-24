@@ -40,7 +40,50 @@ export default class OptionsButton extends Block {
         label: 'Удалить пользователя',
         isDeleteIcon: true,
         onClick: () => {
-          console.log('delete user from chat');
+          window.store.set({
+            inputModal: {
+              isOpen: true,
+              text: `Введите id юзера (ваш id: ${window.store.state?.user?.id})`,
+              onSubmit: (e: SubmitEvent) => {
+                e.preventDefault();
+
+                if (e.target instanceof HTMLFormElement) {
+                  const formData = new FormData(e.target);
+                  const data = Object.fromEntries(formData);
+
+                  chatsApi.deleteChatUsers({
+                    chatId: window.store.state.selectedChat,
+                    users: [Number(data.modal_input)],
+                  });
+                }
+              },
+            },
+          });
+        },
+      }),
+      ButtonDeleteChat: new SystemAction({
+        label: 'Удалить чат',
+        isDeleteIcon: true,
+        className: 'delete-chat-button',
+        onClick: () => {
+          window.store.set({
+            inputModal: {
+              isOpen: true,
+              text: 'Введите название чата, чтобы удалить его',
+              onSubmit: (e: SubmitEvent) => {
+                e.preventDefault();
+
+                if (e.target instanceof HTMLFormElement) {
+                  const formData = new FormData(e.target);
+                  const data = Object.fromEntries(formData);
+
+                  if (data.modal_input === window.store.state.chatHeader.title) {                    
+                    chatsApi.deleteChat(window.store.state.selectedChat)
+                  }
+                }
+              },
+            },
+          });
         },
       }),
       events: {
@@ -63,6 +106,7 @@ export default class OptionsButton extends Block {
         <div class='system-message {{#if isOpen}}popup-open{{/if}}'>
             {{{ ButtonAdd }}}
             {{{ ButtonDelete }}}
+             {{{ ButtonDeleteChat }}}
           </div>
     `;
   }

@@ -12,7 +12,7 @@
   position: fixed;
   top: 50%;
   left: 50%;
-  min-width: 340px;
+  width: 340px;
   padding: 40px;
   background-color: white;
   border-radius: 12px;
@@ -22,6 +22,7 @@
 .modal-title {
   margin: 0;
   text-align: center;
+  text-wrap: wrap;
 }
 
 .modal-body {

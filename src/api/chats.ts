@@ -34,6 +34,10 @@ export default class ChatsApi {
     return chatsApi.delete<string>('/users', data);
   }
 
+  async deleteChat(chatId: number) {    
+    return chatsApi.delete<string>('', {chatId});
+  }
+
   async getChatUsers(
     id: number,
     options: GetOptions = {

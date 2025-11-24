@@ -45,6 +45,27 @@ export const postCreateChat = async (data: CreateChatRequest) => {
   }
 };
 
+export const deleteChat = async (chatId: number) => {
+  window.store.set({ isLoading: true });
+
+  try {
+    await chatsApi.deleteChat(chatId);
+    window.store.set({
+      inputModal: { isOpen: false },
+    });
+    window.location.reload();
+  } catch (responseError: unknown) {
+    const error = responseError as HTTPError;
+    if (error.data?.reason) {
+      window.store.set({ apiRequestError: error.data.reason });
+    } else {
+      window.store.set({ apiRequestError: error.message ?? DEFAULT_ERROR_MESSAGE });
+    }
+  } finally {
+    window.store.set({ isLoading: false });
+  }
+};
+
 export const putChatUsers = async (data: UsersRequest) => {
   window.store.set({ isLoading: true });
 
@@ -53,6 +74,7 @@ export const putChatUsers = async (data: UsersRequest) => {
     window.store.set({
       inputModal: { isOpen: false },
     });
+    window.location.reload();
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
@@ -73,6 +95,7 @@ export const deleteChatUsers = async (data: UsersRequest) => {
     window.store.set({
       inputModal: { isOpen: false },
     });
+    window.location.reload();
   } catch (responseError: unknown) {
     const error = responseError as HTTPError;
     if (error.data?.reason) {
