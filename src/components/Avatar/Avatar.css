@@ -8,9 +8,22 @@
   border-radius: 50%;
 }
 
-.chat-avatar .profile-avatar {
-  width: 37px;
-  height: 37px;
+.chat-avatar {
+  .profile-avatar {
+    width: 37px;
+    height: 37px;
+  }
+
+  .edit-avatar-button {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
 }
 
 .edit-avatar-button {

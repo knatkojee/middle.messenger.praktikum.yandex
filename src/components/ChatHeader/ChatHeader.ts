@@ -2,8 +2,11 @@ import Block from '../../core/block';
 import type { StoreProps } from '../../core/store';
 import { connect } from '../../utils/connect';
 import { Avatar } from '../Avatar';
+import { Button } from '../Button';
 import { InputModal } from '../InputModal';
+import { Modal } from '../Modal';
 import { OptionsButton } from '../OptionsButton';
+import * as chatServices from '../../services/chats';
 
 export type ChatHeaderProps = {
   title: string;
@@ -25,7 +28,49 @@ class ChatHeader extends Block {
         alt: props.title,
         className: 'chat-avatar',
         canChange: true,
-      })
+        onClick: () => {
+          this.setProps({
+            showAvatarModal: true,
+          });
+        },
+      }),
+      AvatarModal: new Modal({
+        title: 'Загрузите файл',
+        labelCancel: true,
+        onSubmit: e => {
+          e.preventDefault();
+
+          if (e.target instanceof HTMLFormElement) {
+            const formData = new FormData(e.target);
+            const avatar = formData.get('avatar') as File;
+
+            if (avatar) {
+              chatServices.postUpdateChatAvatar({
+                chatId: window.store.state.selectedChat,
+                avatar,
+              })
+            }
+          }
+
+          this.setProps({
+            showAvatarModal: false,
+          });
+        },
+        ButtonOk: new Button({
+          label: 'Подтвердить',
+          type: 'submit',
+        }),
+        ButtonCancel: new Button({
+          label: 'Отмена',
+          type: 'button',
+          isSecondary: true,
+          onClick: () => {
+            this.setProps({
+              showAvatarModal: false,
+            });
+          },
+        }),
+      }),
     });
   }
 
@@ -47,9 +92,7 @@ class ChatHeader extends Block {
     return `
         <div class='active-user-info'>
           <div class='active-user-avatar'>
-          {{#if pic}}
             {{{ Avatar }}}
-          {{/if}}
           </div>
           <div class='chat-header-container'>
             <h2 class='active-user-name'>{{ title }}</h2>
@@ -62,6 +105,10 @@ class ChatHeader extends Block {
 
         {{#if isModalOpen}}
           <div data-id="${InputModalComponent.id}">
+        {{/if}}
+
+        {{#if showAvatarModal}}
+          {{{ AvatarModal }}}
         {{/if}}
         `;
   }

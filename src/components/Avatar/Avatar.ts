@@ -18,7 +18,7 @@ class Avatar extends Block {
       className: `avatar-container ${props.className ?? 'avatar-container'}`,
       canChange: props.canChange,
       events: {
-        click: props.canChange ? props.onClick : () => {},
+        click: props.canChange ? props.onClick : () => { },
       },
     });
   }
@@ -26,7 +26,9 @@ class Avatar extends Block {
   render(): string {
     return `
         <div class='profile-avatar'>
-          <img class='avatar' src='${HOST}/resources/${this.props.src}' alt='{{ alt }}' />
+        {{#if src}}
+          <img class='avatar' src='${HOST}/resources/${this.props.src}' />
+        {{/if}}
           ${!this.props.src
         ? `
             <div class="edit-avatar-button" id="avatarButton">

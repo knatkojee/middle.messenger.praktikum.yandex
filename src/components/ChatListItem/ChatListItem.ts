@@ -36,7 +36,7 @@ class ChatListItem extends Block {
           <div class='chat-user-info'>
             <div class='user-avatar'>
               {{#if pic}}
-                <img src='${HOST}/resources/${this.props.pic}' alt='{{ name }}' />
+                <img class='avatar' src='${HOST}/resources/${this.props.pic}' alt='{{ name }}' />
               {{/if}}
             </div>
             <div class='user-details'>

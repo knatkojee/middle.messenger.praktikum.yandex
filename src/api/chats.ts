@@ -2,6 +2,7 @@ import { HOST } from '../constants';
 import { HTTPTransport, type GetOptions } from '../core/httpTransport';
 import type {
   ChatsResponse,
+  ChatUpdateAvatarRequest,
   ChatUserResponse,
   CreateChatRequest,
   CreateChatResponse,
@@ -34,8 +35,15 @@ export default class ChatsApi {
     return chatsApi.delete<string>('/users', data);
   }
 
-  async deleteChat(chatId: number) {    
-    return chatsApi.delete<string>('', {chatId});
+  async deleteChat(chatId: number) {
+    return chatsApi.delete<string>('', { chatId });
+  }
+
+  async putUpdateChatAvatar(data: ChatUpdateAvatarRequest) {
+    const formData = new FormData();
+    formData.append('avatar', data.avatar);
+    formData.append('chatId', data.chatId.toString());
+    return chatsApi.put<string>('/avatar', formData);
   }
 
   async getChatUsers(

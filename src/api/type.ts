@@ -100,3 +100,8 @@ export type ChatUser = {
 };
 
 export type ChatRole = 'admin' | 'regular';
+
+export type ChatUpdateAvatarRequest = {
+  chatId: number;
+  avatar: File;
+}
