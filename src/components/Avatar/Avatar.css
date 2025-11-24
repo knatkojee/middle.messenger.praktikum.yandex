@@ -8,24 +8,6 @@
   border-radius: 50%;
 }
 
-.chat-avatar {
-  .profile-avatar {
-    width: 37px;
-    height: 37px;
-  }
-
-  .edit-avatar-button {
-    width: 20px;
-    height: 20px;
-
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-}
-
 .edit-avatar-button {
   top: calc(50% - 20px);
   left: calc(50% - 20px);
@@ -46,8 +28,26 @@
   outline-offset: 2px;
 }
 
+.chat-avatar {
+  .profile-avatar {
+    width: 37px;
+    height: 37px;
+  }
+
+  .edit-avatar-button {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+}
+
 .avatar {
-  border-radius: 50%;
   object-fit: cover;
+  border-radius: 50%;
   aspect-ratio: 1;
 }
