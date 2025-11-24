@@ -35,6 +35,10 @@ class ChatsPage extends Block {
           if (e.target instanceof HTMLFormElement) {
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
+            
+            if (!data.message) {
+              return;
+            }
 
             this.chatInstance.socket?.sendMessage(data.message);
 
