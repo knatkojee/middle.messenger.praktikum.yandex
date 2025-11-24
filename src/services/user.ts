@@ -46,7 +46,6 @@ export const changeUserPassword = async (model: UserUpdatePasswordRequest) => {
   }
 };
 
-
 export const changeUserAvatar = async (data: UserUpdateAvatarRequest) => {
   window.store.set({ isLoading: true });
   try {

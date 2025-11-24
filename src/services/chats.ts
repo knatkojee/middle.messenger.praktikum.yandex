@@ -128,7 +128,6 @@ export const getChatUsers = async (id: number) => {
   }
 };
 
-
 export const postUpdateChatAvatar = async (data: ChatUpdateAvatarRequest) => {
   window.store.set({ isLoading: true });
 
