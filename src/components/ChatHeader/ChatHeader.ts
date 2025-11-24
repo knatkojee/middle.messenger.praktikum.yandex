@@ -87,7 +87,7 @@ class ChatHeader extends Block {
       selectedChat: this.props.selectedChat as number | undefined,
     });
 
-    this.children.InputModal = InputModalComponent;
+    this.children.InputModal = InputModalComponent as unknown as Block;
 
     return `
         <div class='active-user-info'>

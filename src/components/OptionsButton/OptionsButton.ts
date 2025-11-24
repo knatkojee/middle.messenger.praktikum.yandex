@@ -44,6 +44,7 @@ export default class OptionsButton extends Block {
             inputModal: {
               isOpen: true,
               text: `Введите id юзера (ваш id: ${window.store.state?.user?.id})`,
+              showUsersList: true,
               onSubmit: (e: SubmitEvent) => {
                 e.preventDefault();
 

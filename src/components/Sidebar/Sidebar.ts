@@ -98,7 +98,7 @@ class Sidebar extends Block {
       },
     });
 
-    this.children.InputModal = InputModalComponent;
+    this.children.InputModal = InputModalComponent as unknown as Block;
 
     return `
   <div class='sidebar-wrapper'>

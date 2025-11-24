@@ -1,4 +1,4 @@
-import type { UserDTO } from '../api/type';
+import type { ChatUserResponse, UserDTO } from '../api/type';
 import type { MessageProps } from '../components/Message/Message';
 import EventBus from './eventBus';
 
@@ -11,6 +11,7 @@ export type StoreProps = {
   user?: UserDTO;
   chats?: [];
   selectedChat?: number;
+  selectedChatUsers?: ChatUserResponse[];
   messages?: MessageProps[];
   chatHeader?: {
     title: string;
