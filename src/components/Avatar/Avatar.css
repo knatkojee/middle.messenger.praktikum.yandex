@@ -27,3 +27,9 @@
   outline: 2px solid var(--main-color);
   outline-offset: 2px;
 }
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  aspect-ratio: 1;
+}

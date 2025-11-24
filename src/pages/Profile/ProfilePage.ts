@@ -58,8 +58,11 @@ class ProfilePage extends Block {
 
           if (e.target instanceof HTMLFormElement) {
             const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData);
-            console.log(data);
+            const avatar = formData.get('avatar') as File;
+            
+            if (avatar) {
+              userServices.changeUserAvatar({ avatar });
+            }
           }
 
           this.setProps({
@@ -82,6 +85,7 @@ class ProfilePage extends Block {
         }),
       }),
       Avatar: new Avatar({
+        canChange: true,
         onClick: (e: PointerEvent) => {
           e.preventDefault();
 

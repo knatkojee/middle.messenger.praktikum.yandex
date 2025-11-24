@@ -31,6 +31,10 @@ export type UserUpdatePasswordRequest = {
   repeatPassword: string;
 };
 
+export type UserUpdateAvatarRequest = {
+  avatar: File;
+};
+
 export type CreateUser = Omit<UserDTO, 'avatar' | 'display_name' | 'id'> & {
   password: string;
 };

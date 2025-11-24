@@ -1,3 +1,4 @@
+import { HOST } from '../../constants';
 import Block from '../../core/block';
 
 export type ChatListItemProps = {
@@ -10,7 +11,7 @@ export type ChatListItemProps = {
   pic?: string;
 };
 
-export default class ChatListItem extends Block {
+class ChatListItem extends Block {
   constructor(props: ChatListItemProps) {
     super('button', {
       ...props,
@@ -33,7 +34,9 @@ export default class ChatListItem extends Block {
   render(): string {
     return `
           <div class='chat-user-info'>
-            <div class='user-avatar'></div>
+            <div class='user-avatar'>
+              <img src='${HOST}/resources/${this.props.pic}' alt='{{ name }}' />
+            </div>
             <div class='user-details'>
               <h3 class='user-name'>{{ name }}</h3>
               <p class='last-message'>{{ text }}</p>
@@ -50,3 +53,5 @@ export default class ChatListItem extends Block {
       `;
   }
 }
+
+export default ChatListItem
