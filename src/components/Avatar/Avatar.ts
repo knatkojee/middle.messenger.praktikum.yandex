@@ -7,6 +7,7 @@ type AvatarProps = {
   onClick: (e: PointerEvent) => void;
   src?: string;
   alt?: string;
+  isUserAvatar?: boolean;
   canChange?: boolean;
   className?: string;
 };
@@ -26,10 +27,13 @@ class Avatar extends Block {
   render(): string {
     return `
         <div class='profile-avatar'>
-        {{#if src}}
-          <img class='avatar' src='${HOST}/resources/${this.props.src}' />
-        {{/if}}
-          ${!this.props.src
+          {{#unless isUserAvatar}}
+            ${this.props.src ? `<img class='avatar' src='${HOST}/resources/${this.props.src}' />` : null}
+          {{/unless}}
+          {{#if isUserAvatar}}
+            ${this.props.userAvatar ? `<img class='avatar' src='${HOST}/resources/${this.props.userAvatar}' />` : null}
+          {{/if}}
+          ${!this.props.src && !this.props.userAvatar
         ? `
             <div class="edit-avatar-button" id="avatarButton">
                 <svg
@@ -57,6 +61,7 @@ class Avatar extends Block {
 
 const mapStateToProps = (state: StoreProps) => ({
   alt: state.user?.first_name,
+  userAvatar: state.user?.avatar,
 });
 
 export default connect(mapStateToProps)(Avatar)

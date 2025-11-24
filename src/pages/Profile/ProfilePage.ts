@@ -87,6 +87,7 @@ class ProfilePage extends Block {
       Avatar: new Avatar({
         canChange: true,
         src: window.store.state.user?.avatar,
+        isUserAvatar: true,
         onClick: (e: PointerEvent) => {
           e.preventDefault();
 
