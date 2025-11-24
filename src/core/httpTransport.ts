@@ -61,9 +61,10 @@ export enum HttpStatus {
 export class HTTPTransport {
   private readonly baseURL: string;
 
-  constructor(baseURL: string = '') {
-    this.baseURL = baseURL;
-  }
+  public post!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public put!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public patch!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public delete!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
 
   public async request<T = unknown>(
     url: string,
@@ -142,36 +143,18 @@ export class HTTPTransport {
     return this.request<T>(fullURL, { ...options, method: 'GET' });
   }
 
-  public post<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: Omit<PostOptions, 'data'> = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'POST', data });
-  }
+  constructor(baseURL: string = '') {
+    this.baseURL = baseURL;
 
-  public put<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: Omit<PutOptions, 'data'> = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'PUT', data });
-  }
-
-  public patch<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: Omit<PatchOptions, 'data'> = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'PATCH', data });
-  }
-
-  public delete<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: DeleteOptions = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'DELETE', data });
+    (['POST', 'PUT', 'PATCH', 'DELETE'] as const).forEach(method => {
+      (this as any)[method.toLowerCase()] = <T = unknown>(
+        url: string,
+        data?: RequestData,
+        options: Record<string, unknown> = {}
+      ): Promise<HTTPResponse<T>> => {
+        return this.request<T>(url, { ...options, method, data });
+      };
+    });
   }
 
   private sendRequestData(
