@@ -28,10 +28,10 @@ class Avatar extends Block {
     return `
         <div class='profile-avatar'>
           {{#unless isUserAvatar}}
-            ${this.props.src ? `<img class='avatar' src='${HOST}/resources/${this.props.src}' />` : null}
+            ${this.props.src ? `<img class='avatar' src='${HOST}/resources/${this.props.src}' />` : ''}
           {{/unless}}
           {{#if isUserAvatar}}
-            ${this.props.userAvatar ? `<img class='avatar' src='${HOST}/resources/${this.props.userAvatar}' />` : null}
+            ${this.props.userAvatar ? `<img class='avatar' src='${HOST}/resources/${this.props.userAvatar}' />` : ''}
           {{/if}}
           ${!this.props.src && !this.props.userAvatar
         ? `
