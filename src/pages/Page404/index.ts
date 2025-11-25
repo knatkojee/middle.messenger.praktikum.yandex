@@ -1,1 +1,2 @@
-export { default as Page404 } from "./Page404.hbs?raw";
+import './Page404.css';
+export { default as Page404 } from './Page404';

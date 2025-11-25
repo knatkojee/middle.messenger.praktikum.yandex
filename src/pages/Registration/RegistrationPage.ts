@@ -1,22 +1,37 @@
 import { FormWrapper } from '../../components';
+import { ROUTER } from '../../constants';
 import Block from '../../core/block';
+import type Router from '../../core/router';
+import { connect } from '../../utils/connect';
 import { validateForm } from '../../utils/validation';
+import * as authServices from '../../services/auth';
+import { withRouter } from '../../utils/withRouter';
+import type { RegisterData } from '../../types';
+import type { StoreProps } from '../../core/store';
 
-export default class RegistrationPage extends Block {
-  constructor() {
+type RegistrationPageProps = {
+  router: Router;
+};
+
+class RegistrationPage extends Block {
+  constructor(props: RegistrationPageProps) {
     super('main', {
+      ...props,
       FormWrapper: new FormWrapper({
-        primaryText: 'Регистрация',
-        secondaryText: 'Зарегистрироваться',
-        onPrimaryClick: () => {},
-        onSecondaryClick: () => {},
-        title: 'Вход',
+        primaryText: 'Зарегистрироваться',
+        secondaryText: 'Войти',
+        onSecondaryClick: () => {
+          props.router.go(ROUTER.login);
+        },
+        onFormSubmit: data => {
+          authServices.register(data as RegisterData);
+        },
+        title: 'Регистрация',
         showSecondaryButton: true,
         fields: [
           {
             label: 'Почта',
             inputType: 'email',
-            inputValue: 'pochta@yandex.ru',
             name: 'email',
             onBlur: event =>
               validateForm(
@@ -27,7 +42,6 @@ export default class RegistrationPage extends Block {
           {
             label: 'Логин',
             inputType: 'text',
-            inputValue: 'ivanivanov',
             name: 'login',
             onBlur: event =>
               validateForm(
@@ -38,7 +52,6 @@ export default class RegistrationPage extends Block {
           {
             label: 'Имя',
             inputType: 'text',
-            inputValue: 'Иван',
             name: 'first_name',
             onBlur: event =>
               validateForm(
@@ -49,7 +62,6 @@ export default class RegistrationPage extends Block {
           {
             label: 'Фамилия',
             inputType: 'text',
-            inputValue: 'Иванов',
             name: 'second_name',
             onBlur: event =>
               validateForm(
@@ -60,7 +72,6 @@ export default class RegistrationPage extends Block {
           {
             label: 'Телефон',
             inputType: 'tel',
-            inputValue: '+7 (909) 967 30 30',
             name: 'phone',
             onBlur: event =>
               validateForm(
@@ -71,7 +82,6 @@ export default class RegistrationPage extends Block {
           {
             label: 'Пароль',
             inputType: 'password',
-            inputValue: 'password',
             name: 'password',
             onBlur: event =>
               validateForm(
@@ -82,8 +92,7 @@ export default class RegistrationPage extends Block {
           {
             label: 'Пароль (ещё раз)',
             inputType: 'password',
-            inputValue: 'password1',
-            name: 'password_repeat',
+            name: 'repeatPassword',
             onBlur: event =>
               validateForm(
                 ((this.children.FormWrapper as Block).children.formFields as Block[])[6],
@@ -99,3 +108,12 @@ export default class RegistrationPage extends Block {
     return `{{{ FormWrapper }}}`;
   }
 }
+
+const mapStateToProps = (state: StoreProps) => {
+  return {
+    isLoading: state.isLoading,
+    apiRequestError: state.apiRequestError,
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(RegistrationPage));

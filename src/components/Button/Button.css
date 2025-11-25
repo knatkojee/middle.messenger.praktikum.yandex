@@ -1,23 +1,23 @@
 .button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 280px;
+  padding: 12px 24px;
+  color: var(--white);
+  font-size: 13px;
+  text-align: center;
   background-color: var(--main-color);
   border: none;
   border-radius: 8px;
-  color: var(--white);
   cursor: pointer;
-  display: flex;
-  font-size: 13px;
-  justify-content: center;
-  max-width: 280px;
-  padding: 12px 24px;
-  text-align: center;
   transition: background-color 0.2s ease;
-  width: 100%;
 }
 
 .button-secondary {
-  background-color: transparent;
   color: var(--main-color);
   font-size: 11px;
+  background-color: transparent;
 }
 
 .button:hover {

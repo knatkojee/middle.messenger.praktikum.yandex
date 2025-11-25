@@ -9,11 +9,15 @@ const validators = {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
     return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
   },
-  password_old: (val: string) => {
+  newPassword: (val: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
     return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
   },
-  password_repeat: (val: string) => {
+  oldPassword: (val: string) => {
+    const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
+    return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
+  },
+  repeatPassword: (val: string) => {
     const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
     return passwordRegex.test(val) ? '' : 'Введите корректный пароль';
   },
@@ -50,6 +54,8 @@ const validators = {
 };
 
 const validate = (field: Block) => {
+  console.log(field);
+
   const input = field.getContent()?.querySelector('input');
   let isInputValid = true;
 

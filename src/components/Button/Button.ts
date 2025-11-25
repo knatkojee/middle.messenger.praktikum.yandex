@@ -4,7 +4,7 @@ type ButtonProps = {
   type: 'submit' | 'button';
   label: string;
   isSecondary?: boolean;
-  onClick?: () => void;
+  onClick?: (e: PointerEvent) => void;
 };
 
 export default class Button extends Block {

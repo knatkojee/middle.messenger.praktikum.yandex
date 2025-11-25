@@ -1,9 +1,7 @@
 // Базовые типы
 type HTTPMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
-// Без any получается слишком большое и плохо читаемое перечисление
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type QueryParams = Record<string, any>;
+type QueryParams = Record<string, unknown>;
 
 type RequestData =
   | Record<string, unknown>
@@ -24,26 +22,27 @@ interface HTTPRequestOptions {
   timeout?: number;
 }
 
-interface HTTPResponse<T = unknown> {
+export interface HTTPResponse<T = unknown> {
   data: T;
   status: number;
   statusText: string;
   headers: string;
 }
 
-interface GetOptions extends Omit<HTTPRequestOptions, 'method' | 'data'> {
+export interface GetOptions extends Omit<HTTPRequestOptions, 'method' | 'data'> {
   data?: QueryParams;
 }
 
-type PostOptions = Omit<HTTPRequestOptions, 'method'>;
-type PutOptions = Omit<HTTPRequestOptions, 'method'>;
-type PatchOptions = Omit<HTTPRequestOptions, 'method'>;
-type DeleteOptions = Omit<HTTPRequestOptions, 'method' | 'data'>;
+export type PostOptions = Omit<HTTPRequestOptions, 'method'>;
+export type PutOptions = Omit<HTTPRequestOptions, 'method'>;
+export type PatchOptions = Omit<HTTPRequestOptions, 'method'>;
+export type DeleteOptions = Omit<HTTPRequestOptions, 'method' | 'data'>;
 
-interface HTTPError extends Error {
+export interface HTTPError extends Error {
   status?: number;
   method?: string;
   url?: string;
+  data?: { reason: string };
 }
 
 export enum HttpStatus {
@@ -62,9 +61,10 @@ export enum HttpStatus {
 export class HTTPTransport {
   private readonly baseURL: string;
 
-  constructor(baseURL: string = '') {
-    this.baseURL = baseURL;
-  }
+  public post!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public put!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public patch!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public delete!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
 
   public async request<T = unknown>(
     url: string,
@@ -77,6 +77,8 @@ export class HTTPTransport {
       const fullURL = this.baseURL + url;
 
       xhr.open(method, fullURL);
+
+      xhr.withCredentials = true;
 
       Object.keys(headers).forEach((key: string) => {
         xhr.setRequestHeader(key, headers[key]);
@@ -101,6 +103,7 @@ export class HTTPTransport {
           error.status = xhr.status;
           error.method = method;
           error.url = fullURL;
+          error.data = xhr.response;
           reject(error);
         }
       };
@@ -140,32 +143,18 @@ export class HTTPTransport {
     return this.request<T>(fullURL, { ...options, method: 'GET' });
   }
 
-  public post<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: Omit<PostOptions, 'data'> = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'POST', data });
-  }
+  constructor(baseURL: string = '') {
+    this.baseURL = baseURL;
 
-  public put<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: Omit<PutOptions, 'data'> = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'PUT', data });
-  }
-
-  public patch<T = unknown>(
-    url: string,
-    data?: RequestData,
-    options: Omit<PatchOptions, 'data'> = {}
-  ): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'PATCH', data });
-  }
-
-  public delete<T = unknown>(url: string, options: DeleteOptions = {}): Promise<HTTPResponse<T>> {
-    return this.request<T>(url, { ...options, method: 'DELETE' });
+    (['POST', 'PUT', 'PATCH', 'DELETE'] as const).forEach(method => {
+      (this as any)[method.toLowerCase()] = <T = unknown>(
+        url: string,
+        data?: RequestData,
+        options: Record<string, unknown> = {}
+      ): Promise<HTTPResponse<T>> => {
+        return this.request<T>(url, { ...options, method, data });
+      };
+    });
   }
 
   private sendRequestData(

@@ -1,4 +1,5 @@
 import Block from '../../core/block';
+import type { SubmitData } from '../../types';
 import { validateForm } from '../../utils/validation';
 import { Button } from '../Button';
 import { FormField } from '../FormField';
@@ -16,8 +17,9 @@ export type FormFieldType = {
 export type FormWrapperProps = {
   primaryText: string;
   secondaryText: string;
-  onPrimaryClick: () => void;
+  onPrimaryClick?: (e: PointerEvent) => void;
   onSecondaryClick: () => void;
+  onFormSubmit: (data: SubmitData) => void;
   fields: FormFieldType[];
   title: string;
   showSecondaryButton?: boolean;
@@ -53,7 +55,9 @@ export default class FormWrapper extends Block {
 
           const validationResult = validateForm(this.children.formFields, e);
 
-          console.log(validationResult);
+          if (validationResult) {
+            props.onFormSubmit(validationResult);
+          }
         },
       },
     });

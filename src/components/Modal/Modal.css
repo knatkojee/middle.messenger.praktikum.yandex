@@ -1,26 +1,28 @@
 .modal-container {
-  background-color: rgb(0 0 0 / 70%);
-  height: 100vh;
-  left: 0;
   position: fixed;
   top: 0;
+  left: 0;
+  z-index: 100;
   width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 70%);
 }
 
 .modal {
-  background-color: white;
-  border-radius: 12px;
-  left: 50%;
-  min-width: 340px;
-  padding: 40px;
   position: fixed;
   top: 50%;
+  left: 50%;
+  width: 340px;
+  padding: 40px;
+  background-color: white;
+  border-radius: 12px;
   transform: translate(-50%, -50%);
 }
 
 .modal-title {
   margin: 0;
   text-align: center;
+  text-wrap: wrap;
 }
 
 .modal-body {

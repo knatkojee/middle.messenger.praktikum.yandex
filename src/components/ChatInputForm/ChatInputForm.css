@@ -1,0 +1,87 @@
+.message-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  align-self: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px 20px;
+  color: var(--text-secondary-color);
+  font-size: 12px;
+  line-height: 1;
+  white-space: nowrap;
+  background-color: var(--grey);
+  border-radius: 30px;
+}
+
+.message-input {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.message-page-button {
+  position: relative;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.media-menu {
+  position: absolute;
+  bottom: 65px;
+  z-index: 2000;
+  display: flex;
+  display: none;
+  flex-direction: column;
+  align-items: start;
+  width: 162px;
+  max-width: 100%;
+  padding: 15px;
+  color: var(--text-color);
+  font-size: 12px;
+  line-height: 1;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--container-box-shadow);
+}
+
+.media-option {
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
+  align-self: stretch;
+}
+
+.media-option:not(:first-child) {
+  margin-top: 16px;
+}
+
+.media-icon {
+  flex-shrink: 0;
+  width: 22px;
+  object-fit: contain;
+  object-position: center;
+  aspect-ratio: 1;
+}
+
+.media-label {
+  margin: auto 0;
+}
+
+.media-option-file {
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
+  margin-top: 16px;
+  white-space: nowrap;
+}
+
+.media-option-location {
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
+  margin-top: 16px;
+  white-space: nowrap;
+}

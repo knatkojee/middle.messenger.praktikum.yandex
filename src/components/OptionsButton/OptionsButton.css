@@ -1,0 +1,75 @@
+.system-message {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  z-index: 2000;
+  display: none;
+  color: var(--text-color);
+  line-height: 1;
+  background-color: var(--white);
+  border-radius: 12px;
+  box-shadow: var(--container-box-shadow);
+}
+
+.action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--main-color);
+  border-radius: 50%;
+}
+
+.action-text {
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin: auto 0;
+}
+
+.action-text-alt {
+  flex-grow: 1;
+  flex-shrink: 1;
+  margin: auto 0;
+}
+
+.system-action {
+  display: flex;
+  gap: 15px;
+  align-items: stretch;
+  padding: 8px;
+  text-align: left;
+}
+
+.chat-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: var(--bg-grey);
+  border-radius: 50%;
+
+  &:hover {
+    background-color: var(--bg-grey-hover);
+  }
+
+  .popup-open {
+    &.system-message {
+      display: block;
+
+      .system-action:hover {
+        background-color: var(--bg-grey-hover);
+      }
+    }
+  }
+}
+
+.delete-chat-button {
+  background-color: var(--danger);
+  border-radius: 0 0 8px 8px;
+
+  &:hover{
+    background-color: var(--danger-hover) !important;
+  }
+}

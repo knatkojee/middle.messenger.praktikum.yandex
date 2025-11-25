@@ -1,0 +1,39 @@
+{{{Aside}}}
+
+<section class='profile-section'>
+  {{{Avatar}}}
+
+  <h1 class='profile-name'>{{profileName}}</h1>
+
+  <div class='profile-info'>
+
+    {{!-- {{#each infoRows}}
+      {{{this}}}
+    {{/each}} --}}
+
+    ${infoRowsComponents .map((_, index) => `<div data-id='${infoRowsComponents[index].id}'></div>`)
+    .join('')}
+
+    <div class='action-buttons'>
+
+      <div class='action-button-row'>
+        {{{ButtonChangeData}}}
+        <div class='action-divider'></div>
+      </div>
+
+      <div class='action-button-row'>
+        {{{ButtonChangePassword}}}
+        <div class='action-divider'></div>
+      </div>
+
+      <div class='action-button-row'>
+        {{{ButtonLogout}}}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{{#if showModal}}
+  {{{Modal}}}
+{{/if}}

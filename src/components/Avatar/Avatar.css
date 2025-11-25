@@ -1,22 +1,22 @@
 .profile-avatar {
-  align-items: center;
-  background-color: var(--grey);
-  border-radius: 50%;
   display: flex;
-  height: 130px;
+  align-items: center;
   justify-content: center;
   width: 130px;
+  height: 130px;
+  background-color: var(--grey);
+  border-radius: 50%;
 }
 
 .edit-avatar-button {
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+  width: 40px;
+  height: 40px;
+  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
-  height: 40px;
-  left: calc(50% - 20px);
-  padding: 0;
-  top: calc(50% - 20px);
-  width: 40px;
 }
 
 .edit-avatar-button:hover {
@@ -26,4 +26,28 @@
 .edit-avatar-button:focus {
   outline: 2px solid var(--main-color);
   outline-offset: 2px;
+}
+
+.chat-avatar {
+  .profile-avatar {
+    width: 37px;
+    height: 37px;
+  }
+
+  .edit-avatar-button {
+    width: 20px;
+    height: 20px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+}
+
+.avatar {
+  object-fit: cover;
+  border-radius: 50%;
+  aspect-ratio: 1;
 }

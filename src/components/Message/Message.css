@@ -8,12 +8,12 @@
 }
 
 .message {
-  align-items: end;
   display: flex;
   gap: 8px;
+  align-items: end;
+  width: fit-content;
   max-width: 400px;
   padding: 12px;
-  width: fit-content;
 }
 
 .incoming-message {
@@ -40,6 +40,6 @@
 }
 
 .message-container-wrapper {
-  width: 100%;
   z-index: 1000;
+  width: 100%;
 }
