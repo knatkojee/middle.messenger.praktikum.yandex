@@ -22,11 +22,8 @@ export default defineConfig({
   plugins: [
     checker({
       typescript: true,
-      eslint: {
-        lintCommand: 'eslint . --ext .ts,.tsx,.js,.jsx',
-      },
       stylelint: {
-        lintCommand: 'stylelint **/*.css',
+        lintCommand: 'stylelint "**/*.css"',
       },
     }),
     handlebars(),
