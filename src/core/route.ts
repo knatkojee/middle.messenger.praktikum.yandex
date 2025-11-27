@@ -1,5 +1,5 @@
-import Block from './block';
-import type { RouteInterface } from './router';
+import Block from './block.js';
+import type { RouteInterface } from './router.js';
 
 interface BlockConstructable<P = unknown> {
   new (props: P): Block;
