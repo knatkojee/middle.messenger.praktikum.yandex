@@ -58,13 +58,15 @@ export enum HttpStatus {
   InternalServerError = 500,
 }
 
+export type TransportMethod = <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>
+
 export class HTTPTransport {
   private readonly baseURL: string;
 
-  public post!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
-  public put!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
-  public patch!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
-  public delete!: <T = unknown>(url: string, data?: RequestData, options?: Record<string, unknown>) => Promise<HTTPResponse<T>>;
+  public post!: TransportMethod;
+  public put!: TransportMethod;
+  public patch!: TransportMethod;
+  public delete!: TransportMethod;
 
   public async request<T = unknown>(
     url: string,
