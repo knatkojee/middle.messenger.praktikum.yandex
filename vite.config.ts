@@ -2,6 +2,7 @@ import prettier from 'vite-plugin-prettier';
 import { defineConfig } from "vite";
 // @ts-ignore
 import handlebars from "vite-plugin-handlebars";
+import checker from 'vite-plugin-checker';
 
 export default defineConfig({
   preview: {
@@ -19,6 +20,15 @@ export default defineConfig({
   },
   //@ts-ignore
   plugins: [
+    checker({
+      typescript: true,
+      eslint: {
+        lintCommand: 'eslint . --ext .ts,.tsx,.js,.jsx',
+      },
+      stylelint: {
+        lintCommand: 'stylelint **/*.css',
+      },
+    }),
     handlebars(),
     prettier({
       semi: false,
