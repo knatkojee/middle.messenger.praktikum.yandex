@@ -1,17 +1,17 @@
 .message-input-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: start;
   align-self: center;
-  justify-content: center;
   width: 100%;
   padding: 10px 20px;
-  color: var(--text-secondary-color);
   font-size: 12px;
   line-height: 1;
-  white-space: nowrap;
+  color: var(--text-secondary-color);
   background-color: var(--grey);
   border-radius: 30px;
+  white-space: nowrap;
 }
 
 .message-input {
@@ -30,8 +30,8 @@
 
 .media-menu {
   position: absolute;
-  bottom: 65px;
   z-index: 2000;
+  bottom: 65px;
   display: flex;
   display: none;
   flex-direction: column;
@@ -39,9 +39,9 @@
   width: 162px;
   max-width: 100%;
   padding: 15px;
-  color: var(--text-color);
   font-size: 12px;
   line-height: 1;
+  color: var(--text-color);
   background-color: var(--white);
   border-radius: 12px;
   box-shadow: var(--container-box-shadow);
@@ -49,9 +49,9 @@
 
 .media-option {
   display: flex;
-  gap: 15px;
   align-items: stretch;
   align-self: stretch;
+  gap: 15px;
 }
 
 .media-option:not(:first-child) {
@@ -72,16 +72,16 @@
 
 .media-option-file {
   display: flex;
-  gap: 15px;
   align-items: stretch;
   margin-top: 16px;
+  gap: 15px;
   white-space: nowrap;
 }
 
 .media-option-location {
   display: flex;
-  gap: 15px;
   align-items: stretch;
   margin-top: 16px;
+  gap: 15px;
   white-space: nowrap;
 }

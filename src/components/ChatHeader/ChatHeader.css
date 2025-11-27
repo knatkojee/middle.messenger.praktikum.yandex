@@ -1,7 +1,7 @@
 .active-user-info {
   display: flex;
-  gap: 10px;
   align-items: stretch;
+  gap: 10px;
 }
 
 .active-user-avatar {
@@ -24,14 +24,14 @@
 .date-section {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  justify-content: space-between;
   align-items: stretch;
   align-self: end;
-  justify-content: space-between;
   width: 499px;
   max-width: 100%;
   margin-top: 10px;
   font-size: 12px;
+  gap: 20px;
 }
 
 .date-label {
@@ -40,9 +40,9 @@
   right: 50%;
   left: 50%;
   margin: auto 0;
-  color: var(--text-secondary-color);
   line-height: 1;
   text-align: center;
+  color: var(--text-secondary-color);
 }
 
 .active-user-members {

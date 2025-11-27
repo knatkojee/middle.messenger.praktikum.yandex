@@ -9,11 +9,11 @@
 
 .message {
   display: flex;
-  gap: 8px;
   align-items: end;
   width: fit-content;
   max-width: 400px;
   padding: 12px;
+  gap: 8px;
 }
 
 .incoming-message {
@@ -27,16 +27,16 @@
 }
 
 .message-text {
-  color: var(--text-color);
   font-size: 12px;
   line-height: 1;
+  color: var(--text-color);
 }
 
 .message-timestamp {
-  color: var(--text-secondary-color);
   font-size: 9px;
   line-height: 1;
   text-align: right;
+  color: var(--text-secondary-color);
 }
 
 .message-container-wrapper {
