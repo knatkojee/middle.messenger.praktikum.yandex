@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { HTTPTransport } from './httpTransport.js';
+import { HTTPTransport } from './httpTransport';
 
 describe('HTTPTransport', () => {
   let transport: HTTPTransport;

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
-import Router from './router.js';
-import Block from './block.js';
+import Router from './router';
+import Block from './block';
 
 class TestBlock extends Block {
   render() {

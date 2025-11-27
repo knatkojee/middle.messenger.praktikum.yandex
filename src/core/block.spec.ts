@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Block from './block.js';
+import Block from './block';
 
 class TestComponent extends Block {
   render() {
