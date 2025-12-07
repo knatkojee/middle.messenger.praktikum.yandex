@@ -1,7 +1,7 @@
 .profile-avatar {
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 130px;
   height: 130px;
   background-color: var(--grey);
@@ -47,7 +47,7 @@
 }
 
 .avatar {
-  object-fit: cover;
   border-radius: 50%;
+  object-fit: cover;
   aspect-ratio: 1;
 }

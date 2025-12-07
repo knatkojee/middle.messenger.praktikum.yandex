@@ -1,7 +1,7 @@
 .chat-container {
   height: 100vh;
-  overflow: hidden;
   background-color: var(--white);
+  overflow: hidden;
 }
 
 .chat-layout {
@@ -32,15 +32,15 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  align-items: stretch;
   justify-content: space-between;
+  align-items: stretch;
   margin: 0 10px;
   padding-bottom: 10px;
-  color: var(--text-color);
-  font-weight: 600;
   font-size: 13px;
+  font-weight: 600;
   line-height: 1;
+  color: var(--text-color);
+  gap: 20px;
   white-space: nowrap;
   border-bottom: 1px solid var(--grey);
 }

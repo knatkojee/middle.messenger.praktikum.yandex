@@ -4,19 +4,19 @@
   width: 100%;
   max-width: 280px;
   padding: 12px 24px;
-  color: var(--white);
   font-size: 13px;
   text-align: center;
+  color: var(--white);
   background-color: var(--main-color);
   border: none;
   border-radius: 8px;
-  cursor: pointer;
   transition: background-color 0.2s ease;
+  cursor: pointer;
 }
 
 .button-secondary {
-  color: var(--main-color);
   font-size: 11px;
+  color: var(--main-color);
   background-color: transparent;
 }
 

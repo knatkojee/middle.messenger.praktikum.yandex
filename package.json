@@ -11,30 +11,54 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start": "tsc && vite build && vite preview",
+    "test": "mocha",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "lint:styles": "stylelint **/*.css",
-    "lint:styles:fix": "stylelint **/*.css --fix"
+    "lint:styles:fix": "stylelint **/*.css --fix",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "git add"
+    ]
   },
   "devDependencies": {
+    "@babel/register": "^7.28.3",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@nabla/vite-plugin-eslint": "^2.0.6",
+    "@types/chai": "^5.2.3",
+    "@types/mocha": "^10.0.10",
     "@typescript-eslint/eslint-plugin": "^8.46.1",
     "@typescript-eslint/parser": "^8.46.1",
     "@vue/compiler-sfc": "^3.5.22",
+    "baseline-browser-mapping": "^2.8.31",
+    "chai": "^6.2.1",
     "eslint": "^9.37.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
     "jiti": "^2.6.1",
+    "jsdom": "^27.2.0",
+    "lint-staged": "^16.2.7",
+    "mocha": "^11.7.5",
     "postcss": "^8.5.6",
     "postcss-preset-env": "^10.4.0",
     "prettier": "^3.6.2",
     "stylelint": "^16.26.0",
-    "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^39.0.1",
     "stylelint-order": "^7.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "~5.8.3",
     "vite": "^7.1.7",
+    "vite-plugin-checker": "^0.11.0",
     "vite-plugin-prettier": "^0.0.6"
   },
   "dependencies": {

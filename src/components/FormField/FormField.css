@@ -6,15 +6,15 @@
 .field-label {
   display: block;
   margin-bottom: 8px;
-  color: var(--text-color);
   font-size: 9px;
+  color: var(--text-color);
 }
 
 .field-input {
   width: 100%;
   padding: 0 0 7px;
-  color: var(--text-color);
   font-size: 13px;
+  color: var(--text-color);
   background: transparent;
   border: none;
   outline: none;
@@ -32,16 +32,16 @@
 
 .error-message {
   margin-top: 7px;
-  color: var(--error-color);
   font-size: 8px;
+  color: var(--error-color);
 }
 
 .buttons-container {
   display: flex;
   flex-direction: column;
-  gap: 8px;
   align-items: center;
   margin-top: 47px;
+  gap: 8px;
 }
 
 .field-input:focus + .field-underline {
